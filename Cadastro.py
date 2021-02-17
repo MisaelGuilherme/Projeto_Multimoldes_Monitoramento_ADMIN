@@ -16,6 +16,11 @@ class Front_End():
         else:
             self.janelaCadastro.attributes('-zoomed', True)
         
+        self.lbNome = Label(self.janelaCadastro, text='Nome')
+        self.lbCPF = Label(self.janelaCadastro, text='CPF')
+        self.lbSenha = Label(self.janelaCadastro, text='Senha')
+        self.lbConfirmaSenha = Label(self.janelaCadastro, text='Confirme Senha')
+
         self.janelaCadastro.mainloop()
 
 instancia = Front_End()
