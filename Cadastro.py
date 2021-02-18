@@ -1,13 +1,49 @@
 from tkinter import *
 from tkinter import ttk
 from platform import *
+from tkinter import messagebox
 
-class Front_End():
+class Back_End():
+    
+    def verificar_janela_cadastro(self):
+        
+        a = self.campoNome.get()
+        b = self.campoCPF.get()
+        c = self.campoSenha.get()
+        d = self.campoConfirmaSenha.get()
+        
+        if a == '' or b == '' or c == '' or d == '':
+            
+            if a == '':
+                
+                self.campoNome['bg'] = 'pink'
+                self.lbNome['fg'] = 'red'
+            
+            if b == '':
+                
+                self.campoCPF['bg'] = 'pink'
+                self.lbCPF['fg'] = 'red'
+            
+            if c == '':
+
+                self.campoSenha['bg'] = 'pink'
+                self.lbSenha['fg'] = 'red'
+        
+            if d == '':
+        
+                self.campoConfirmaSenha['bg'] = 'pink'
+                self.lbConfirmaSenha['fg'] = 'red'
+            
+            return messagebox.showerror('Alerta', 'Campos não preenchido')
+        
+        else: messagebox.showinfo('Alerta', 'Usuário cadastrado com sucesso!')
+        
+class Front_End(Back_End):
     
     def __init__(self):
         
         self.janelaCadastro = Tk()
-        self.janelaCadastro.geometry('500x500')
+        self.janelaCadastro.geometry('1000x500')
         self.janelaCadastro.title('Cadastro')
         
         self.sistemaOperacional = system()
@@ -36,20 +72,20 @@ class Front_End():
         self.lbConfirmaSenha = Label(self.frameDadosLogin, text='Confirme Senha', font=('impact',12))
         
         self.lbNome.place(relx=0.020, rely=0.300)
-        self.lbCPF.place(relx=0.380, rely=0.300)
+        self.lbCPF.place(relx=0.470, rely=0.300)
         self.lbSenha.place(relx=0.020, rely=0.600)
-        self.lbConfirmaSenha.place(relx=0.270, rely=0.600)
+        self.lbConfirmaSenha.place(relx=0.300, rely=0.600)
         
 
         self.campoNome = Entry(self.frameDadosLogin, font=('arial',12))
         self.campoCPF = Entry(self.frameDadosLogin, font=('arial',12))
-        self.campoSenha = Entry(self.frameDadosLogin, font=('arial',12))
-        self.campoConfirmaSenha = Entry(self.frameDadosLogin, font=('arial',12))
+        self.campoSenha = Entry(self.frameDadosLogin, font=('arial',12), show='*')
+        self.campoConfirmaSenha = Entry(self.frameDadosLogin, font=('arial',12), show='*')
         
-        self.campoNome.place(relx=0.080, rely=0.300, relwidth=0.280)
-        self.campoCPF.place(relx=0.425, rely=0.300, relwidth=0.175)
+        self.campoNome.place(relx=0.080, rely=0.300, relwidth=0.350)
+        self.campoCPF.place(relx=0.518, rely=0.300, relwidth=0.175)
         self.campoSenha.place(relx=0.085, rely=0.600, relwidth=0.175)
-        self.campoConfirmaSenha.place(relx=0.410, rely=0.600, relwidth=0.175)
+        self.campoConfirmaSenha.place(relx=0.430, rely=0.600, relwidth=0.175)
         
         self.frameAtribuicao = Frame(self.janelaCadastro, highlightbackground='grey', highlightthickness=2)
         self.frameAtribuicao.place(relx=0.100, rely=0.460, relwidth=0.800, relheight=0.250)
@@ -109,7 +145,7 @@ class Front_End():
         self.lbbox6.place(relx=0.67, rely=0.600, relwidth=0.11)
         self.lbbox7.place(relx=0.80, rely=0.600, relwidth=0.11)
         
-        self.botaoConfirmar = Button(self.janelaCadastro, text='Confirmar', font=('arial black', 13))
+        self.botaoConfirmar = Button(self.janelaCadastro, text='Confirmar', font=('arial black', 13), command=self.verificar_janela_cadastro)
         self.botaoConfirmar.place(relx=0.82, rely=0.90)
 
         self.janelaCadastro.mainloop()
