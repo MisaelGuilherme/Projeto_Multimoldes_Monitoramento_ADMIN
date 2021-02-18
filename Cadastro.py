@@ -17,6 +17,13 @@ class Front_End():
         else:
             self.janelaCadastro.attributes('-zoomed', True)
         
+        image = PhotoImage(file='image/logo-multimoldes.png')
+        
+        corPadrao = self.janelaCadastro['bg']
+        
+        self.logo = Label(self.janelaCadastro, image=image, bg=corPadrao)
+        self.logo.pack()
+        
         self.frameDadosLogin = Frame(self.janelaCadastro, highlightbackground='grey', highlightthickness=2)
         self.frameDadosLogin.place(relx=0.100, rely=0.200, relwidth=0.800, relheight=0.250)
         
@@ -101,6 +108,9 @@ class Front_End():
         self.lbbox5.place(relx=0.54, rely=0.600, relwidth=0.11)
         self.lbbox6.place(relx=0.67, rely=0.600, relwidth=0.11)
         self.lbbox7.place(relx=0.80, rely=0.600, relwidth=0.11)
+        
+        self.botaoConfirmar = Button(self.janelaCadastro, text='Confirmar', font=('arial black', 13))
+        self.botaoConfirmar.place(relx=0.82, rely=0.90)
 
         self.janelaCadastro.mainloop()
 
