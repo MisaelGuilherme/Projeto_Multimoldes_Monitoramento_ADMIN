@@ -132,12 +132,16 @@ class Front_End(Back_End):
         self.lbNome = Label(self.frameDadosLogin, text='Nome', font=('impact',12))
         self.lbCPF = Label(self.frameDadosLogin, text='CPF', font=('impact',12))
         self.lbSenha = Label(self.frameDadosLogin, text='Senha', font=('impact',12))
+        self.lbSenhaErro = Label(self.frameDadosLogin, text='', font=('arial', 10), fg='red')
         self.lbConfirmaSenha = Label(self.frameDadosLogin, text='Confirme Senha', font=('impact',12))
+        self.lbConfirmaSenhaErro = Label(self.frameDadosLogin, text='', font=('arial', 10), fg='red')
         
         self.lbNome.place(relx=0.020, rely=0.300)
         self.lbCPF.place(relx=0.470, rely=0.300)
         self.lbSenha.place(relx=0.020, rely=0.600)
+        self.lbSenhaErro.place(relx=0.110, rely=0.750)
         self.lbConfirmaSenha.place(relx=0.300, rely=0.600)
+        self.lbConfirmaSenhaErro.place(relx=0.440, rely=0.750)
         
         #Função que impedirá que o usuário digite valores diferentes do que o campos propõe
         
@@ -145,6 +149,7 @@ class Front_End(Back_End):
             
             value = strNome.get()
             if len(value) > 0:
+                
                 if value[-1].isnumeric():
                     strNome.set(value[:-1])
                 else:
@@ -152,6 +157,7 @@ class Front_End(Back_End):
             
             value2 = nCPF.get()
             if len(value2) > 0:
+                
                 if not value2[-1].isnumeric():
                     nCPF.set(value2[:-1])
                 else:
@@ -159,6 +165,10 @@ class Front_End(Back_End):
 
             value3 = nSenha.get()
             if len(value3) > 0:
+                
+                if len(value3) > 8:
+                    self.lbSenhaErro['text'] = ''
+                
                 if not value3[-1].isnumeric():
                     nSenha.set(value3[:-1])
                 else:
@@ -166,6 +176,16 @@ class Front_End(Back_End):
             
             value4 = nConfirmaSenha.get()
             if len(value4) > 0:
+                
+                if len(value4) >= 1 and len(value3) < 8:
+                    self.lbSenhaErro['text'] = 'Obrigatório 8 dígitos'
+                
+                elif len(value4) == 8 and value4 != value3:
+                    self.lbConfirmaSenhaErro['text'] = 'As senhas não coincidem'
+                
+                elif len(value4) == 8 and value4 == value3:
+                    self.lbConfirmaSenhaErro['text'] = ''
+                    
                 if not value4[-1].isnumeric():
                     nConfirmaSenha.set(value4[:-1])
                 else:
