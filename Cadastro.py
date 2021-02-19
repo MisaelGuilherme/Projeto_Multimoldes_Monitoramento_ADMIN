@@ -7,10 +7,14 @@ class Back_End():
     
     def verificar_janela_cadastro(self):
         
+        #Atribuição dos campos cadastrais nas variáveis
+        
         a = self.campoNome.get()
         b = self.campoCPF.get()
         c = self.campoSenha.get()
         d = self.campoConfirmaSenha.get()
+        
+        #Verificando se algum campo não foi preenchido
         
         if a == '' or b == '' or c == '' or d == '':
             
@@ -48,20 +52,28 @@ class Front_End(Back_End):
         
         self.sistemaOperacional = system()
         
+        #Configurando o ambiente para se maximizado de acordo com o sistema operacional
+        
         if self.sistemaOperacional == 'Windows':
             self.janelaCadastro.state('zoomed')
         else:
             self.janelaCadastro.attributes('-zoomed', True)
         
-        image = PhotoImage(file='image/logo-multimoldes.png')
-        
         corPadrao = self.janelaCadastro['bg']
+        
+        #Configurando Imagem da Logo Multimoldes
+        
+        image = PhotoImage(file='image/logo-multimoldes.png')
         
         self.logo = Label(self.janelaCadastro, image=image, bg=corPadrao)
         self.logo.pack()
         
+        #Frame de Login dos registros de conta do usuário
+        
         self.frameDadosLogin = Frame(self.janelaCadastro, highlightbackground='grey', highlightthickness=2)
         self.frameDadosLogin.place(relx=0.100, rely=0.200, relwidth=0.800, relheight=0.250)
+        
+        #labels referente aos campos de login
         
         self.lbDados = Label(self.frameDadosLogin, text='Dados', font=('impact', 14))
         self.lbDados.place(relx=0.010, rely=0.010)
@@ -75,6 +87,8 @@ class Front_End(Back_End):
         self.lbCPF.place(relx=0.470, rely=0.300)
         self.lbSenha.place(relx=0.020, rely=0.600)
         self.lbConfirmaSenha.place(relx=0.300, rely=0.600)
+        
+        #Função que impedirá que o usuário digite valores diferentes do que o campos propõe
         
         def verifica_campo(*args):
             
@@ -106,6 +120,8 @@ class Front_End(Back_End):
                 else:
                     nConfirmaSenha.set(value4[:8])
         
+        #Variáveis que será utilizadas para verificação dos campos
+        
         strNome = StringVar()
         strNome.trace('w', verifica_campo)
 
@@ -118,6 +134,8 @@ class Front_End(Back_End):
         nConfirmaSenha = StringVar()
         nConfirmaSenha.trace('w', verifica_campo)
 
+        #Campos de preenchimento dos dados de login
+        
         self.campoNome = Entry(self.frameDadosLogin, font=('arial',12), textvariable=strNome)
         self.campoCPF = Entry(self.frameDadosLogin, font=('arial',12), textvariable=nCPF)
         self.campoSenha = Entry(self.frameDadosLogin, font=('arial',12), show='*', textvariable=nSenha)
@@ -128,8 +146,12 @@ class Front_End(Back_End):
         self.campoSenha.place(relx=0.085, rely=0.600, relwidth=0.175)
         self.campoConfirmaSenha.place(relx=0.430, rely=0.600, relwidth=0.175)
         
+        #Frame de atribuição das habilidades dos funcionários
+        
         self.frameAtribuicao = Frame(self.janelaCadastro, highlightbackground='grey', highlightthickness=2)
         self.frameAtribuicao.place(relx=0.100, rely=0.460, relwidth=0.800, relheight=0.250)
+        
+        #labels referente aos campos de Atribuição
         
         self.lbAtribuicao = Label(self.frameAtribuicao, text='Atribuição', font=('impact', 14))
         self.lbAtribuicao.place(relx=0.010, rely=0.010)
@@ -149,6 +171,8 @@ class Front_End(Back_End):
         self.lbFurar.place(relx=0.54, rely=0.400)
         self.lbBrochamento.place(relx=0.67, rely=0.400)
         self.lbEletroerosao.place(relx=0.80, rely=0.400)
+        
+        #Boxes de seleção para o nível de habilidades do usuário em cada operação
 
         self.lbbox1 = ttk.Combobox(self.frameAtribuicao, font=('arial',13), state="readonly")
         self.lbbox1['values'] = ('Select', '0', '1', '2', '3')
@@ -185,6 +209,8 @@ class Front_End(Back_End):
         self.lbbox5.place(relx=0.54, rely=0.600, relwidth=0.11)
         self.lbbox6.place(relx=0.67, rely=0.600, relwidth=0.11)
         self.lbbox7.place(relx=0.80, rely=0.600, relwidth=0.11)
+        
+        #Botão que confirmará os dados quando solicitado
         
         self.botaoConfirmar = Button(self.janelaCadastro, text='Confirmar', font=('arial black', 13), command=self.verificar_janela_cadastro)
         self.botaoConfirmar.place(relx=0.82, rely=0.90)
