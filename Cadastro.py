@@ -71,27 +71,31 @@ class Back_End():
             
             return messagebox.showerror('Alerta', 'Verifique os campos')
         
-        if len(a) < 6:
+        elif len(a) < 6 or len(b) < 11 or len(c) < 8 or len(d) < 8 or c != d:
+        
+            if len(a) < 6:
+                    
+                    self.campoNome['bg'] = 'pink'
+                    self.lbNome['fg'] = 'red'
                 
-                self.campoNome['bg'] = 'pink'
-                self.lbNome['fg'] = 'red'
+            if len(b) < 11:
+                
+                self.campoCPF['bg'] = 'pink'
+                self.lbCPF['fg'] = 'red'
             
-        if len(b) < 11:
-            
-            self.campoCPF['bg'] = 'pink'
-            self.lbCPF['fg'] = 'red'
-        
-        if len(c) < 8:
+            if len(c) < 8:
 
-            self.campoSenha['bg'] = 'pink'
-            self.lbSenha['fg'] = 'red'
-    
-        if len(d) < 8:
-    
-            self.campoConfirmaSenha['bg'] = 'pink'
-            self.lbConfirmaSenha['fg'] = 'red'
+                self.campoSenha['bg'] = 'pink'
+                self.lbSenha['fg'] = 'red'
         
-        else: messagebox.showinfo('Alerta', 'Usuário cadastrado com sucesso!')
+            if len(d) < 8:
+        
+                self.campoConfirmaSenha['bg'] = 'pink'
+                self.lbConfirmaSenha['fg'] = 'red'
+                
+            return messagebox.showerror('Alerta', 'Verifique os campos')
+
+        messagebox.showinfo('Alerta', 'Usuário cadastrado com sucesso!')
         
 class Front_End(Back_End):
     
@@ -165,22 +169,25 @@ class Front_End(Back_End):
 
             value3 = nSenha.get()
             if len(value3) > 0:
-                
-                if len(value3) > 8:
-                    self.lbSenhaErro['text'] = ''
-                
+                                
                 if not value3[-1].isnumeric():
                     nSenha.set(value3[:-1])
                 else:
-                    nSenha.set(value3[:8])
+                    nSenha.set(value3[0:8])
+                    
+                if len(value3) >= 8:
+                    self.campoConfirmaSenha.configure(state=NORMAL)
+                else:
+                    self.campoConfirmaSenha.configure(state=DISABLED)
+            
+            else:
+                self.lbConfirmaSenhaErro['text'] = ''
+                self.campoConfirmaSenha.configure(state=DISABLED)
             
             value4 = nConfirmaSenha.get()
             if len(value4) > 0:
                 
-                if len(value4) >= 1 and len(value3) < 8:
-                    self.lbSenhaErro['text'] = 'Obrigatório 8 dígitos'
-                
-                elif len(value4) == 8 and value4 != value3:
+                if len(value4) == 8 and value4 != value3:
                     self.lbConfirmaSenhaErro['text'] = 'As senhas não coincidem'
                 
                 elif len(value4) == 8 and value4 == value3:
@@ -190,6 +197,8 @@ class Front_End(Back_End):
                     nConfirmaSenha.set(value4[:-1])
                 else:
                     nConfirmaSenha.set(value4[:8])
+            else:
+                self.lbConfirmaSenhaErro['text'] = ''
         
         #Variáveis que será utilizadas para verificação dos campos
         
@@ -210,7 +219,7 @@ class Front_End(Back_End):
         self.campoNome = Entry(self.frameDadosLogin, font=('arial',12), textvariable=strNome)
         self.campoCPF = Entry(self.frameDadosLogin, font=('arial',12), textvariable=nCPF)
         self.campoSenha = Entry(self.frameDadosLogin, font=('arial',12), show='*', textvariable=nSenha)
-        self.campoConfirmaSenha = Entry(self.frameDadosLogin, font=('arial',12), show='*', textvariable=nConfirmaSenha)
+        self.campoConfirmaSenha = Entry(self.frameDadosLogin, font=('arial',12), show='*', textvariable=nConfirmaSenha,state=DISABLED)
         
         self.campoNome.place(relx=0.080, rely=0.300, relwidth=0.350)
         self.campoCPF.place(relx=0.518, rely=0.300, relwidth=0.175)
