@@ -34,7 +34,7 @@ class Back_End():
                 self.campoConfirmaSenha['bg'] = 'pink'
                 self.lbConfirmaSenha['fg'] = 'red'
             
-            return messagebox.showerror('Alerta', 'Campos não preenchido')
+            return messagebox.showerror('Alerta', 'Verifique os campos')
         
         else: messagebox.showinfo('Alerta', 'Usuário cadastrado com sucesso!')
         
@@ -76,11 +76,52 @@ class Front_End(Back_End):
         self.lbSenha.place(relx=0.020, rely=0.600)
         self.lbConfirmaSenha.place(relx=0.300, rely=0.600)
         
+        def verifica_campo(*args):
+            
+            value = strNome.get()
+            if len(value) > 0:
+                if value[-1].isnumeric():
+                    strNome.set(value[:-1])
+                else:
+                    strNome.set(value[:50])
+            
+            value2 = nCPF.get()
+            if len(value2) > 0:
+                if not value2[-1].isnumeric():
+                    nCPF.set(value2[:-1])
+                else:
+                    nCPF.set(value2[:11])
 
-        self.campoNome = Entry(self.frameDadosLogin, font=('arial',12))
-        self.campoCPF = Entry(self.frameDadosLogin, font=('arial',12))
-        self.campoSenha = Entry(self.frameDadosLogin, font=('arial',12), show='*')
-        self.campoConfirmaSenha = Entry(self.frameDadosLogin, font=('arial',12), show='*')
+            value3 = nSenha.get()
+            if len(value3) > 0:
+                if not value3[-1].isnumeric():
+                    nSenha.set(value3[:-1])
+                else:
+                    nSenha.set(value3[:8])
+            
+            value4 = nConfirmaSenha.get()
+            if len(value4) > 0:
+                if not value4[-1].isnumeric():
+                    nConfirmaSenha.set(value4[:-1])
+                else:
+                    nConfirmaSenha.set(value4[:8])
+        
+        strNome = StringVar()
+        strNome.trace('w', verifica_campo)
+
+        nCPF = StringVar()
+        nCPF.trace('w', verifica_campo)
+        
+        nSenha = StringVar()
+        nSenha.trace('w', verifica_campo)
+        
+        nConfirmaSenha = StringVar()
+        nConfirmaSenha.trace('w', verifica_campo)
+
+        self.campoNome = Entry(self.frameDadosLogin, font=('arial',12), textvariable=strNome)
+        self.campoCPF = Entry(self.frameDadosLogin, font=('arial',12), textvariable=nCPF)
+        self.campoSenha = Entry(self.frameDadosLogin, font=('arial',12), show='*', textvariable=nSenha)
+        self.campoConfirmaSenha = Entry(self.frameDadosLogin, font=('arial',12), show='*', textvariable=nConfirmaSenha)
         
         self.campoNome.place(relx=0.080, rely=0.300, relwidth=0.350)
         self.campoCPF.place(relx=0.518, rely=0.300, relwidth=0.175)
