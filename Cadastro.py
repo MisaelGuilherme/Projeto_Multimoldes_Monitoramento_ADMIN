@@ -11,10 +11,55 @@ class Back_End():
 
         self.bancoServer = mysql.connector.connect(
                                                     host='10.0.0.65',
+                                                    database='empresa_funcionarios',
                                                     user='MultimoldesClient',
                                                     password='')
-    
-    def verificar_janela_cadastro(self):
+        self.cursor = self.bancoServer.cursor()
+        
+    def inserindo_dados_cadastro(self):
+        
+        #Atribuição dos campos cadastrais nas variáveis
+        
+        a = self.campoNome.get().upper()
+        b = self.campoCPF.get()
+        c = self.campoConfirmaSenha.get()
+        
+        #Atribuição dos valores dos boxes de seleção nas variáves
+        
+        A = self.box1.get()
+        B = self.box2.get()
+        C = self.box3.get()
+        D = self.box4.get()
+        E = self.box5.get()
+        F = self.box6.get()
+        G = self.box7.get()
+        
+        #Inserrindo dados no Banco de Dados Servidor
+        
+        self.cursor.execute("INSERT INTO funcionarios VALUES (ID, '"+a+"','"+b+"','"+c+"')")
+        self.bancoServer.commit()
+        
+        self.cursor.execute("INSERT INTO habilidade_funcionarios VALUES ('"+a+"','"+b+"','"+A+"','"+B+"','"+C+"','"+D+"','"+E+"','"+F+"','"+G+"')")
+        self.bancoServer.commit()
+        
+        if messagebox.showinfo('Alerta', 'Usuário cadastrado com sucesso!'):
+        
+            self.campoNome.delete(0, END)
+            self.campoCPF.delete(0, END)
+            self.campoSenha.delete(0, END)
+            self.campoConfirmaSenha.delete(0, END)
+            
+            self.box1.current(0)
+            self.box2.current(0)
+            self.box3.current(0)
+            self.box4.current(0)
+            self.box5.current(0)
+            self.box6.current(0)
+            self.box7.current(0)
+            
+            self.campoNome.focus_force()
+        
+    def verificar_campos_cadastro(self):
         
         #Atribuição dos campos cadastrais nas variáveis
         
@@ -107,10 +152,12 @@ class Back_End():
         try:   
             
             if self.bancoServer.is_connected():
-                messagebox.showinfo('Alerta', 'Usuário cadastrado com sucesso!')
+                
+                self.inserindo_dados_cadastro()
             
         except:
             messagebox.showerror('Alerta', 'Erro ao tentar conexão com Banco de Dados')
+            self.connection_database()
         
 class Front_End(Back_End):
     
@@ -234,6 +281,7 @@ class Front_End(Back_End):
         #Campos de preenchimento dos dados de login
         
         self.campoNome = Entry(self.frameDadosLogin, font=('arial',12), textvariable=strNome)
+        self.campoNome.focus_force()
         self.campoCPF = Entry(self.frameDadosLogin, font=('arial',12), textvariable=nCPF)
         self.campoSenha = Entry(self.frameDadosLogin, font=('arial',12), show='*', textvariable=nSenha)
         self.campoConfirmaSenha = Entry(self.frameDadosLogin, font=('arial',12), show='*', textvariable=nConfirmaSenha,state=DISABLED)
@@ -309,7 +357,7 @@ class Front_End(Back_End):
         
         #Botão que confirmará os dados quando solicitado
         
-        self.botaoConfirmar = Button(self.janelaCadastro, text='Confirmar', font=('arial black', 13), command=self.verificar_janela_cadastro)
+        self.botaoConfirmar = Button(self.janelaCadastro, text='Confirmar', font=('arial black', 13), command=self.verificar_campos_cadastro)
         self.botaoConfirmar.place(relx=0.82, rely=0.90)
 
         self.janelaCadastro.mainloop()
