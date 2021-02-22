@@ -331,6 +331,23 @@ class Front_End(Back_End):
         self.campoSenha.place(relx=0.085, rely=0.600, relwidth=0.175)
         self.campoConfirmaSenha.place(relx=0.430, rely=0.600, relwidth=0.175)
         
+        def mostrar_senha(*args):
+
+            if senhaVisible.get() == 1:
+                
+                self.campoSenha['show'] = ''
+                self.campoConfirmaSenha['show'] = ''
+            
+            else:
+                
+                self.campoSenha['show'] = '*'
+                self.campoConfirmaSenha['show'] = '*'
+        
+        senhaVisible = IntVar()
+        
+        self.check = Checkbutton(self.frameDadosLogin, text='Mostrar Senha', variable=senhaVisible, command=mostrar_senha)
+        self.check.place(relx=0.620, rely=0.600)
+        
         #Frame de atribuição das habilidades dos funcionários
         
         self.frameAtribuicao = Frame(self.janelaCadastro, highlightbackground='grey', highlightthickness=2)
