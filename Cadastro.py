@@ -46,8 +46,8 @@ class Back_End():
         
             self.campoNome.delete(0, END)
             self.campoCPF.delete(0, END)
-            self.campoSenha.delete(0, END)
             self.campoConfirmaSenha.delete(0, END)
+            self.campoSenha.delete(0, END)
             
             self.box1.current(0)
             self.box2.current(0)
@@ -82,6 +82,26 @@ class Back_End():
 
         if a == '' or b == '' or c == '' or d == '' or A == 'Select' or B == 'Select' or C == 'Select' or D == 'Select' or E == 'Select' or F == 'Select' or G == 'Select':
             
+            #Mudando cor para preto caso o usuário tenha errado em algum campo e tenha corrigdo
+            
+            self.lbNome['fg'] = 'black'
+            self.lbCPF['fg'] = 'black'
+            self.lbSenha['fg'] = 'black'
+            self.lbConfirmaSenha['fg'] = 'black'
+            
+            self.campoNome['bg'] = 'white'
+            self.campoCPF['bg'] = 'white'
+            self.campoSenha['bg'] = 'white'
+            self.campoConfirmaSenha['bg'] = 'white'
+            
+            self.lbSerramento['fg'] = 'black'
+            self.lbAplainamento['fg'] = 'black'
+            self.lbTorneamento['fg'] = 'black'
+            self.lbFresagem['fg'] = 'black'
+            self.lbFurar['fg'] = 'black'
+            self.lbBrochamento['fg'] = 'black'
+            self.lbEletroerosao['fg'] = 'black'
+        
             if a == '':
                 
                 self.campoNome['bg'] = 'pink'
@@ -126,6 +146,26 @@ class Back_End():
             return messagebox.showerror('Alerta', 'Verifique os campos')
         
         elif len(a) < 6 or len(b) < 11 or len(c) < 8 or len(d) < 8 or c != d:
+            
+            #Mudando cor para preto caso o usuário tenha errado em algum campo e tenha corrigdo
+            
+            self.lbNome['fg'] = 'black'
+            self.lbCPF['fg'] = 'black'
+            self.lbSenha['fg'] = 'black'
+            self.lbConfirmaSenha['fg'] = 'black'
+            
+            self.campoNome['bg'] = 'white'
+            self.campoCPF['bg'] = 'white'
+            self.campoSenha['bg'] = 'white'
+            self.campoConfirmaSenha['bg'] = 'white'
+            
+            self.lbSerramento['fg'] = 'black'
+            self.lbAplainamento['fg'] = 'black'
+            self.lbTorneamento['fg'] = 'black'
+            self.lbFresagem['fg'] = 'black'
+            self.lbFurar['fg'] = 'black'
+            self.lbBrochamento['fg'] = 'black'
+            self.lbEletroerosao['fg'] = 'black'
         
             if len(a) < 6:
                     
