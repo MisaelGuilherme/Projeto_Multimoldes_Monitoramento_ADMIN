@@ -2,8 +2,17 @@ from tkinter import *
 from tkinter import ttk
 from platform import *
 from tkinter import messagebox
+import mysql.connector
+import threading
 
 class Back_End():
+    
+    def connection_database(self):
+
+        self.bancoServer = mysql.connector.connect(
+                                                    host='10.0.0.65',
+                                                    user='MultimoldesClient',
+                                                    password='')
     
     def verificar_janela_cadastro(self):
         
@@ -25,7 +34,7 @@ class Back_End():
         G = self.box7.get()
         
         #Verificando se algum campo não foi preenchido
-        print(len(a))
+
         if a == '' or b == '' or c == '' or d == '' or A == 'Select' or B == 'Select' or C == 'Select' or D == 'Select' or E == 'Select' or F == 'Select' or G == 'Select':
             
             if a == '':
@@ -94,8 +103,14 @@ class Back_End():
                 self.lbConfirmaSenha['fg'] = 'red'
                 
             return messagebox.showerror('Alerta', 'Verifique os campos')
-
-        messagebox.showinfo('Alerta', 'Usuário cadastrado com sucesso!')
+        
+        try:   
+            
+            if self.bancoServer.is_connected():
+                messagebox.showinfo('Alerta', 'Usuário cadastrado com sucesso!')
+            
+        except:
+            messagebox.showerror('Alerta', 'Erro ao tentar conexão com Banco de Dados')
         
 class Front_End(Back_End):
     
@@ -113,6 +128,8 @@ class Front_End(Back_End):
             self.janelaCadastro.state('zoomed')
         else:
             self.janelaCadastro.attributes('-zoomed', True)
+            
+        threading.Thread(target=self.connection_database).start()
         
         corPadrao = self.janelaCadastro['bg']
         
