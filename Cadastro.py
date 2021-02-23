@@ -201,7 +201,28 @@ class Back_End():
         
     def crud_os_finalizada(self):
         
-        pass
+        #Buscando os dados de os Finalizado do Banco de Dados
+        self.cursor.execute('use empresa_funcionarios')
+        self.cursor.execute("select Id, Operador, OS, codigoPeca, CodigoOperacao, Tipo from monitoria_funcionarios order by id desc limit 1")
+        valido = self.cursor.fetchall()
+        print(valido)
+        if len(valido) >= 1:
+
+            if valido[0] != self.finalizado[-1]:
+                
+                #extraindo do banco de dados as informações e armazenando nas variáveis
+                idd = valido[0][0]
+                nome = valido[0][1]
+                os = valido[0][2]
+                peca = valido[0][3]
+                operacao = valido[0][4]
+                tipo = valido[0][5]
+                
+                self.visualiza.insert("", "end", values=(idd, nome, os, peca, operacao, tipo))
+                
+                self.finalizado.append(valido[0])
+            
+        self.janelaCadastro.after(3000, self.crud_os_finalizada)
     
 class Front_End(Back_End):
     
@@ -253,6 +274,8 @@ class Front_End(Back_End):
         
         self.cursor.execute("select Id, Operador, OS, codigoPeca, CodigoOperacao, Tipo from monitoria_funcionarios")
         valido = self.cursor.fetchall()
+
+        self.finalizado = []
 
         if len(valido) >= 1:
             
