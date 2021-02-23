@@ -215,6 +215,8 @@ class Front_End(Back_End):
             self.janelaCadastro.state('zoomed')
         else:
             self.janelaCadastro.attributes('-zoomed', True)
+            
+        self.connection_database()
         
         self.abas = ttk.Notebook(self.janelaCadastro)
         self.aba1 = Frame(self.abas)
@@ -226,20 +228,45 @@ class Front_End(Back_End):
         
         ############################################## ABA 1 #########################################
         
-        visualiza = ttk.Treeview(self.aba1, column=('1','2','3','4','5'), show='headings')
-        visualiza.heading('1', text='NOME')
-        visualiza.heading('2', text='OS Finalizadas')
-        visualiza.heading('3', text='PEÇA')
-        visualiza.heading('4', text='OPERAÇÃO')
-        visualiza.heading('5', text='TIPO')
+        visualiza = ttk.Treeview(self.aba1, column=('1','2','3','4','5','6'), show='headings')
+        visualiza.heading('1', text='ID')
+        visualiza.heading('2', text='NOME')
+        visualiza.heading('3', text='OS Finalizadas')
+        visualiza.heading('4', text='PEÇA')
+        visualiza.heading('5', text='OPERAÇÃO')
+        visualiza.heading('6', text='TIPO')
         
-        visualiza.column("1", width=30, anchor='n')
-        visualiza.column("2", width=30, anchor='n')
-        visualiza.column("3", width=30, anchor='n')
-        visualiza.column("4", width=30, anchor='n')
-        visualiza.column("5", width=30, anchor='n')
+        visualiza.column("1", width=-50, anchor='n')
+        visualiza.column("2", width=170, anchor='n')
+        visualiza.column("3", width=1, anchor='n')
+        visualiza.column("4", width=1, anchor='n')
+        visualiza.column("5", width=1, anchor='n')
+        visualiza.column("6", width=1, anchor='n')
         
         visualiza.place(relx=0, rely=0.600, relwidth=0.500, relheight=1)
+        
+        self.cursor.execute("select Id, Operador, OS, codigoPeca, CodigoOperacao, Tipo from monitoria_funcionarios")
+        valido = self.cursor.fetchall()
+        
+        finalizado = []
+        
+        if len(valido) >= 1:
+            
+            for c in valido:
+                finalizado.append(c)
+                
+            #utilizando estrutura de repetição para inserir os dados obtidos já armazenado na lista finalizado para o list box
+            for i in range (len(finalizado)):
+                
+                #extraindo do banco de dados as informações e armazenando nas variáveis
+                idd = finalizado[i][0]
+                nome = finalizado[i][1]
+                os = finalizado[i][2]
+                peca = finalizado[i][3]
+                operacao = finalizado[i][4]
+                tipo = finalizado[i][5]
+                
+                visualiza.insert("", "end", values=(idd, nome, os, peca, operacao, tipo))
         
         visualiza2 = ttk.Treeview(self.aba1, column=('1','2','3','4','5'), show='headings')
         visualiza2.heading('1', text='NOME')
@@ -256,9 +283,9 @@ class Front_End(Back_End):
         
         visualiza2.place(relx=0.500, rely=0.600, relwidth=0.500, relheight=1)
         
+        
         ############################################## ABA 2 #########################################
         
-        threading.Thread(target=self.connection_database).start()
         
         corPadrao = self.janelaCadastro['bg']
         
