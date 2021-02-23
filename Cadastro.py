@@ -199,6 +199,10 @@ class Back_End():
             messagebox.showerror('Alerta', 'Erro ao tentar conexão com Banco de Dados')
             self.connection_database()
         
+    def crud_os_finalizada(self):
+        
+        pass
+    
 class Front_End(Back_End):
     
     def __init__(self):
@@ -228,45 +232,51 @@ class Front_End(Back_End):
         
         ############################################## ABA 1 #########################################
         
-        visualiza = ttk.Treeview(self.aba1, column=('1','2','3','4','5','6'), show='headings')
-        visualiza.heading('1', text='ID')
-        visualiza.heading('2', text='NOME')
-        visualiza.heading('3', text='OS Finalizadas')
-        visualiza.heading('4', text='PEÇA')
-        visualiza.heading('5', text='OPERAÇÃO')
-        visualiza.heading('6', text='TIPO')
+        #Criando Treeview para visualização dos dados de OS Finalizados
         
-        visualiza.column("1", width=-50, anchor='n')
-        visualiza.column("2", width=170, anchor='n')
-        visualiza.column("3", width=1, anchor='n')
-        visualiza.column("4", width=1, anchor='n')
-        visualiza.column("5", width=1, anchor='n')
-        visualiza.column("6", width=1, anchor='n')
+        self.visualiza = ttk.Treeview(self.aba1, column=('1','2','3','4','5','6'), show='headings')
+        self.visualiza.heading('1', text='ID')
+        self.visualiza.heading('2', text='NOME')
+        self.visualiza.heading('3', text='OS Finalizadas')
+        self.visualiza.heading('4', text='PEÇA')
+        self.visualiza.heading('5', text='OPERAÇÃO')
+        self.visualiza.heading('6', text='TIPO')
         
-        visualiza.place(relx=0, rely=0.600, relwidth=0.500, relheight=1)
+        self.visualiza.column("1", width=-50, anchor='n')
+        self.visualiza.column("2", width=170, anchor='n')
+        self.visualiza.column("3", width=1, anchor='n')
+        self.visualiza.column("4", width=1, anchor='n')
+        self.visualiza.column("5", width=1, anchor='n')
+        self.visualiza.column("6", width=1, anchor='n')
+        
+        self.visualiza.place(relx=0, rely=0.600, relwidth=0.500, relheight=1)
         
         self.cursor.execute("select Id, Operador, OS, codigoPeca, CodigoOperacao, Tipo from monitoria_funcionarios")
         valido = self.cursor.fetchall()
-        
-        finalizado = []
-        
+
         if len(valido) >= 1:
             
             for c in valido:
-                finalizado.append(c)
                 
-            #utilizando estrutura de repetição para inserir os dados obtidos já armazenado na lista finalizado para o list box
-            for i in range (len(finalizado)):
+                self.finalizado.append(c)
                 
+            #utilizando estrutura de repetição para inserir os dados obtidos já armazenado na lista "finalizado"
+            for i in range (len(self.finalizado)):
+
                 #extraindo do banco de dados as informações e armazenando nas variáveis
-                idd = finalizado[i][0]
-                nome = finalizado[i][1]
-                os = finalizado[i][2]
-                peca = finalizado[i][3]
-                operacao = finalizado[i][4]
-                tipo = finalizado[i][5]
+                idd = self.finalizado[i][0]
+                nome = self.finalizado[i][1]
+                os = self.finalizado[i][2]
+                peca = self.finalizado[i][3]
+                operacao = self.finalizado[i][4]
+                tipo = self.finalizado[i][5]
                 
-                visualiza.insert("", "end", values=(idd, nome, os, peca, operacao, tipo))
+                self.visualiza.insert("", "end", values=(idd, nome, os, peca, operacao, tipo))
+
+        
+        threading.Thread(target=self.crud_os_finalizada).start()
+        
+        #Criando Treeview para visualização dos dados de OS Pausados
         
         visualiza2 = ttk.Treeview(self.aba1, column=('1','2','3','4','5'), show='headings')
         visualiza2.heading('1', text='NOME')
