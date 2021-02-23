@@ -205,7 +205,7 @@ class Front_End(Back_End):
         
         self.janelaCadastro = Tk()
         self.janelaCadastro.geometry('1000x500')
-        self.janelaCadastro.title('Cadastro')
+        self.janelaCadastro.title('Janela Principal')
         
         self.sistemaOperacional = system()
         
@@ -215,7 +215,35 @@ class Front_End(Back_End):
             self.janelaCadastro.state('zoomed')
         else:
             self.janelaCadastro.attributes('-zoomed', True)
-            
+        
+        self.abas = ttk.Notebook(self.janelaCadastro)
+        self.aba1 = Frame(self.abas)
+        self.aba2 = Frame(self.abas)
+        
+        self.abas.add(self.aba1, text='Principal')
+        self.abas.add(self.aba2, text='Cadastro')
+        self.abas.place(relx=0, rely=0, relwidth=1, relheight=1)
+        
+        ############################################## ABA 1 #########################################
+        
+        visualiza = ttk.Treeview(self.aba1, column=('1','2','3','4','5'), show='headings')
+        visualiza.heading('1', text='NOME')
+        visualiza.heading('2', text='OS Finalizadas')
+        visualiza.heading('3', text='PEÇA')
+        visualiza.heading('4', text='OPERAÇÃO')
+        visualiza.heading('5', text='TIPO')
+        
+        visualiza.column("1", width=30, anchor='n')
+        visualiza.column("2", width=30, anchor='n')
+        visualiza.column("3", width=30, anchor='n')
+        visualiza.column("4", width=30, anchor='n')
+        visualiza.column("5", width=30, anchor='n')
+        
+        visualiza.place(relx=0, rely=0.600, relwidth=0.500, relheight=1)
+
+        
+        ############################################## ABA 2 #########################################
+        
         threading.Thread(target=self.connection_database).start()
         
         corPadrao = self.janelaCadastro['bg']
@@ -224,12 +252,12 @@ class Front_End(Back_End):
         
         image = PhotoImage(file='image/logo-multimoldes.png')
         
-        self.logo = Label(self.janelaCadastro, image=image, bg=corPadrao)
+        self.logo = Label(self.aba2, image=image, bg=corPadrao)
         self.logo.pack()
         
         #Frame de Login dos registros de conta do usuário
         
-        self.frameDadosLogin = Frame(self.janelaCadastro, highlightbackground='grey', highlightthickness=2)
+        self.frameDadosLogin = Frame(self.aba2, highlightbackground='grey', highlightthickness=2)
         self.frameDadosLogin.place(relx=0.100, rely=0.200, relwidth=0.800, relheight=0.250)
         
         #labels referente aos campos de login
@@ -350,7 +378,7 @@ class Front_End(Back_End):
         
         #Frame de atribuição das habilidades dos funcionários
         
-        self.frameAtribuicao = Frame(self.janelaCadastro, highlightbackground='grey', highlightthickness=2)
+        self.frameAtribuicao = Frame(self.aba2, highlightbackground='grey', highlightthickness=2)
         self.frameAtribuicao.place(relx=0.100, rely=0.460, relwidth=0.800, relheight=0.250)
         
         #labels referente aos campos de Atribuição
@@ -414,7 +442,7 @@ class Front_End(Back_End):
         
         #Botão que confirmará os dados quando solicitado
         
-        self.botaoConfirmar = Button(self.janelaCadastro, text='Confirmar', font=('arial black', 13), command=self.verificar_campos_cadastro)
+        self.botaoConfirmar = Button(self.aba2, text='Confirmar', font=('arial black', 13), command=self.verificar_campos_cadastro)
         self.botaoConfirmar.place(relx=0.82, rely=0.90)
 
         self.janelaCadastro.mainloop()
