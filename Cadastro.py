@@ -240,7 +240,21 @@ class Front_End(Back_End):
         visualiza.column("5", width=30, anchor='n')
         
         visualiza.place(relx=0, rely=0.600, relwidth=0.500, relheight=1)
-
+        
+        visualiza2 = ttk.Treeview(self.aba1, column=('1','2','3','4','5'), show='headings')
+        visualiza2.heading('1', text='NOME')
+        visualiza2.heading('2', text='OS Pausadas')
+        visualiza2.heading('3', text='PEÇA')
+        visualiza2.heading('4', text='OPERAÇÃO')
+        visualiza2.heading('5', text='TIPO')
+        
+        visualiza2.column("1", width=30, anchor='n')
+        visualiza2.column("2", width=30, anchor='n')
+        visualiza2.column("3", width=30, anchor='n')
+        visualiza2.column("4", width=30, anchor='n')
+        visualiza2.column("5", width=30, anchor='n')
+        
+        visualiza2.place(relx=0.500, rely=0.600, relwidth=0.500, relheight=1)
         
         ############################################## ABA 2 #########################################
         
