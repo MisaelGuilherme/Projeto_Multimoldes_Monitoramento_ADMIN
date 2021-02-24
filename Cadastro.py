@@ -278,13 +278,13 @@ class Front_End(Back_End):
         self.visualiza.column("3", width=1, anchor='n')
         self.visualiza.column("4", width=1, anchor='n')
         self.visualiza.column("5", width=1, anchor='n')
-        self.visualiza.column("6", width=1, anchor='n')
+        self.visualiza.column("6", width=30, anchor='n')
         
-        self.visualiza.place(relx=0, rely=0.600, relwidth=0.400, relheight=0.400)
+        self.visualiza.place(relx=0, rely=0.600, relwidth=0.480, relheight=0.400)
         
         scrollbar = Scrollbar(self.aba1, orient="vertical", command=self.visualiza.yview)
         self.visualiza.configure(yscrollcommand=scrollbar.set)
-        scrollbar.place(relx=0.400, rely=0.600, relheight=0.400)
+        scrollbar.place(relx=0.480, rely=0.600, relheight=0.400)
         
         self.cursor.execute("select Id, Operador, OS, codigoPeca, CodigoOperacao, Tipo from monitoria_funcionarios")
         valido = self.cursor.fetchall()
@@ -315,20 +315,24 @@ class Front_End(Back_End):
         
         #Criando Treeview para visualização dos dados de OS Pausados
         
-        visualiza2 = ttk.Treeview(self.aba1, column=('1','2','3','4','5'), show='headings')
-        visualiza2.heading('1', text='NOME')
-        visualiza2.heading('2', text='OS Pausadas')
-        visualiza2.heading('3', text='PEÇA')
-        visualiza2.heading('4', text='OPERAÇÃO')
-        visualiza2.heading('5', text='TIPO')
+        self.visualiza2 = ttk.Treeview(self.aba1, column=('1','2','3','4','5'), show='headings')
+        self.visualiza2.heading('1', text='NOME')
+        self.visualiza2.heading('2', text='OS Pausadas')
+        self.visualiza2.heading('3', text='PEÇA')
+        self.visualiza2.heading('4', text='OPERAÇÃO')
+        self.visualiza2.heading('5', text='TIPO')
         
-        visualiza2.column("1", width=30, anchor='n')
-        visualiza2.column("2", width=30, anchor='n')
-        visualiza2.column("3", width=30, anchor='n')
-        visualiza2.column("4", width=30, anchor='n')
-        visualiza2.column("5", width=30, anchor='n')
+        self.visualiza2.column("1", width=30, anchor='n')
+        self.visualiza2.column("2", width=30, anchor='n')
+        self.visualiza2.column("3", width=30, anchor='n')
+        self.visualiza2.column("4", width=30, anchor='n')
+        self.visualiza2.column("5", width=30, anchor='n')
         
-        visualiza2.place(relx=0.500, rely=0.600, relwidth=0.500, relheight=1)
+        self.visualiza2.place(relx=0.500, rely=0.600, relwidth=0.480, relheight=1)
+        
+        scrollbar2 = Scrollbar(self.aba1, orient="vertical", command=self.visualiza2.yview)
+        self.visualiza2.configure(yscrollcommand=scrollbar2.set)
+        scrollbar2.place(relx=0.980, rely=0.600, relheight=0.400)
         
         
         ############################################## ABA 2 #########################################
