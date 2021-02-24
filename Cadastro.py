@@ -280,7 +280,11 @@ class Front_End(Back_End):
         self.visualiza.column("5", width=1, anchor='n')
         self.visualiza.column("6", width=1, anchor='n')
         
-        self.visualiza.place(relx=0, rely=0.600, relwidth=0.500, relheight=1)
+        self.visualiza.place(relx=0, rely=0.600, relwidth=0.400, relheight=0.400)
+        
+        scrollbar = Scrollbar(self.aba1, orient="vertical", command=self.visualiza.yview)
+        self.visualiza.configure(yscrollcommand=scrollbar.set)
+        scrollbar.place(relx=0.400, rely=0.600, relheight=0.400)
         
         self.cursor.execute("select Id, Operador, OS, codigoPeca, CodigoOperacao, Tipo from monitoria_funcionarios")
         valido = self.cursor.fetchall()
