@@ -15,7 +15,12 @@ class Back_End():
                                                     user='MultimoldesClient',
                                                     password='')
         self.cursor = self.bancoServer.cursor()
+    
+    def encerrando_conexao_database(self):
         
+        self.bancoServer.close()
+        self.cursor.close()
+    
     def inserindo_dados_cadastro(self):
         
         #Atribuição dos campos cadastrais nas variáveis
@@ -201,16 +206,18 @@ class Back_End():
         
     def crud_os_finalizada(self):
         
-        #Buscando os dados de os Finalizado do Banco de Dados
+        self.connection_database()
+        
+        #Buscando os dados de os Finalizado do Banco de Dados para inserir na Treeview
         self.cursor.execute('use empresa_funcionarios')
-        self.cursor.execute("select Id, Operador, OS, codigoPeca, CodigoOperacao, Tipo from monitoria_funcionarios order by id desc limit 1")
+        self.cursor.execute("select ID, Operador, OS, codigoPeca, CodigoOperacao, Tipo from monitoria_funcionarios order by id desc limit 1")
         valido = self.cursor.fetchall()
-        print(valido)
+        
         if len(valido) >= 1:
-
-            if valido[0] != self.finalizado[-1]:
+            
+            #Buscando o último dado do banco e último dado da lista, se for diferente: é um novo dado, e será inserido na Treeview
+            if self.finalizado == [] or valido[0] != self.finalizado[-1]:
                 
-                #extraindo do banco de dados as informações e armazenando nas variáveis
                 idd = valido[0][0]
                 nome = valido[0][1]
                 os = valido[0][2]
@@ -220,9 +227,12 @@ class Back_End():
                 
                 self.visualiza.insert("", "end", values=(idd, nome, os, peca, operacao, tipo))
                 
+                #Adcionando novo dado na lista para não se repetir na Treeview
                 self.finalizado.append(valido[0])
-            
-        self.janelaCadastro.after(3000, self.crud_os_finalizada)
+                
+                self.encerrando_conexao_database()
+        
+        self.janelaCadastro.after(1000, self.crud_os_finalizada)
     
 class Front_End(Back_End):
     
