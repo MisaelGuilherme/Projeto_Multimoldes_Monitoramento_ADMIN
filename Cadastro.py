@@ -240,7 +240,7 @@ class Front_End(Back_End):
         
         self.janelaCadastro = Tk()
         self.janelaCadastro.geometry('1000x500')
-        self.janelaCadastro.title('Janela Principal')
+        self.janelaCadastro.title('Multimoldes Admin')
         
         self.sistemaOperacional = system()
         
@@ -263,12 +263,21 @@ class Front_End(Back_End):
         
         ############################################## ABA 1 #########################################
         
+        lb1 = Label(self.aba1, text='OS Finalizadas', font=('arial', 12, 'bold'))
+        lb1.place(relx=0.200, rely=0.500)
+        
+        lb2 = Label(self.aba1, text='OS Pausadas', font=('arial', 12, 'bold'))
+        lb2.place(relx=0.700, rely=0.500)
+        
         #Criando Treeview para visualização dos dados de OS Finalizados
+        
+        style = ttk.Style()
+        style.configure('Treeview.Heading', font=('arial', 9, 'bold'))
         
         self.visualiza = ttk.Treeview(self.aba1, column=('1','2','3','4','5','6'), show='headings')
         self.visualiza.heading('1', text='ID')
         self.visualiza.heading('2', text='NOME')
-        self.visualiza.heading('3', text='OS Finalizadas')
+        self.visualiza.heading('3', text='OS')
         self.visualiza.heading('4', text='PEÇA')
         self.visualiza.heading('5', text='OPERAÇÃO')
         self.visualiza.heading('6', text='TIPO')
@@ -317,7 +326,7 @@ class Front_End(Back_End):
         
         self.visualiza2 = ttk.Treeview(self.aba1, column=('1','2','3','4','5'), show='headings')
         self.visualiza2.heading('1', text='NOME')
-        self.visualiza2.heading('2', text='OS Pausadas')
+        self.visualiza2.heading('2', text='OS')
         self.visualiza2.heading('3', text='PEÇA')
         self.visualiza2.heading('4', text='OPERAÇÃO')
         self.visualiza2.heading('5', text='TIPO')
