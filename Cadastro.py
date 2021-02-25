@@ -8,13 +8,18 @@ import threading
 class Back_End():
     
     def connection_database(self):
-
-        self.bancoServer = mysql.connector.connect(
-                                                    host='10.0.0.65',
-                                                    database='empresa_funcionarios',
-                                                    user='MultimoldesClient',
-                                                    password='')
-        self.cursor = self.bancoServer.cursor()
+        try:
+            
+            self.bancoServer = mysql.connector.connect(
+                                                        host='10.0.0.65',
+                                                        database='empresa_funcionarios',
+                                                        user='MultimoldesClient',
+                                                        password='')
+            self.cursor = self.bancoServer.cursor()
+            self.bancoConnect = True
+        
+        except:
+            self.bancoConnect = False
     
     def encerrando_conexao_database(self):
         
@@ -41,11 +46,16 @@ class Back_End():
         
         #Inserrindo dados no Banco de Dados Servidor
         
-        self.cursor.execute("INSERT INTO funcionarios VALUES (ID, '"+a+"','"+b+"','"+c+"')")
-        self.bancoServer.commit()
+        try:
         
-        self.cursor.execute("INSERT INTO habilidade_funcionarios VALUES ('"+a+"','"+b+"','"+A+"','"+B+"','"+C+"','"+D+"','"+E+"','"+F+"','"+G+"')")
-        self.bancoServer.commit()
+            self.cursor.execute("INSERT INTO funcionarios VALUES (ID, '"+a+"','"+b+"','"+c+"')")
+            self.bancoServer.commit()
+            
+            self.cursor.execute("INSERT INTO habilidade_funcionarios VALUES ('"+a+"','"+b+"','"+A+"','"+B+"','"+C+"','"+D+"','"+E+"','"+F+"','"+G+"')")
+            self.bancoServer.commit()
+        
+        except:
+            return messagebox.showerror('Alerta', 'Erro ao inserir dados. Verifique a conexão com o banco')
         
         if messagebox.showinfo('Alerta', 'Usuário cadastrado com sucesso!'):
         
@@ -201,17 +211,20 @@ class Back_End():
                 self.inserindo_dados_cadastro()
             
         except:
-            messagebox.showerror('Alerta', 'Erro ao tentar conexão com Banco de Dados')
-            self.connection_database()
+            messagebox.showerror('Alerta', 'Erro conexão com Banco de Dados não estabelecida')
         
     def crud_os_finalizada(self):
         
+        valido = ''
+        
         self.connection_database()
         
-        #Buscando os dados de os Finalizado do Banco de Dados para inserir na Treeview
-        self.cursor.execute('use empresa_funcionarios')
-        self.cursor.execute("select ID, Operador, OS, codigoPeca, CodigoOperacao, Tipo from monitoria_funcionarios order by id desc limit 1")
-        valido = self.cursor.fetchall()
+        if self.bancoConnect:
+        
+            #Buscando os dados de os Finalizado do Banco de Dados para inserir na Treeview
+            self.cursor.execute('use empresa_funcionarios')
+            self.cursor.execute("select ID, Operador, OS, codigoPeca, CodigoOperacao, Tipo from monitoria_funcionarios order by id desc limit 1")
+            valido = self.cursor.fetchall()
         
         if len(valido) >= 1:
             
@@ -230,7 +243,8 @@ class Back_End():
                 #Adcionando novo dado na lista para não se repetir na Treeview
                 self.finalizado.append(valido[0])
                 
-                self.encerrando_conexao_database()
+                self.bancoServer.close()
+                self.cursor.close()
         
         self.janelaCadastro.after(1000, self.crud_os_finalizada)
     
@@ -250,9 +264,14 @@ class Front_End(Back_End):
             self.janelaCadastro.state('zoomed')
         else:
             self.janelaCadastro.attributes('-zoomed', True)
-            
-        self.connection_database()
         
+        
+        try:
+            self.connection_database()
+        except:
+            messagebox.showerror('Alerta', 'Erro na conexão com Banco de Dados')
+        
+
         self.abas = ttk.Notebook(self.janelaCadastro)
         self.aba1 = Frame(self.abas)
         self.aba2 = Frame(self.abas)
@@ -295,8 +314,12 @@ class Front_End(Back_End):
         self.visualiza.configure(yscrollcommand=scrollbar.set)
         scrollbar.place(relx=0.480, rely=0.600, relheight=0.400)
         
-        self.cursor.execute("select Id, Operador, OS, codigoPeca, CodigoOperacao, Tipo from monitoria_funcionarios")
-        valido = self.cursor.fetchall()
+        valido = ''
+        
+        if self.bancoConnect:
+            
+            self.cursor.execute("select Id, Operador, OS, codigoPeca, CodigoOperacao, Tipo from monitoria_funcionarios")
+            valido = self.cursor.fetchall()
 
         self.finalizado = []
 
