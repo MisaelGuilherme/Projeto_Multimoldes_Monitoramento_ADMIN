@@ -217,7 +217,7 @@ class Back_End():
         
         valido = ''
         
-        self.connection_database()
+        threading.Thread(target=self.connection_database).start()
         
         if self.bancoConnect:
         
@@ -260,15 +260,14 @@ class Front_End(Back_End):
         
         #Configurando o ambiente para se maximizado de acordo com o sistema operacional
         
-        if self.sistemaOperacional == 'Windows':
+        if self.sistemaOperacional == 'Windows': 
             self.janelaCadastro.state('zoomed')
         else:
             self.janelaCadastro.attributes('-zoomed', True)
         
         
-        try:
-            self.connection_database()
-        except:
+        self.connection_database()
+        if not self.bancoConnect:
             messagebox.showerror('Alerta', 'Erro na conexão com Banco de Dados')
         
 
@@ -282,11 +281,17 @@ class Front_End(Back_End):
         
         ############################################## ABA 1 #########################################
         
+        frameDetalhe1 = Frame(self.aba1, highlightbackground='grey', highlightthickness=2)
+        frameDetalhe1.place(relx=0.010, rely=0.090, relwidth=0.450, relheight=0.400)
+
+        frameDetalhe2 = Frame(self.aba1, highlightbackground='grey', highlightthickness=2)
+        frameDetalhe2.place(relx=0.520, rely=0.090, relwidth=0.450, relheight=0.400)
+        
         lb1 = Label(self.aba1, text='OS Finalizadas', font=('arial', 12, 'bold'))
-        lb1.place(relx=0.200, rely=0.500)
+        lb1.place(relx=0.200, rely=0.520)
         
         lb2 = Label(self.aba1, text='OS Pausadas', font=('arial', 12, 'bold'))
-        lb2.place(relx=0.700, rely=0.500)
+        lb2.place(relx=0.700, rely=0.520)
         
         #Criando Treeview para visualização dos dados de OS Finalizados
         
