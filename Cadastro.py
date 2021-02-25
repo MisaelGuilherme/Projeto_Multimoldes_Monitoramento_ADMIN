@@ -281,8 +281,65 @@ class Front_End(Back_End):
         
         ############################################## ABA 1 #########################################
         
+        lbDetalhes1 = Label(self.aba1, text='Detalhe: OS Finalizada', font=('arial', 12, 'bold'))
+        lbDetalhes1.place(relx=0.020, rely=0.025)
+        
+        lbDetalhes2 = Label(self.aba1, text='Detalhe: OS Pausada', font=('arial', 12, 'bold'))
+        lbDetalhes2.place(relx=0.520, rely=0.025)
+        
         frameDetalhe1 = Frame(self.aba1, highlightbackground='grey', highlightthickness=2)
         frameDetalhe1.place(relx=0.010, rely=0.090, relwidth=0.450, relheight=0.400)
+        
+        #-------- COLUNA 1 NO FRAME DE DETALHES 1 --------
+        lbInfo1 = Label(frameDetalhe1, text='Nome', font=('arial', 10, 'bold'))
+        lbInfo1.place(relx=0.020, rely=0.025)
+        
+        lbInfo2 = Label(frameDetalhe1, text='OS', font=('arial', 10, 'bold'))
+        lbInfo2.place(relx=0.020, rely=0.150)
+        
+        lbInfo3 = Label(frameDetalhe1, text='Hora de Login', font=('arial', 10, 'bold'))
+        lbInfo3.place(relx=0.020, rely=0.290)
+        
+        lbInfo4 = Label(frameDetalhe1, text='Data Inicial', font=('arial', 10, 'bold'))
+        lbInfo4.place(relx=0.020, rely=0.440)
+        
+        lbInfo5 = Label(frameDetalhe1, text='Tempo Programado', font=('arial', 10, 'bold'))
+        lbInfo5.place(relx=0.020, rely=0.590)
+        
+        lbInfo5 = Label(frameDetalhe1, text='Tipo', font=('arial', 10, 'bold'))
+        lbInfo5.place(relx=0.020, rely=0.740)
+        
+        #COLUNA 2 NO FRAME DE DETALHES
+        lbInfo6 = Label(frameDetalhe1, text='CPF', font=('arial', 10, 'bold'))
+        lbInfo6.place(relx=0.50, rely=0.025)
+        
+        lbInfo7 = Label(frameDetalhe1, text='Peça', font=('arial', 10, 'bold'))
+        lbInfo7.place(relx=0.35, rely=0.150)
+        
+        lbInfo8 = Label(frameDetalhe1, text='Hora Inicial', font=('arial', 10, 'bold'))
+        lbInfo8.place(relx=0.35, rely=0.290)
+        
+        lbInfo9 = Label(frameDetalhe1, text='Data Final', font=('arial', 10, 'bold'))
+        lbInfo9.place(relx=0.35, rely=0.440)
+        
+        lbInfo10 = Label(frameDetalhe1, text='Vezes Tempo Extra', font=('arial', 10, 'bold'))
+        lbInfo10.place(relx=0.35, rely=0.590)
+        
+        #COLUNA 3 NO FRAME DE DETALHES
+        lbInfo11 = Label(frameDetalhe1, text='ID', font=('arial', 10, 'bold'))
+        lbInfo11.place(relx=0.85, rely=0.025)
+        
+        lbInfo12 = Label(frameDetalhe1, text='Operação', font=('arial', 10, 'bold'))
+        lbInfo12.place(relx=0.70, rely=0.150)
+        
+        lbInfo13 = Label(frameDetalhe1, text='Hora de Final', font=('arial', 10, 'bold'))
+        lbInfo13.place(relx=0.70, rely=0.290)
+        
+        lbInfo14 = Label(frameDetalhe1, text='Tempo Gasto', font=('arial', 10, 'bold'))
+        lbInfo14.place(relx=0.70, rely=0.440)
+        
+        lbInfo15 = Label(frameDetalhe1, text='Tempo Operando', font=('arial', 10, 'bold'))
+        lbInfo15.place(relx=0.70, rely=0.590)        
 
         frameDetalhe2 = Frame(self.aba1, highlightbackground='grey', highlightthickness=2)
         frameDetalhe2.place(relx=0.520, rely=0.090, relwidth=0.450, relheight=0.400)
