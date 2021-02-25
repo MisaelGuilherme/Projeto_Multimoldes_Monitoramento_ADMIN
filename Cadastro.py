@@ -217,12 +217,11 @@ class Back_End():
         
         valido = ''
         
-        threading.Thread(target=self.connection_database).start()
+        self.connection_database()
         
         if self.bancoConnect:
         
             #Buscando os dados de os Finalizado do Banco de Dados para inserir na Treeview
-            self.cursor.execute('use empresa_funcionarios')
             self.cursor.execute("select ID, Operador, OS, codigoPeca, CodigoOperacao, Tipo from monitoria_funcionarios order by id desc limit 1")
             valido = self.cursor.fetchall()
         
@@ -281,10 +280,10 @@ class Front_End(Back_End):
         
         ############################################## ABA 1 #########################################
         
-        lbDetalhes1 = Label(self.aba1, text='Detalhe: OS Finalizada', font=('arial', 12, 'bold'))
+        lbDetalhes1 = Label(self.aba1, text='OS Finalizada', font=('arial', 12, 'bold'))
         lbDetalhes1.place(relx=0.020, rely=0.025)
         
-        lbDetalhes2 = Label(self.aba1, text='Detalhe: OS Pausada', font=('arial', 12, 'bold'))
+        lbDetalhes2 = Label(self.aba1, text='OS Pausada', font=('arial', 12, 'bold'))
         lbDetalhes2.place(relx=0.520, rely=0.025)
         
         frameDetalhe1 = Frame(self.aba1, highlightbackground='grey', highlightthickness=2)
@@ -332,7 +331,7 @@ class Front_End(Back_End):
         lbInfo12 = Label(frameDetalhe1, text='Operação', font=('arial', 10, 'bold'))
         lbInfo12.place(relx=0.70, rely=0.150)
         
-        lbInfo13 = Label(frameDetalhe1, text='Hora de Final', font=('arial', 10, 'bold'))
+        lbInfo13 = Label(frameDetalhe1, text='Hora Final', font=('arial', 10, 'bold'))
         lbInfo13.place(relx=0.70, rely=0.290)
         
         lbInfo14 = Label(frameDetalhe1, text='Tempo Gasto', font=('arial', 10, 'bold'))
@@ -354,13 +353,13 @@ class Front_End(Back_End):
         lbInfo3 = Label(frameDetalhe2, text='Hora de Login', font=('arial', 10, 'bold'))
         lbInfo3.place(relx=0.020, rely=0.290)
         
-        lbInfo4 = Label(frameDetalhe2, text='Data Inicial', font=('arial', 10, 'bold'))
+        lbInfo4 = Label(frameDetalhe2, text='Data Pausada', font=('arial', 10, 'bold'))
         lbInfo4.place(relx=0.020, rely=0.440)
         
         lbInfo5 = Label(frameDetalhe2, text='Tempo Programado', font=('arial', 10, 'bold'))
         lbInfo5.place(relx=0.020, rely=0.590)
         
-        lbInfo5 = Label(frameDetalhe2, text='Tipo', font=('arial', 10, 'bold'))
+        lbInfo5 = Label(frameDetalhe2, text='Motivo da Pause', font=('arial', 10, 'bold'))
         lbInfo5.place(relx=0.020, rely=0.740)
         
         #-------- COLUNA 2 NO FRAME DE DETALHES 2 --------
@@ -370,10 +369,10 @@ class Front_End(Back_End):
         lbInfo7 = Label(frameDetalhe2, text='Peça', font=('arial', 10, 'bold'))
         lbInfo7.place(relx=0.35, rely=0.150)
         
-        lbInfo8 = Label(frameDetalhe2, text='Hora Inicial', font=('arial', 10, 'bold'))
+        lbInfo8 = Label(frameDetalhe2, text='Hora Pausada', font=('arial', 10, 'bold'))
         lbInfo8.place(relx=0.35, rely=0.290)
         
-        lbInfo9 = Label(frameDetalhe2, text='Data Final', font=('arial', 10, 'bold'))
+        lbInfo9 = Label(frameDetalhe2, text='Data Retomada', font=('arial', 10, 'bold'))
         lbInfo9.place(relx=0.35, rely=0.440)
         
         lbInfo10 = Label(frameDetalhe2, text='Vezes Tempo Extra', font=('arial', 10, 'bold'))
@@ -386,7 +385,7 @@ class Front_End(Back_End):
         lbInfo12 = Label(frameDetalhe2, text='Operação', font=('arial', 10, 'bold'))
         lbInfo12.place(relx=0.70, rely=0.150)
         
-        lbInfo13 = Label(frameDetalhe2, text='Hora de Final', font=('arial', 10, 'bold'))
+        lbInfo13 = Label(frameDetalhe2, text='Hora Retomada', font=('arial', 10, 'bold'))
         lbInfo13.place(relx=0.70, rely=0.290)
         
         lbInfo14 = Label(frameDetalhe2, text='Tempo Gasto', font=('arial', 10, 'bold'))
@@ -394,12 +393,7 @@ class Front_End(Back_End):
         
         lbInfo15 = Label(frameDetalhe2, text='Tempo Operando', font=('arial', 10, 'bold'))
         lbInfo15.place(relx=0.70, rely=0.590)        
-        
-        lb1 = Label(self.aba1, text='OS Finalizadas', font=('arial', 12, 'bold'))
-        lb1.place(relx=0.200, rely=0.520)
-        
-        lb2 = Label(self.aba1, text='OS Pausadas', font=('arial', 12, 'bold'))
-        lb2.place(relx=0.700, rely=0.520)
+
         
         #Criando Treeview para visualização dos dados de OS Finalizados
         
