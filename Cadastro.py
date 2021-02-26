@@ -270,7 +270,8 @@ class Front_End(Back_End):
         if not self.bancoConnect:
             messagebox.showerror('Alerta', 'Erro na conexão com Banco de Dados')
         
-
+        #Criando e adicionando abas
+        
         self.abas = ttk.Notebook(self.janelaCadastro)
         self.aba1 = Frame(self.abas)
         self.aba2 = Frame(self.abas)
@@ -281,14 +282,20 @@ class Front_End(Back_End):
         
         ############################################## ABA 1 #########################################
         
+        #Labels de indicação
+        
         lbDetalhes1 = Label(self.aba1, text='OS Finalizada', font=('arial', 12, 'bold'))
         lbDetalhes1.place(relx=0.020, rely=0.055)
         
         lbDetalhes2 = Label(self.aba1, text='OS Pausada', font=('arial', 12, 'bold'))
         lbDetalhes2.place(relx=0.520, rely=0.025)
         
+        #Frame de Visualização de dados Os Finalizada
+        
         frameDetalhe1 = Frame(self.aba1, highlightbackground='grey', highlightthickness=2)
         frameDetalhe1.place(relx=0.010, rely=0.120, relwidth=0.450, relheight=0.400)
+        
+        #Labels Informativos de dados do Frame de Visualização de Os Finalizada
         
         lbInfo1 = Label(frameDetalhe1, text='Nome', font=('arial', 10, 'bold'))
         lbInfo1.place(relx=0.020, rely=0.025)
@@ -365,61 +372,66 @@ class Front_End(Back_End):
         botaoLimpar = Button(self.aba1, text='Limpar', font=('arial', 8), command=limpar_dados_visualizados)
         botaoLimpar.place(relx=0.420, rely=0.070)
         
-        
+        #Frame de Visualização de dados Os Pausadas
+
         frameDetalhe2 = Frame(self.aba1, highlightbackground='grey', highlightthickness=2)
         frameDetalhe2.place(relx=0.520, rely=0.090, relwidth=0.450, relheight=0.400)
         
-        
-        #-------- COLUNA 1 NO FRAME DE DETALHES 2 --------
+        #Labels Informativos de dados do Frame de Visualização de Pausada
+
         lbInfo01 = Label(frameDetalhe2, text='Nome', font=('arial', 10, 'bold'))
-        lbInfo1.place(relx=0.020, rely=0.025)
+        lbInfo01.place(relx=0.020, rely=0.025)
         
-        lbInfo02 = Label(frameDetalhe2, text='OS', font=('arial', 10, 'bold'))
-        lbInfo02.place(relx=0.020, rely=0.150)
+        lbInfo02 = Label(frameDetalhe2, text='CPF', font=('arial', 10, 'bold'))
+        lbInfo02.place(relx=0.50, rely=0.025)
         
-        lbInfo03 = Label(frameDetalhe2, text='Hora de Login', font=('arial', 10, 'bold'))
-        lbInfo03.place(relx=0.020, rely=0.290)
+        lbInfo03 = Label(frameDetalhe2, text='ID', font=('arial', 10, 'bold'))
+        lbInfo03.place(relx=0.850, rely=0.025)
         
-        lbInfo04 = Label(frameDetalhe2, text='Data Pausada', font=('arial', 10, 'bold'))
-        lbInfo04.place(relx=0.020, rely=0.440)
+        lbInfo04 = Label(frameDetalhe2, text='OS', font=('arial', 10, 'bold'))
+        lbInfo04.place(relx=0.020, rely=0.170)
         
-        lbInfo05 = Label(frameDetalhe2, text='Tempo Programado', font=('arial', 10, 'bold'))
-        lbInfo05.place(relx=0.020, rely=0.590)
+        lbInfo05 = Label(frameDetalhe2, text='Peça', font=('arial', 10, 'bold'))
+        lbInfo05.place(relx=0.250, rely=0.170)
         
-        lbInfo05 = Label(frameDetalhe2, text='Motivo da Pause', font=('arial', 10, 'bold'))
-        lbInfo05.place(relx=0.020, rely=0.740)
+        lbInfo06 = Label(frameDetalhe2, text='Operação', font=('arial', 10, 'bold'))
+        lbInfo06.place(relx=0.470, rely=0.170)
         
-        #-------- COLUNA 2 NO FRAME DE DETALHES 2 --------
-        lbInfo06 = Label(frameDetalhe2, text='CPF', font=('arial', 10, 'bold'))
-        lbInfo06.place(relx=0.50, rely=0.025)
-        
-        lbInfo07 = Label(frameDetalhe2, text='Peça', font=('arial', 10, 'bold'))
-        lbInfo07.place(relx=0.35, rely=0.150)
+        lbInfo07 = Label(frameDetalhe2, text='Hora de Login', font=('arial', 10, 'bold'))
+        lbInfo07.place(relx=0.020, rely=0.320)
         
         lbInfo08 = Label(frameDetalhe2, text='Hora Pausada', font=('arial', 10, 'bold'))
-        lbInfo08.place(relx=0.35, rely=0.290)
+        lbInfo08.place(relx=0.350, rely=0.320)
         
-        lbInfo09 = Label(frameDetalhe2, text='Data Retomada', font=('arial', 10, 'bold'))
-        lbInfo09.place(relx=0.35, rely=0.440)
+        lbInfo09 = Label(frameDetalhe2, text='Hora Retomada', font=('arial', 10, 'bold'))
+        lbInfo09.place(relx=0.650, rely=0.320)
         
-        lbInfo010 = Label(frameDetalhe2, text='Vezes Tempo Extra', font=('arial', 10, 'bold'))
-        lbInfo010.place(relx=0.35, rely=0.590)
+        lbInfo010 = Label(frameDetalhe2, text='Data Pausada', font=('arial', 10, 'bold'))
+        lbInfo010.place(relx=0.020, rely=0.470)
         
-        #-------- COLUNA 3 NO FRAME DE DETALHES 2 --------
-        lbInfo011 = Label(frameDetalhe2, text='ID', font=('arial', 10, 'bold'))
-        lbInfo011.place(relx=0.85, rely=0.025)
+        lbInfo011 = Label(frameDetalhe2, text='Data Retomada', font=('arial', 10, 'bold'))
+        lbInfo011.place(relx=0.40, rely=0.470)
         
-        lbInfo012 = Label(frameDetalhe2, text='Operação', font=('arial', 10, 'bold'))
-        lbInfo012.place(relx=0.70, rely=0.150)
+        lbInfo012 = Label(frameDetalhe2, text='Tempo Programado', font=('arial', 10, 'bold'))
+        lbInfo012.place(relx=0.020, rely=0.620)
         
-        lbInfo013 = Label(frameDetalhe2, text='Hora Retomada', font=('arial', 10, 'bold'))
-        lbInfo013.place(relx=0.70, rely=0.290)
+        lbInfo013 = Label(frameDetalhe2, text='Tempo Gasto', font=('arial', 10, 'bold'))
+        lbInfo013.place(relx=0.40, rely=0.620)
         
-        lbInfo014 = Label(frameDetalhe2, text='Tempo Gasto', font=('arial', 10, 'bold'))
-        lbInfo014.place(relx=0.70, rely=0.440)
+        lbInfo014 = Label(frameDetalhe2, text='Tempo Operando', font=('arial', 10, 'bold'))
+        lbInfo014.place(relx=0.70, rely=0.620)
         
-        lbInfo015 = Label(frameDetalhe2, text='Tempo Operando', font=('arial', 10, 'bold'))
-        lbInfo015.place(relx=0.70, rely=0.590)        
+        lbInfo015 = Label(frameDetalhe2, text='Ult Tempo Extra Add', font=('arial', 10, 'bold'))
+        lbInfo015.place(relx=0.020, rely=0.760)
+        
+        lbInfo016 = Label(frameDetalhe2, text='Número de Vezes', font=('arial', 10, 'bold'))
+        lbInfo016.place(relx=0.350, rely=0.760)
+        
+        lbInfo017 = Label(frameDetalhe2, text='Total Tempo Extra', font=('arial', 10, 'bold'))
+        lbInfo017.place(relx=0.650, rely=0.760)
+        
+        lbInfo018 = Label(frameDetalhe2, text='Motivo da Pausa', font=('arial', 10, 'bold'))
+        lbInfo018.place(relx=0.020, rely=0.900)
 
         
         #Criando Treeview para visualização dos dados de OS Finalizados
