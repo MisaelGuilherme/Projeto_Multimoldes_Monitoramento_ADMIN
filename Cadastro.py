@@ -277,18 +277,18 @@ class Front_End(Back_End):
         self.aba2 = Frame(self.abas)
         
         self.abas.add(self.aba1, text='Principal')
-        self.abas.add(self.aba2, text='Cadastro')
+        self.abas.add(self.aba2, text='Cadastrar')
         self.abas.place(relx=0, rely=0, relwidth=1, relheight=1)
         
         ############################################## ABA 1 #########################################
         
         #Labels de indicação
         
-        lbDetalhes1 = Label(self.aba1, text='OS Finalizada', font=('arial', 12, 'bold'))
+        lbDetalhes1 = Label(self.aba1, text='OS Finalizada', font=('arial', 14, 'bold'))
         lbDetalhes1.place(relx=0.020, rely=0.055)
         
-        lbDetalhes2 = Label(self.aba1, text='OS Pausada', font=('arial', 12, 'bold'))
-        lbDetalhes2.place(relx=0.520, rely=0.055)
+        lbDetalhes2 = Label(self.aba1, text='OS Pausada', font=('arial', 14, 'bold'))
+        lbDetalhes2.place(relx=0.530, rely=0.055)
         
         #Frame de Visualização de dados Os Finalizada
         
@@ -433,6 +433,31 @@ class Front_End(Back_End):
         lbInfo018 = Label(frameDetalhe2, text='Motivo da Pausa', font=('arial', 10, 'bold'))
         lbInfo018.place(relx=0.020, rely=0.900)
 
+        
+        def limpar_dados_visualizados2():
+            
+            lbInfo01['fg'] = corPadrao
+            lbInfo02['fg'] = corPadrao
+            lbInfo03['fg'] = corPadrao
+            lbInfo04['fg'] = corPadrao
+            lbInfo05['fg'] = corPadrao
+            lbInfo06['fg'] = corPadrao
+            lbInfo07['fg'] = corPadrao
+            lbInfo07['fg'] = corPadrao
+            lbInfo08['fg'] = corPadrao
+            lbInfo09['fg'] = corPadrao
+            lbInfo010['fg'] = corPadrao
+            lbInfo011['fg'] = corPadrao
+            lbInfo012['fg'] = corPadrao
+            lbInfo013['fg'] = corPadrao
+            lbInfo014['fg'] = corPadrao
+            lbInfo015['fg'] = corPadrao
+            lbInfo016['fg'] = corPadrao
+            lbInfo017['fg'] = corPadrao
+            lbInfo018['fg'] = corPadrao
+        
+        botaoLimpar2 = Button(self.aba1, text='Limpar', font=('arial', 8), command=limpar_dados_visualizados2)
+        botaoLimpar2.place(relx=0.930, rely=0.070)
         
         #Criando Treeview para visualização dos dados de OS Finalizados
         
