@@ -11,7 +11,7 @@ class Back_End():
         try:
             
             self.bancoServer = mysql.connector.connect(
-                                                        host='10.0.0.65',
+                                                        host='localhost',
                                                         database='empresa_funcionarios',
                                                         user='MultimoldesClient',
                                                         password='')
@@ -293,55 +293,58 @@ class Front_End(Back_End):
         lbInfo1 = Label(frameDetalhe1, text='Nome', font=('arial', 10, 'bold'))
         lbInfo1.place(relx=0.020, rely=0.025)
         
-        lbInfo2 = Label(frameDetalhe1, text='OS', font=('arial', 10, 'bold'))
-        lbInfo2.place(relx=0.020, rely=0.150)
+        lbInfo2 = Label(frameDetalhe1, text='CPF', font=('arial', 10, 'bold'))
+        lbInfo2.place(relx=0.50, rely=0.025)
         
-        lbInfo3 = Label(frameDetalhe1, text='Hora de Login', font=('arial', 10, 'bold'))
-        lbInfo3.place(relx=0.020, rely=0.290)
+        lbInfo3 = Label(frameDetalhe1, text='ID', font=('arial', 10, 'bold'))
+        lbInfo3.place(relx=0.850, rely=0.025)
         
-        lbInfo4 = Label(frameDetalhe1, text='Data Inicial', font=('arial', 10, 'bold'))
-        lbInfo4.place(relx=0.020, rely=0.440)
+        lbInfo4 = Label(frameDetalhe1, text='OS', font=('arial', 10, 'bold'))
+        lbInfo4.place(relx=0.020, rely=0.170)
         
-        lbInfo5 = Label(frameDetalhe1, text='Tempo Programado', font=('arial', 10, 'bold'))
-        lbInfo5.place(relx=0.020, rely=0.590)
+        lbInfo5 = Label(frameDetalhe1, text='Peça', font=('arial', 10, 'bold'))
+        lbInfo5.place(relx=0.250, rely=0.170)
         
-        lbInfo5 = Label(frameDetalhe1, text='Tipo', font=('arial', 10, 'bold'))
-        lbInfo5.place(relx=0.020, rely=0.740)
+        lbInfo6 = Label(frameDetalhe1, text='Operação', font=('arial', 10, 'bold'))
+        lbInfo6.place(relx=0.470, rely=0.170)
         
-        #COLUNA 2 NO FRAME DE DETALHES
-        lbInfo6 = Label(frameDetalhe1, text='CPF', font=('arial', 10, 'bold'))
-        lbInfo6.place(relx=0.50, rely=0.025)
+        lbInfo7 = Label(frameDetalhe1, text='Tipo', font=('arial', 10, 'bold'))
+        lbInfo7.place(relx=0.750, rely=0.170)
         
-        lbInfo7 = Label(frameDetalhe1, text='Peça', font=('arial', 10, 'bold'))
-        lbInfo7.place(relx=0.35, rely=0.150)
+        lbInfo8 = Label(frameDetalhe1, text='Hora de Login', font=('arial', 10, 'bold'))
+        lbInfo8.place(relx=0.020, rely=0.320)
         
-        lbInfo8 = Label(frameDetalhe1, text='Hora Inicial', font=('arial', 10, 'bold'))
-        lbInfo8.place(relx=0.35, rely=0.290)
+        lbInfo9 = Label(frameDetalhe1, text='Hora Inicial', font=('arial', 10, 'bold'))
+        lbInfo9.place(relx=0.350, rely=0.320)
         
-        lbInfo9 = Label(frameDetalhe1, text='Data Final', font=('arial', 10, 'bold'))
-        lbInfo9.place(relx=0.35, rely=0.440)
+        lbInfo10 = Label(frameDetalhe1, text='Hora Final', font=('arial', 10, 'bold'))
+        lbInfo10.place(relx=0.650, rely=0.320)
         
-        lbInfo10 = Label(frameDetalhe1, text='Vezes Tempo Extra', font=('arial', 10, 'bold'))
-        lbInfo10.place(relx=0.35, rely=0.590)
+        lbInfo11 = Label(frameDetalhe1, text='Data Inicial', font=('arial', 10, 'bold'))
+        lbInfo11.place(relx=0.020, rely=0.470)
         
-        #COLUNA 3 NO FRAME DE DETALHES
-        lbInfo11 = Label(frameDetalhe1, text='ID', font=('arial', 10, 'bold'))
-        lbInfo11.place(relx=0.85, rely=0.025)
+        lbInfo12 = Label(frameDetalhe1, text='Data Final', font=('arial', 10, 'bold'))
+        lbInfo12.place(relx=0.40, rely=0.470)
         
-        lbInfo12 = Label(frameDetalhe1, text='Operação', font=('arial', 10, 'bold'))
-        lbInfo12.place(relx=0.70, rely=0.150)
-        
-        lbInfo13 = Label(frameDetalhe1, text='Hora Final', font=('arial', 10, 'bold'))
-        lbInfo13.place(relx=0.70, rely=0.290)
+        lbInfo13 = Label(frameDetalhe1, text='Tempo Programado', font=('arial', 10, 'bold'))
+        lbInfo13.place(relx=0.020, rely=0.620)
         
         lbInfo14 = Label(frameDetalhe1, text='Tempo Gasto', font=('arial', 10, 'bold'))
-        lbInfo14.place(relx=0.70, rely=0.440)
+        lbInfo14.place(relx=0.40, rely=0.620)
         
         lbInfo15 = Label(frameDetalhe1, text='Tempo Operando', font=('arial', 10, 'bold'))
-        lbInfo15.place(relx=0.70, rely=0.590)        
-
+        lbInfo15.place(relx=0.70, rely=0.620)
+        
+        lbInfo16 = Label(frameDetalhe1, text='Tempo Extra', font=('arial', 10, 'bold'))
+        lbInfo16.place(relx=0.020, rely=0.760)
+        
+        lbInfo17 = Label(frameDetalhe1, text='Número de Vezes', font=('arial', 10, 'bold'))
+        lbInfo17.place(relx=0.40, rely=0.760)
+        
         frameDetalhe2 = Frame(self.aba1, highlightbackground='grey', highlightthickness=2)
         frameDetalhe2.place(relx=0.520, rely=0.090, relwidth=0.450, relheight=0.400)
+        
+        
         
         #-------- COLUNA 1 NO FRAME DE DETALHES 2 --------
         lbInfo1 = Label(frameDetalhe2, text='Nome', font=('arial', 10, 'bold'))
