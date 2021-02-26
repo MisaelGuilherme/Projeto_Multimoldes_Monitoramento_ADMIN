@@ -288,7 +288,7 @@ class Front_End(Back_End):
         lbDetalhes1.place(relx=0.020, rely=0.055)
         
         lbDetalhes2 = Label(self.aba1, text='OS Pausada', font=('arial', 12, 'bold'))
-        lbDetalhes2.place(relx=0.520, rely=0.025)
+        lbDetalhes2.place(relx=0.520, rely=0.055)
         
         #Frame de Visualização de dados Os Finalizada
         
@@ -346,7 +346,7 @@ class Front_End(Back_End):
         lbInfo16.place(relx=0.020, rely=0.760)
         
         lbInfo17 = Label(frameDetalhe1, text='Número de Vezes', font=('arial', 10, 'bold'))
-        lbInfo17.place(relx=0.40, rely=0.760)
+        lbInfo17.place(relx=0.350, rely=0.760)
         
         def limpar_dados_visualizados():
             
@@ -375,7 +375,7 @@ class Front_End(Back_End):
         #Frame de Visualização de dados Os Pausadas
 
         frameDetalhe2 = Frame(self.aba1, highlightbackground='grey', highlightthickness=2)
-        frameDetalhe2.place(relx=0.520, rely=0.090, relwidth=0.450, relheight=0.400)
+        frameDetalhe2.place(relx=0.520, rely=0.120, relwidth=0.450, relheight=0.400)
         
         #Labels Informativos de dados do Frame de Visualização de Pausada
 
