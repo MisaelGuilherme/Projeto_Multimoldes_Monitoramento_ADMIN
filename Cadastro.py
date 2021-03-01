@@ -295,7 +295,13 @@ class Front_End(Back_End):
         self.logo = Label(self.aba2, image=image, bg=corPadrao)
         self.logo.pack()
         
-        ############################################## ABA 1 #########################################
+        self.aba_principal()
+        
+        self.aba_cadastro()
+
+        self.janelaInicial.mainloop()
+    
+    def aba_principal(self):
         
         #Labels de indicação
         
@@ -550,12 +556,8 @@ class Front_End(Back_End):
         
         scrollbar2 = Scrollbar(self.aba1, orient="vertical", command=self.visualiza2.yview)
         self.visualiza2.configure(yscrollcommand=scrollbar2.set)
-        scrollbar2.place(relx=0.980, rely=0.600, relheight=0.400)
+        scrollbar2.place(relx=0.980, rely=0.600, relheight=0.400)        
         
-        self.aba_cadastro()
-
-        self.janelaInicial.mainloop()
-    
     def aba_cadastro(self):
         
         #Frame de Login dos registros de conta do usuário
