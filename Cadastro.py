@@ -28,6 +28,14 @@ class Back_End():
     
     def inserindo_dados_cadastro(self):
         
+        #Verificando se o CPF digitado no campo não está cadastrado no banco
+        
+        self.cursor.execute("select * from funcionarios where CPF = "+self.campoCPF.get())
+        valido = self.cursor.fetchall()
+
+        if len(valido) == 1:
+            return messagebox.showinfo('Alerta', 'O CPF - '+self.campoCPF.get()+', já possui cadastro')
+
         #Atribuição dos campos cadastrais nas variáveis
         
         a = self.campoNome.get().upper()
@@ -149,13 +157,13 @@ class Back_End():
             if D == 'Select':
                 self.lbFresagem['fg'] = 'red'
             
-            if F == 'Select':
+            if E == 'Select':
                 self.lbFurar['fg'] = 'red'
             
-            if G == 'Select':
+            if F == 'Select':
                 self.lbBrochamento['fg'] = 'red'
             
-            if E == 'Select':
+            if G == 'Select':
                 self.lbEletroerosao['fg'] = 'red'
             
             return messagebox.showerror('Alerta', 'Verifique os campos')
@@ -205,7 +213,6 @@ class Back_End():
             return messagebox.showerror('Alerta', 'Verifique os campos')
         
         try:   
-            
             if self.bancoServer.is_connected():
                 
                 self.inserindo_dados_cadastro()
