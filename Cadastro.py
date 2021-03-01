@@ -5,9 +5,10 @@ from tkinter import messagebox
 import mysql.connector
 import threading
 
-class Back_End():
+class Database():
     
     def connection_database(self):
+        
         try:
             
             self.bancoServer = mysql.connector.connect(
@@ -22,65 +23,45 @@ class Back_End():
             self.bancoConnect = False
     
     def encerrando_conexao_database(self):
-        
+    
         self.bancoServer.close()
         self.cursor.close()
     
-    def inserindo_dados_cadastro(self):
+class Back_End(Database):
+    
+    def crud_os_finalizada(self):
         
-        #Verificando se o CPF digitado no campo não está cadastrado no banco
+        valido = ''
         
-        self.cursor.execute("select * from funcionarios where CPF = "+self.campoCPF.get())
-        valido = self.cursor.fetchall()
-
-        if len(valido) == 1:
-            return messagebox.showinfo('Alerta', 'O CPF - '+self.campoCPF.get()+', já possui cadastro')
-
-        #Atribuição dos campos cadastrais nas variáveis
+        self.connection_database()
         
-        a = self.campoNome.get().upper()
-        b = self.campoCPF.get()
-        c = self.campoConfirmaSenha.get()
+        if self.bancoConnect:
         
-        #Atribuição dos valores dos boxes de seleção nas variáves
+            #Buscando os dados de os Finalizado do Banco de Dados para inserir na Treeview
+            self.cursor.execute("select ID, Operador, OS, codigoPeca, CodigoOperacao, Tipo from monitoria_funcionarios order by id desc limit 1")
+            valido = self.cursor.fetchall()
         
-        A = self.box1.get()
-        B = self.box2.get()
-        C = self.box3.get()
-        D = self.box4.get()
-        E = self.box5.get()
-        F = self.box6.get()
-        G = self.box7.get()
-        
-        #Inserrindo dados no Banco de Dados Servidor
-        
-        try:
-        
-            self.cursor.execute("INSERT INTO funcionarios VALUES (ID, '"+a+"','"+b+"','"+c+"')")
-            self.bancoServer.commit()
+        if len(valido) >= 1:
             
-            self.cursor.execute("INSERT INTO habilidade_funcionarios VALUES ('"+a+"','"+b+"','"+A+"','"+B+"','"+C+"','"+D+"','"+E+"','"+F+"','"+G+"')")
-            self.bancoServer.commit()
+            #Buscando o último dado do banco e último dado da lista, se for diferente: é um novo dado, e será inserido na Treeview
+            if self.finalizado == [] or valido[0] != self.finalizado[-1]:
+                
+                idd = valido[0][0]
+                nome = valido[0][1]
+                os = valido[0][2]
+                peca = valido[0][3]
+                operacao = valido[0][4]
+                tipo = valido[0][5]
+                
+                self.visualiza.insert("", "end", values=(idd, nome, os, peca, operacao, tipo))
+                
+                #Adcionando novo dado na lista para não se repetir na Treeview
+                self.finalizado.append(valido[0])
+                
+                self.bancoServer.close()
+                self.cursor.close()
         
-        except:
-            return messagebox.showerror('Alerta', 'Erro ao inserir dados. Verifique a conexão com o banco')
-        
-        if messagebox.showinfo('Alerta', 'Usuário cadastrado com sucesso!'):
-        
-            self.campoNome.delete(0, END)
-            self.campoCPF.delete(0, END)
-            self.campoConfirmaSenha.delete(0, END)
-            self.campoSenha.delete(0, END)
-            
-            self.box1.current(0)
-            self.box2.current(0)
-            self.box3.current(0)
-            self.box4.current(0)
-            self.box5.current(0)
-            self.box6.current(0)
-            self.box7.current(0)
-            
-            self.campoNome.focus_force()
+        self.janelaInicial.after(1000, self.crud_os_finalizada)
         
     def verificar_campos_cadastro(self):
         
@@ -219,40 +200,95 @@ class Back_End():
             
         except:
             messagebox.showerror('Alerta', 'Erro conexão com Banco de Dados não estabelecida')
-        
-    def crud_os_finalizada(self):
-        
-        valido = ''
-        
-        self.connection_database()
-        
-        if self.bancoConnect:
-        
-            #Buscando os dados de os Finalizado do Banco de Dados para inserir na Treeview
-            self.cursor.execute("select ID, Operador, OS, codigoPeca, CodigoOperacao, Tipo from monitoria_funcionarios order by id desc limit 1")
-            valido = self.cursor.fetchall()
-        
-        if len(valido) >= 1:
+    
+    def inserindo_dados_cadastro(self):
             
-            #Buscando o último dado do banco e último dado da lista, se for diferente: é um novo dado, e será inserido na Treeview
-            if self.finalizado == [] or valido[0] != self.finalizado[-1]:
-                
-                idd = valido[0][0]
-                nome = valido[0][1]
-                os = valido[0][2]
-                peca = valido[0][3]
-                operacao = valido[0][4]
-                tipo = valido[0][5]
-                
-                self.visualiza.insert("", "end", values=(idd, nome, os, peca, operacao, tipo))
-                
-                #Adcionando novo dado na lista para não se repetir na Treeview
-                self.finalizado.append(valido[0])
-                
-                self.bancoServer.close()
-                self.cursor.close()
+        #Verificando se o CPF digitado no campo não está cadastrado no banco
         
-        self.janelaInicial.after(1000, self.crud_os_finalizada)
+        self.cursor.execute("select * from funcionarios where CPF = "+self.campoCPF.get())
+        valido = self.cursor.fetchall()
+
+        if len(valido) == 1:
+            return messagebox.showinfo('Alerta', 'O CPF - '+self.campoCPF.get()+', já possui cadastro')
+
+        #Atribuição dos campos cadastrais nas variáveis
+        
+        a = self.campoNome.get().upper()
+        b = self.campoCPF.get()
+        c = self.campoConfirmaSenha.get()
+        
+        #Atribuição dos valores dos boxes de seleção nas variáves
+        
+        A = self.box1.get()
+        B = self.box2.get()
+        C = self.box3.get()
+        D = self.box4.get()
+        E = self.box5.get()
+        F = self.box6.get()
+        G = self.box7.get()
+        
+        #Inserrindo dados no Banco de Dados Servidor
+        
+        try:
+        
+            self.cursor.execute("INSERT INTO funcionarios VALUES (ID, '"+a+"','"+b+"','"+c+"')")
+            self.bancoServer.commit()
+            
+            self.cursor.execute("INSERT INTO habilidade_funcionarios VALUES ('"+a+"','"+b+"','"+A+"','"+B+"','"+C+"','"+D+"','"+E+"','"+F+"','"+G+"')")
+            self.bancoServer.commit()
+        
+        except:
+            return messagebox.showerror('Alerta', 'Erro ao inserir dados. Verifique a conexão com o banco')
+        
+        if messagebox.showinfo('Alerta', 'Usuário cadastrado com sucesso!'):
+        
+            self.campoNome.delete(0, END)
+            self.campoCPF.delete(0, END)
+            self.campoConfirmaSenha.delete(0, END)
+            self.campoSenha.delete(0, END)
+            
+            self.box1.current(0)
+            self.box2.current(0)
+            self.box3.current(0)
+            self.box4.current(0)
+            self.box5.current(0)
+            self.box6.current(0)
+            self.box7.current(0)
+            
+            self.campoNome.focus_force()
+    
+    def exibir_detalhes_frame1(self, event):
+        
+        selecionada = self.visualiza.selection()[0]
+        x = self.visualiza.item(selecionada, "values")
+        
+        i_d = x[0]
+        
+        if self.bancoServer.is_connected():
+            self.cursor.execute("select Operador, ID, OS, CodigoPeca, CodigoOperacao, Tipo, HoraLogin, HoraInicial, HoraFinal, DataInicial, DataFinal, TempProgramado, tempGasto, tempOperando, TempGastoExt, VezTempExt from monitoria_funcionarios where id = "+i_d)
+            
+            valido = self.cursor.fetchall()
+            
+            for dado in valido:
+                nome, idd, os, peca, operacao, tipo, horaLogin, horaInicial, horaFinal, dataInicial, dataFinal, tempProgramado, tempGasto, tempOperando, tempExtra, vezTempoExtra = dado
+                
+                self.nomeF1['text'] = nome
+                #self.cpfF1['text'] = idd
+                self.osF1['text'] = os
+                self.pecaF1['text'] = peca
+                self.operacaoF1['text'] = operacao
+                self.tipoF1['text'] = tipo
+                self.horaLoginF1['text'] = horaLogin
+                self.horaInicialF1['text'] = horaInicial
+                self.horaFinalF1['text'] = horaFinal
+                self.dataInicialF1['text'] = dataInicial
+                self.dataFinalF1['text'] = dataFinal
+                self.tempProgramadoF1['text'] = tempProgramado
+                self.tempGastoF1['text'] = tempGasto
+                self.tempOperandoF1['text'] = tempOperando
+                self.tempExtraF1['text'] = tempExtra
+                self.vezTempoExtraF1['text'] = vezTempoExtra
+                
     
 class Front_End(Back_End):
     
@@ -331,13 +367,13 @@ class Front_End(Back_End):
         lbInfo4.place(relx=0.020, rely=0.170)
         
         lbInfo5 = Label(frameDetalhe1, text='Peça', font=('arial', 10, 'bold'))
-        lbInfo5.place(relx=0.250, rely=0.170)
+        lbInfo5.place(relx=0.210, rely=0.170)
         
         lbInfo6 = Label(frameDetalhe1, text='Operação', font=('arial', 10, 'bold'))
-        lbInfo6.place(relx=0.470, rely=0.170)
+        lbInfo6.place(relx=0.450, rely=0.170)
         
         lbInfo7 = Label(frameDetalhe1, text='Tipo', font=('arial', 10, 'bold'))
-        lbInfo7.place(relx=0.750, rely=0.170)
+        lbInfo7.place(relx=0.730, rely=0.170)
         
         lbInfo8 = Label(frameDetalhe1, text='Hora de Login', font=('arial', 10, 'bold'))
         lbInfo8.place(relx=0.020, rely=0.320)
@@ -354,20 +390,72 @@ class Front_End(Back_End):
         lbInfo12 = Label(frameDetalhe1, text='Data Final', font=('arial', 10, 'bold'))
         lbInfo12.place(relx=0.40, rely=0.470)
         
-        lbInfo13 = Label(frameDetalhe1, text='Tempo Programado', font=('arial', 10, 'bold'))
+        lbInfo13 = Label(frameDetalhe1, text='T. Programado', font=('arial', 10, 'bold'))
         lbInfo13.place(relx=0.020, rely=0.620)
         
-        lbInfo14 = Label(frameDetalhe1, text='Tempo Gasto', font=('arial', 10, 'bold'))
-        lbInfo14.place(relx=0.40, rely=0.620)
+        lbInfo14 = Label(frameDetalhe1, text='T. Gasto', font=('arial', 10, 'bold'))
+        lbInfo14.place(relx=0.380, rely=0.620)
         
-        lbInfo15 = Label(frameDetalhe1, text='Tempo Operando', font=('arial', 10, 'bold'))
-        lbInfo15.place(relx=0.70, rely=0.620)
+        lbInfo15 = Label(frameDetalhe1, text='T. Operando', font=('arial', 10, 'bold'))
+        lbInfo15.place(relx=0.670, rely=0.620)
         
-        lbInfo16 = Label(frameDetalhe1, text='Tempo Extra', font=('arial', 10, 'bold'))
+        lbInfo16 = Label(frameDetalhe1, text='T. Extra', font=('arial', 10, 'bold'))
         lbInfo16.place(relx=0.020, rely=0.760)
         
         lbInfo17 = Label(frameDetalhe1, text='Número de Vezes', font=('arial', 10, 'bold'))
         lbInfo17.place(relx=0.350, rely=0.760)
+        
+        
+        self.nomeF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.nomeF1.place(relx=0.10, rely=0.025, relwidth=0.390)
+        
+        self.cpfF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.cpfF1.place(relx=0.560, rely=0.025, relwidth=0.270)
+        
+        self.osF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.osF1.place(relx=0.100, rely=0.170, relwidth=0.060)
+        
+        self.pecaF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.pecaF1.place(relx=0.320, rely=0.170, relwidth=0.080)
+        
+        self.operacaoF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.operacaoF1.place(relx=0.620, rely=0.170, relwidth=0.070)
+        
+        self.tipoF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.tipoF1.place(relx=0.810, rely=0.170, relwidth=0.170)
+        
+        self.horaLoginF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.horaLoginF1.place(relx=0.200, rely=0.320, relwidth=0.130)
+        
+        self.horaInicialF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.horaInicialF1.place(relx=0.500, rely=0.320, relwidth=0.130)
+        
+        self.horaFinalF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.horaFinalF1.place(relx=0.800, rely=0.320, relwidth=0.130)
+        
+        self.dataInicialF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.dataInicialF1.place(relx=0.210, rely=.470, relwidth=0.130)
+        
+        self.dataFinalF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.dataFinalF1.place(relx=0.580, rely=0.470, relwidth=0.130)
+        
+        self.tempProgramadoF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.tempProgramadoF1.place(relx=0.220, rely=0.620, relwidth=0.130)
+        
+        self.tempGastoF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.tempGastoF1.place(relx=0.510, rely=0.620, relwidth=0.130)
+        
+        self.tempOperandoF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.tempOperandoF1.place(relx=0.840, rely=0.620, relwidth=0.130)
+        
+        self.tempExtraF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.tempExtraF1.place(relx=0.170, rely=0.760, relwidth=0.130)
+
+        self.vezTempoExtraF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.vezTempoExtraF1.place(relx=0.580, rely=0.760, relwidth=0.030)
+        
+        
+        corPadrao = self.janelaInicial['bg']
         
         def limpar_dados_visualizados():
             
@@ -501,6 +589,7 @@ class Front_End(Back_End):
         self.visualiza.column("6", width=30, anchor='n')
         
         self.visualiza.place(relx=0, rely=0.600, relwidth=0.480, relheight=0.400)
+        self.visualiza.bind("<Double-1>", self.exibir_detalhes_frame1)
         
         scrollbar = Scrollbar(self.aba1, orient="vertical", command=self.visualiza.yview)
         self.visualiza.configure(yscrollcommand=scrollbar.set)
