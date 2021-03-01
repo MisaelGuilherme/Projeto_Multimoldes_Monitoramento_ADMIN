@@ -252,26 +252,26 @@ class Back_End():
                 self.bancoServer.close()
                 self.cursor.close()
         
-        self.janelaCadastro.after(1000, self.crud_os_finalizada)
+        self.janelaInicial.after(1000, self.crud_os_finalizada)
     
 class Front_End(Back_End):
     
     def __init__(self):
         
-        self.janelaCadastro = Tk()
-        self.janelaCadastro.geometry('1000x500')
-        self.janelaCadastro.title('Multimoldes Admin')
+        self.janelaInicial = Tk()
+        self.janelaInicial.geometry('1000x500')
+        self.janelaInicial.title('Multimoldes Admin')
         
         self.sistemaOperacional = system()
         
         #Configurando o ambiente para se maximizado de acordo com o sistema operacional
         
         if self.sistemaOperacional == 'Windows': 
-            self.janelaCadastro.state('zoomed')
+            self.janelaInicial.state('zoomed')
         else:
-            self.janelaCadastro.attributes('-zoomed', True)
+            self.janelaInicial.attributes('-zoomed', True)
         
-        corPadrao = self.janelaCadastro['bg']
+        corPadrao = self.janelaInicial['bg']
         
         self.connection_database()
         if not self.bancoConnect:
@@ -279,13 +279,21 @@ class Front_End(Back_End):
         
         #Criando e adicionando abas
         
-        self.abas = ttk.Notebook(self.janelaCadastro)
+        self.abas = ttk.Notebook(self.janelaInicial)
         self.aba1 = Frame(self.abas)
         self.aba2 = Frame(self.abas)
         
         self.abas.add(self.aba1, text='Principal')
         self.abas.add(self.aba2, text='Cadastrar')
         self.abas.place(relx=0, rely=0, relwidth=1, relheight=1)
+        
+        
+        #Configurando Imagem da Logo Multimoldes na aba Cadastro
+        
+        image = PhotoImage(file='image/logo-multimoldes.png')
+        
+        self.logo = Label(self.aba2, image=image, bg=corPadrao)
+        self.logo.pack()
         
         ############################################## ABA 1 #########################################
         
@@ -544,16 +552,11 @@ class Front_End(Back_End):
         self.visualiza2.configure(yscrollcommand=scrollbar2.set)
         scrollbar2.place(relx=0.980, rely=0.600, relheight=0.400)
         
-        
-        ############################################## ABA 2 #########################################
-        
-        
-        #Configurando Imagem da Logo Multimoldes
-        
-        image = PhotoImage(file='image/logo-multimoldes.png')
-        
-        self.logo = Label(self.aba2, image=image, bg=corPadrao)
-        self.logo.pack()
+        self.aba_cadastro()
+
+        self.janelaInicial.mainloop()
+    
+    def aba_cadastro(self):
         
         #Frame de Login dos registros de conta do usuário
         
@@ -743,8 +746,6 @@ class Front_End(Back_End):
         #Botão que confirmará os dados quando solicitado
         
         self.botaoConfirmar = Button(self.aba2, text='Confirmar', font=('arial black', 13), command=self.verificar_campos_cadastro)
-        self.botaoConfirmar.place(relx=0.82, rely=0.90)
-
-        self.janelaCadastro.mainloop()
+        self.botaoConfirmar.place(relx=0.82, rely=0.90)        
 
 instancia = Front_End()
