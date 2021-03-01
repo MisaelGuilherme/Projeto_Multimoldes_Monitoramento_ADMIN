@@ -272,6 +272,24 @@ class Back_End(Database):
             for dado in valido:
                 nome, idd, os, peca, operacao, tipo, horaLogin, horaInicial, horaFinal, dataInicial, dataFinal, tempProgramado, tempGasto, tempOperando, tempExtra, vezTempoExtra = dado
                 
+                self.lbInfo1['fg'] ='black'
+                #self.lbInfo2['fg'] ='black'
+                #self.lbInfo3['fg'] ='black'
+                self.lbInfo4['fg'] ='black'
+                self.lbInfo5['fg'] ='black'
+                self.lbInfo6['fg'] ='black'
+                self.lbInfo7['fg'] ='black'
+                self.lbInfo8['fg'] ='black'
+                self.lbInfo9['fg'] ='black'
+                self.lbInfo10['fg'] ='black'
+                self.lbInfo11['fg'] ='black'
+                self.lbInfo12['fg'] ='black'
+                self.lbInfo13['fg'] ='black'
+                self.lbInfo14['fg'] ='black'
+                self.lbInfo15['fg'] ='black'
+                self.lbInfo16['fg'] ='black'
+                self.lbInfo17['fg'] ='black'
+                
                 self.nomeF1['text'] = nome
                 #self.cpfF1['text'] = idd
                 self.osF1['text'] = os
@@ -354,56 +372,58 @@ class Front_End(Back_End):
         
         #Labels Informativos de dados do Frame de Visualização de Os Finalizada
         
-        lbInfo1 = Label(frameDetalhe1, text='Nome', font=('arial', 10, 'bold'))
-        lbInfo1.place(relx=0.020, rely=0.025)
+        corPadrao = self.janelaInicial['bg']
         
-        lbInfo2 = Label(frameDetalhe1, text='CPF', font=('arial', 10, 'bold'))
-        lbInfo2.place(relx=0.50, rely=0.025)
+        self.lbInfo1 = Label(frameDetalhe1, text='Nome', font=('arial', 10, 'bold'), fg=corPadrao)
+        self.lbInfo1.place(relx=0.020, rely=0.025)
         
-        lbInfo3 = Label(frameDetalhe1, text='ID', font=('arial', 10, 'bold'))
-        lbInfo3.place(relx=0.850, rely=0.025)
+        self.lbInfo2 = Label(frameDetalhe1, text='CPF', font=('arial', 10, 'bold'), fg=corPadrao)
+        self.lbInfo2.place(relx=0.50, rely=0.025)
         
-        lbInfo4 = Label(frameDetalhe1, text='OS', font=('arial', 10, 'bold'))
-        lbInfo4.place(relx=0.020, rely=0.170)
+        self.lbInfo3 = Label(frameDetalhe1, text='ID', font=('arial', 10, 'bold'), fg=corPadrao)
+        self.lbInfo3.place(relx=0.850, rely=0.025)
         
-        lbInfo5 = Label(frameDetalhe1, text='Peça', font=('arial', 10, 'bold'))
-        lbInfo5.place(relx=0.210, rely=0.170)
+        self.lbInfo4 = Label(frameDetalhe1, text='OS', font=('arial', 10, 'bold'), fg=corPadrao)
+        self.lbInfo4.place(relx=0.020, rely=0.170)
         
-        lbInfo6 = Label(frameDetalhe1, text='Operação', font=('arial', 10, 'bold'))
-        lbInfo6.place(relx=0.450, rely=0.170)
+        self.lbInfo5 = Label(frameDetalhe1, text='Peça', font=('arial', 10, 'bold'), fg=corPadrao)
+        self.lbInfo5.place(relx=0.210, rely=0.170)
         
-        lbInfo7 = Label(frameDetalhe1, text='Tipo', font=('arial', 10, 'bold'))
-        lbInfo7.place(relx=0.730, rely=0.170)
+        self.lbInfo6 = Label(frameDetalhe1, text='Operação', font=('arial', 10, 'bold'), fg=corPadrao)
+        self.lbInfo6.place(relx=0.450, rely=0.170)
         
-        lbInfo8 = Label(frameDetalhe1, text='Hora de Login', font=('arial', 10, 'bold'))
-        lbInfo8.place(relx=0.020, rely=0.320)
+        self.lbInfo7 = Label(frameDetalhe1, text='Tipo', font=('arial', 10, 'bold'), fg=corPadrao)
+        self.lbInfo7.place(relx=0.730, rely=0.170)
         
-        lbInfo9 = Label(frameDetalhe1, text='Hora Inicial', font=('arial', 10, 'bold'))
-        lbInfo9.place(relx=0.350, rely=0.320)
+        self.lbInfo8 = Label(frameDetalhe1, text='Hora de Login', font=('arial', 10, 'bold'), fg=corPadrao)
+        self.lbInfo8.place(relx=0.020, rely=0.320)
         
-        lbInfo10 = Label(frameDetalhe1, text='Hora Final', font=('arial', 10, 'bold'))
-        lbInfo10.place(relx=0.650, rely=0.320)
+        self.lbInfo9 = Label(frameDetalhe1, text='Hora Inicial', font=('arial', 10, 'bold'), fg=corPadrao)
+        self.lbInfo9.place(relx=0.350, rely=0.320)
         
-        lbInfo11 = Label(frameDetalhe1, text='Data Inicial', font=('arial', 10, 'bold'))
-        lbInfo11.place(relx=0.020, rely=0.470)
+        self.lbInfo10 = Label(frameDetalhe1, text='Hora Final', font=('arial', 10, 'bold'), fg=corPadrao)
+        self.lbInfo10.place(relx=0.650, rely=0.320)
         
-        lbInfo12 = Label(frameDetalhe1, text='Data Final', font=('arial', 10, 'bold'))
-        lbInfo12.place(relx=0.40, rely=0.470)
+        self.lbInfo11 = Label(frameDetalhe1, text='Data Inicial', font=('arial', 10, 'bold'), fg=corPadrao)
+        self.lbInfo11.place(relx=0.020, rely=0.470)
         
-        lbInfo13 = Label(frameDetalhe1, text='T. Programado', font=('arial', 10, 'bold'))
-        lbInfo13.place(relx=0.020, rely=0.620)
+        self.lbInfo12 = Label(frameDetalhe1, text='Data Final', font=('arial', 10, 'bold'), fg=corPadrao)
+        self.lbInfo12.place(relx=0.40, rely=0.470)
         
-        lbInfo14 = Label(frameDetalhe1, text='T. Gasto', font=('arial', 10, 'bold'))
-        lbInfo14.place(relx=0.380, rely=0.620)
+        self.lbInfo13 = Label(frameDetalhe1, text='T. Programado', font=('arial', 10, 'bold'), fg=corPadrao)
+        self.lbInfo13.place(relx=0.020, rely=0.620)
         
-        lbInfo15 = Label(frameDetalhe1, text='T. Operando', font=('arial', 10, 'bold'))
-        lbInfo15.place(relx=0.670, rely=0.620)
+        self.lbInfo14 = Label(frameDetalhe1, text='T. Gasto', font=('arial', 10, 'bold'), fg=corPadrao)
+        self.lbInfo14.place(relx=0.380, rely=0.620)
         
-        lbInfo16 = Label(frameDetalhe1, text='T. Extra', font=('arial', 10, 'bold'))
-        lbInfo16.place(relx=0.020, rely=0.760)
+        self.lbInfo15 = Label(frameDetalhe1, text='T. Operando', font=('arial', 10, 'bold'), fg=corPadrao)
+        self.lbInfo15.place(relx=0.670, rely=0.620)
         
-        lbInfo17 = Label(frameDetalhe1, text='Número de Vezes', font=('arial', 10, 'bold'))
-        lbInfo17.place(relx=0.350, rely=0.760)
+        self.lbInfo16 = Label(frameDetalhe1, text='T. Extra', font=('arial', 10, 'bold'), fg=corPadrao)
+        self.lbInfo16.place(relx=0.020, rely=0.760)
+        
+        self.lbInfo17 = Label(frameDetalhe1, text='Número de Vezes', font=('arial', 10, 'bold'), fg=corPadrao)
+        self.lbInfo17.place(relx=0.350, rely=0.760)
         
         
         self.nomeF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
@@ -454,29 +474,43 @@ class Front_End(Back_End):
         self.vezTempoExtraF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
         self.vezTempoExtraF1.place(relx=0.580, rely=0.760, relwidth=0.030)
         
-        
-        corPadrao = self.janelaInicial['bg']
-        
         def limpar_dados_visualizados():
             
-            lbInfo1['fg'] = corPadrao
-            lbInfo2['fg'] = corPadrao
-            lbInfo3['fg'] = corPadrao
-            lbInfo4['fg'] = corPadrao
-            lbInfo5['fg'] = corPadrao
-            lbInfo6['fg'] = corPadrao
-            lbInfo7['fg'] = corPadrao
-            lbInfo7['fg'] = corPadrao
-            lbInfo8['fg'] = corPadrao
-            lbInfo9['fg'] = corPadrao
-            lbInfo10['fg'] = corPadrao
-            lbInfo11['fg'] = corPadrao
-            lbInfo12['fg'] = corPadrao
-            lbInfo13['fg'] = corPadrao
-            lbInfo14['fg'] = corPadrao
-            lbInfo15['fg'] = corPadrao
-            lbInfo16['fg'] = corPadrao
-            lbInfo17['fg'] = corPadrao
+            self.nomeF1['text'] = ''
+            self.cpfF1['text'] = ''
+            self.osF1['text'] = ''
+            self.pecaF1['text'] = ''
+            self.operacaoF1['text'] = ''
+            self.tipoF1['text'] = ''
+            self.horaLoginF1['text'] = ''
+            self.horaInicialF1['text'] = ''
+            self.horaFinalF1['text'] = ''
+            self.dataInicialF1['text'] = ''
+            self.dataFinalF1['text'] = ''
+            self.tempProgramadoF1['text'] = ''
+            self.tempGastoF1['text'] = ''
+            self.tempOperandoF1['text'] = ''
+            self.tempExtraF1['text'] = ''
+            self.vezTempoExtraF1['text'] = ''
+            
+            self.lbInfo1['fg'] = corPadrao
+            self.lbInfo2['fg'] = corPadrao
+            self.lbInfo3['fg'] = corPadrao
+            self.lbInfo4['fg'] = corPadrao
+            self.lbInfo5['fg'] = corPadrao
+            self.lbInfo6['fg'] = corPadrao
+            self.lbInfo7['fg'] = corPadrao
+            self.lbInfo7['fg'] = corPadrao
+            self.lbInfo8['fg'] = corPadrao
+            self.lbInfo9['fg'] = corPadrao
+            self.lbInfo10['fg'] = corPadrao
+            self.lbInfo11['fg'] = corPadrao
+            self.lbInfo12['fg'] = corPadrao
+            self.lbInfo13['fg'] = corPadrao
+            self.lbInfo14['fg'] = corPadrao
+            self.lbInfo15['fg'] = corPadrao
+            self.lbInfo16['fg'] = corPadrao
+            self.lbInfo17['fg'] = corPadrao
         
         botaoLimpar = Button(self.aba1, text='Limpar', font=('arial', 8), command=limpar_dados_visualizados)
         botaoLimpar.place(relx=0.420, rely=0.070)
@@ -488,82 +522,82 @@ class Front_End(Back_End):
         
         #Labels Informativos de dados do Frame de Visualização de Pausada
 
-        lbInfo01 = Label(frameDetalhe2, text='Nome', font=('arial', 10, 'bold'))
-        lbInfo01.place(relx=0.020, rely=0.025)
+        self.lbInfo01 = Label(frameDetalhe2, text='Nome', font=('arial', 10, 'bold'))
+        self.lbInfo01.place(relx=0.020, rely=0.025)
         
-        lbInfo02 = Label(frameDetalhe2, text='CPF', font=('arial', 10, 'bold'))
-        lbInfo02.place(relx=0.50, rely=0.025)
+        self.lbInfo02 = Label(frameDetalhe2, text='CPF', font=('arial', 10, 'bold'))
+        self.lbInfo02.place(relx=0.50, rely=0.025)
         
-        lbInfo03 = Label(frameDetalhe2, text='ID', font=('arial', 10, 'bold'))
-        lbInfo03.place(relx=0.850, rely=0.025)
+        self.lbInfo03 = Label(frameDetalhe2, text='ID', font=('arial', 10, 'bold'))
+        self.lbInfo03.place(relx=0.850, rely=0.025)
         
-        lbInfo04 = Label(frameDetalhe2, text='OS', font=('arial', 10, 'bold'))
-        lbInfo04.place(relx=0.020, rely=0.170)
+        self.lbInfo04 = Label(frameDetalhe2, text='OS', font=('arial', 10, 'bold'))
+        self.lbInfo04.place(relx=0.020, rely=0.170)
         
-        lbInfo05 = Label(frameDetalhe2, text='Peça', font=('arial', 10, 'bold'))
-        lbInfo05.place(relx=0.250, rely=0.170)
+        self.lbInfo05 = Label(frameDetalhe2, text='Peça', font=('arial', 10, 'bold'))
+        self.lbInfo05.place(relx=0.250, rely=0.170)
         
-        lbInfo06 = Label(frameDetalhe2, text='Operação', font=('arial', 10, 'bold'))
-        lbInfo06.place(relx=0.470, rely=0.170)
+        self.lbInfo06 = Label(frameDetalhe2, text='Operação', font=('arial', 10, 'bold'))
+        self.lbInfo06.place(relx=0.470, rely=0.170)
         
-        lbInfo07 = Label(frameDetalhe2, text='Hora de Login', font=('arial', 10, 'bold'))
-        lbInfo07.place(relx=0.020, rely=0.320)
+        self.lbInfo07 = Label(frameDetalhe2, text='Hora de Login', font=('arial', 10, 'bold'))
+        self.lbInfo07.place(relx=0.020, rely=0.320)
         
-        lbInfo08 = Label(frameDetalhe2, text='Hora Pausada', font=('arial', 10, 'bold'))
-        lbInfo08.place(relx=0.350, rely=0.320)
+        self.lbInfo08 = Label(frameDetalhe2, text='Hora Pausada', font=('arial', 10, 'bold'))
+        self.lbInfo08.place(relx=0.350, rely=0.320)
         
-        lbInfo09 = Label(frameDetalhe2, text='Hora Retomada', font=('arial', 10, 'bold'))
-        lbInfo09.place(relx=0.650, rely=0.320)
+        self.lbInfo09 = Label(frameDetalhe2, text='Hora Retomada', font=('arial', 10, 'bold'))
+        self.lbInfo09.place(relx=0.650, rely=0.320)
         
-        lbInfo010 = Label(frameDetalhe2, text='Data Pausada', font=('arial', 10, 'bold'))
-        lbInfo010.place(relx=0.020, rely=0.470)
+        self.lbInfo010 = Label(frameDetalhe2, text='Data Pausada', font=('arial', 10, 'bold'))
+        self.lbInfo010.place(relx=0.020, rely=0.470)
         
-        lbInfo011 = Label(frameDetalhe2, text='Data Retomada', font=('arial', 10, 'bold'))
-        lbInfo011.place(relx=0.40, rely=0.470)
+        self.lbInfo011 = Label(frameDetalhe2, text='Data Retomada', font=('arial', 10, 'bold'))
+        self.lbInfo011.place(relx=0.40, rely=0.470)
         
-        lbInfo012 = Label(frameDetalhe2, text='Tempo Programado', font=('arial', 10, 'bold'))
-        lbInfo012.place(relx=0.020, rely=0.620)
+        self.lbInfo012 = Label(frameDetalhe2, text='Tempo Programado', font=('arial', 10, 'bold'))
+        self.lbInfo012.place(relx=0.020, rely=0.620)
         
-        lbInfo013 = Label(frameDetalhe2, text='Tempo Gasto', font=('arial', 10, 'bold'))
-        lbInfo013.place(relx=0.40, rely=0.620)
+        self.lbInfo013 = Label(frameDetalhe2, text='Tempo Gasto', font=('arial', 10, 'bold'))
+        self.lbInfo013.place(relx=0.40, rely=0.620)
         
-        lbInfo014 = Label(frameDetalhe2, text='Tempo Operando', font=('arial', 10, 'bold'))
-        lbInfo014.place(relx=0.70, rely=0.620)
+        self.lbInfo014 = Label(frameDetalhe2, text='Tempo Operando', font=('arial', 10, 'bold'))
+        self.lbInfo014.place(relx=0.70, rely=0.620)
         
-        lbInfo015 = Label(frameDetalhe2, text='Ult Tempo Extra Add', font=('arial', 10, 'bold'))
-        lbInfo015.place(relx=0.020, rely=0.760)
+        self.lbInfo015 = Label(frameDetalhe2, text='Ult Tempo Extra Add', font=('arial', 10, 'bold'))
+        self.lbInfo015.place(relx=0.020, rely=0.760)
         
-        lbInfo016 = Label(frameDetalhe2, text='Número de Vezes', font=('arial', 10, 'bold'))
-        lbInfo016.place(relx=0.350, rely=0.760)
+        self.lbInfo016 = Label(frameDetalhe2, text='Número de Vezes', font=('arial', 10, 'bold'))
+        self.lbInfo016.place(relx=0.350, rely=0.760)
         
-        lbInfo017 = Label(frameDetalhe2, text='Total Tempo Extra', font=('arial', 10, 'bold'))
-        lbInfo017.place(relx=0.650, rely=0.760)
+        self.lbInfo017 = Label(frameDetalhe2, text='Total Tempo Extra', font=('arial', 10, 'bold'))
+        self.lbInfo017.place(relx=0.650, rely=0.760)
         
-        lbInfo018 = Label(frameDetalhe2, text='Motivo da Pausa', font=('arial', 10, 'bold'))
-        lbInfo018.place(relx=0.020, rely=0.900)
+        self.lbInfo018 = Label(frameDetalhe2, text='Motivo da Pausa', font=('arial', 10, 'bold'))
+        self.lbInfo018.place(relx=0.020, rely=0.900)
 
         
         def limpar_dados_visualizados2():
             
-            lbInfo01['fg'] = corPadrao
-            lbInfo02['fg'] = corPadrao
-            lbInfo03['fg'] = corPadrao
-            lbInfo04['fg'] = corPadrao
-            lbInfo05['fg'] = corPadrao
-            lbInfo06['fg'] = corPadrao
-            lbInfo07['fg'] = corPadrao
-            lbInfo07['fg'] = corPadrao
-            lbInfo08['fg'] = corPadrao
-            lbInfo09['fg'] = corPadrao
-            lbInfo010['fg'] = corPadrao
-            lbInfo011['fg'] = corPadrao
-            lbInfo012['fg'] = corPadrao
-            lbInfo013['fg'] = corPadrao
-            lbInfo014['fg'] = corPadrao
-            lbInfo015['fg'] = corPadrao
-            lbInfo016['fg'] = corPadrao
-            lbInfo017['fg'] = corPadrao
-            lbInfo018['fg'] = corPadrao
+            self.lbInfo01['fg'] = corPadrao
+            self.lbInfo02['fg'] = corPadrao
+            self.lbInfo03['fg'] = corPadrao
+            self.lbInfo04['fg'] = corPadrao
+            self.lbInfo05['fg'] = corPadrao
+            self.lbInfo06['fg'] = corPadrao
+            self.lbInfo07['fg'] = corPadrao
+            self.lbInfo07['fg'] = corPadrao
+            self.lbInfo08['fg'] = corPadrao
+            self.lbInfo09['fg'] = corPadrao
+            self.lbInfo010['fg'] = corPadrao
+            self.lbInfo011['fg'] = corPadrao
+            self.lbInfo012['fg'] = corPadrao
+            self.lbInfo013['fg'] = corPadrao
+            self.lbInfo014['fg'] = corPadrao
+            self.lbInfo015['fg'] = corPadrao
+            self.lbInfo016['fg'] = corPadrao
+            self.lbInfo017['fg'] = corPadrao
+            self.lbInfo018['fg'] = corPadrao
         
         botaoLimpar2 = Button(self.aba1, text='Limpar', font=('arial', 8), command=limpar_dados_visualizados2)
         botaoLimpar2.place(relx=0.930, rely=0.070)
