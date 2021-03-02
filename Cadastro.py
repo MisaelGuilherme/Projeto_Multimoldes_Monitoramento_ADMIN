@@ -309,6 +309,11 @@ class Back_End(Database):
                 self.tempExtraF1['text'] = tempExtra
                 self.vezTempoExtraF1['text'] = vezTempoExtra
                 
+                if tempExtra != '00:00:00': self.tempExtraF1['fg'] = 'red'                    
+                else: self.tempExtraF1['fg'] = '#006dfa'
+                    
+                if vezTempoExtra != '0': self.vezTempoExtraF1['fg'] = 'red'
+                else: self.vezTempoExtraF1['fg'] = '#006dfa'
     
 class Front_End(Back_End):
     
@@ -427,56 +432,57 @@ class Front_End(Back_End):
         self.lbInfo17 = Label(frameDetalhe1, text='Número de Vezes', font=('arial', 10, 'bold'), fg=corPadrao)
         self.lbInfo17.place(relx=0.350, rely=0.760)
         
+        #Labels de captura de dados do frame visualização 1
         
-        self.nomeF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.nomeF1 = Label(frameDetalhe1, font=('arial', 10, 'bold'), fg='#006dfa')
         self.nomeF1.place(relx=0.10, rely=0.025, relwidth=0.390)
         
-        self.cpfF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.cpfF1 = Label(frameDetalhe1, font=('arial', 10, 'bold'), fg='#006dfa')
         self.cpfF1.place(relx=0.560, rely=0.025, relwidth=0.270)
         
-        self.idF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.idF1 = Label(frameDetalhe1, font=('arial', 10, 'bold'), fg='#006dfa')
         self.idF1.place(relx=0.900, rely=0.025, relwidth=0.050)
         
-        self.osF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.osF1 = Label(frameDetalhe1, font=('arial', 10, 'bold'), fg='#006dfa')
         self.osF1.place(relx=0.100, rely=0.170, relwidth=0.060)
         
-        self.pecaF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.pecaF1 = Label(frameDetalhe1, font=('arial', 10, 'bold'), fg='#006dfa')
         self.pecaF1.place(relx=0.320, rely=0.170, relwidth=0.080)
         
-        self.operacaoF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.operacaoF1 = Label(frameDetalhe1, font=('arial', 10, 'bold'), fg='#006dfa')
         self.operacaoF1.place(relx=0.620, rely=0.170, relwidth=0.070)
         
-        self.tipoF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.tipoF1 = Label(frameDetalhe1, font=('arial', 10, 'bold'), fg='#006dfa')
         self.tipoF1.place(relx=0.810, rely=0.170, relwidth=0.170)
         
-        self.horaLoginF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.horaLoginF1 = Label(frameDetalhe1, font=('arial', 10, 'bold'), fg='#006dfa')
         self.horaLoginF1.place(relx=0.200, rely=0.320, relwidth=0.130)
         
-        self.horaInicialF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.horaInicialF1 = Label(frameDetalhe1, font=('arial', 10, 'bold'), fg='#006dfa')
         self.horaInicialF1.place(relx=0.500, rely=0.320, relwidth=0.130)
         
-        self.horaFinalF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.horaFinalF1 = Label(frameDetalhe1, font=('arial', 10, 'bold'), fg='#006dfa')
         self.horaFinalF1.place(relx=0.800, rely=0.320, relwidth=0.130)
         
-        self.dataInicialF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.dataInicialF1 = Label(frameDetalhe1, font=('arial', 10, 'bold'), fg='#006dfa')
         self.dataInicialF1.place(relx=0.210, rely=.470, relwidth=0.130)
         
-        self.dataFinalF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.dataFinalF1 = Label(frameDetalhe1, font=('arial', 10, 'bold'), fg='#006dfa')
         self.dataFinalF1.place(relx=0.580, rely=0.470, relwidth=0.130)
         
-        self.tempProgramadoF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.tempProgramadoF1 = Label(frameDetalhe1, font=('arial', 10, 'bold'), fg='#006dfa')
         self.tempProgramadoF1.place(relx=0.220, rely=0.620, relwidth=0.130)
         
-        self.tempGastoF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.tempGastoF1 = Label(frameDetalhe1, font=('arial', 10, 'bold'), fg='#006dfa')
         self.tempGastoF1.place(relx=0.510, rely=0.620, relwidth=0.130)
         
-        self.tempOperandoF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.tempOperandoF1 = Label(frameDetalhe1, font=('arial', 10, 'bold'), fg='#006dfa')
         self.tempOperandoF1.place(relx=0.840, rely=0.620, relwidth=0.130)
         
-        self.tempExtraF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.tempExtraF1 = Label(frameDetalhe1, font=('arial', 10, 'bold'), fg='#006dfa')
         self.tempExtraF1.place(relx=0.170, rely=0.760, relwidth=0.130)
 
-        self.vezTempoExtraF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.vezTempoExtraF1 = Label(frameDetalhe1, font=('arial', 10, 'bold'), fg='#006dfa')
         self.vezTempoExtraF1.place(relx=0.580, rely=0.760, relwidth=0.030)
         
         def limpar_dados_visualizados():
@@ -582,6 +588,58 @@ class Front_End(Back_End):
         self.lbInfo018 = Label(frameDetalhe2, text='Motivo da Pausa', font=('arial', 10, 'bold'))
         self.lbInfo018.place(relx=0.020, rely=0.900)
 
+        #Labels de captura de dados do frame visualização 2
+
+        self.nomeF2 = Label(frameDetalhe2, font=('arial', 10, 'bold'), fg='#006dfa')
+        self.nomeF2.place(relx=0.10, rely=0.025, relwidth=0.390)
+        
+        self.cpfF2 = Label(frameDetalhe2, font=('arial', 10, 'bold'), fg='#006dfa')
+        self.cpfF2.place(relx=0.560, rely=0.025, relwidth=0.270)
+        
+        self.idF2 = Label(frameDetalhe2, font=('arial', 10, 'bold'), fg='#006dfa')
+        self.idF2.place(relx=0.900, rely=0.025, relwidth=0.050)
+        
+        self.osF2 = Label(frameDetalhe2, font=('arial', 10, 'bold'), fg='#006dfa')
+        self.osF2.place(relx=0.100, rely=0.170, relwidth=0.060)
+        
+        self.pecaF2 = Label(frameDetalhe2, font=('arial', 10, 'bold'), fg='#006dfa')
+        self.pecaF2.place(relx=0.320, rely=0.170, relwidth=0.080)
+        
+        self.operacaoF2 = Label(frameDetalhe2, font=('arial', 10, 'bold'), fg='#006dfa')
+        self.operacaoF2.place(relx=0.620, rely=0.170, relwidth=0.070)
+        
+        self.tipoF2 = Label(frameDetalhe2, font=('arial', 10, 'bold'), fg='#006dfa')
+        self.tipoF2.place(relx=0.810, rely=0.170, relwidth=0.170)
+        
+        self.horaLoginF2 = Label(frameDetalhe2, font=('arial', 10, 'bold'), fg='#006dfa')
+        self.horaLoginF2.place(relx=0.200, rely=0.320, relwidth=0.130)
+        
+        self.horaInicialF2 = Label(frameDetalhe2, font=('arial', 10, 'bold'), fg='#006dfa')
+        self.horaInicialF2.place(relx=0.500, rely=0.320, relwidth=0.130)
+        
+        self.horaFinalF2 = Label(frameDetalhe2, font=('arial', 10, 'bold'), fg='#006dfa')
+        self.horaFinalF2.place(relx=0.800, rely=0.320, relwidth=0.130)
+        
+        self.dataInicialF2 = Label(frameDetalhe2, font=('arial', 10, 'bold'), fg='#006dfa')
+        self.dataInicialF2.place(relx=0.210, rely=.470, relwidth=0.130)
+        
+        self.dataFinalF2 = Label(frameDetalhe2, font=('arial', 10, 'bold'), fg='#006dfa')
+        self.dataFinalF2.place(relx=0.580, rely=0.470, relwidth=0.130)
+        
+        self.tempProgramadoF2 = Label(frameDetalhe2, font=('arial', 10, 'bold'), fg='#006dfa')
+        self.tempProgramadoF2.place(relx=0.220, rely=0.620, relwidth=0.130)
+        
+        self.tempGastoF2 = Label(frameDetalhe2, font=('arial', 10, 'bold'), fg='#006dfa')
+        self.tempGastoF2.place(relx=0.510, rely=0.620, relwidth=0.130)
+        
+        self.tempOperandoF2 = Label(frameDetalhe2, font=('arial', 10, 'bold'), fg='#006dfa')
+        self.tempOperandoF2.place(relx=0.840, rely=0.620, relwidth=0.130)
+        
+        self.tempExtraF2 = Label(frameDetalhe2, font=('arial', 10, 'bold'), fg='#006dfa')
+        self.tempExtraF2.place(relx=0.170, rely=0.760, relwidth=0.130)
+
+        self.vezTempoExtraF2 = Label(frameDetalhe2, font=('arial', 10, 'bold'), fg='#006dfa')
+        self.vezTempoExtraF2.place(relx=0.580, rely=0.760, relwidth=0.030)
         
         def limpar_dados_visualizados2():
             
@@ -604,6 +662,24 @@ class Front_End(Back_End):
             self.lbInfo016['fg'] = corPadrao
             self.lbInfo017['fg'] = corPadrao
             self.lbInfo018['fg'] = corPadrao
+            
+            self.nomeF2['text'] = ''
+            self.cpfF2['text'] = ''
+            self.idF2['text'] = ''
+            self.osF2['text'] = ''
+            self.pecaF2['text'] = ''
+            self.operacaoF2['text'] = ''
+            self.tipoF2['text'] = ''
+            self.horaLoginF2['text'] = ''
+            self.horaInicialF2['text'] = ''
+            self.horaFinalF2['text'] = ''
+            self.dataInicialF2['text'] = ''
+            self.dataFinalF2['text'] = ''
+            self.tempProgramadoF2['text'] = ''
+            self.tempGastoF2['text'] = ''
+            self.tempOperandoF2['text'] = ''
+            self.tempExtraF2['text'] = ''
+            self.vezTempoExtraF2['text'] = ''
         
         botaoLimpar2 = Button(self.aba1, text='Limpar', font=('arial', 8), command=limpar_dados_visualizados2)
         botaoLimpar2.place(relx=0.930, rely=0.070)
@@ -666,28 +742,58 @@ class Front_End(Back_End):
                 self.visualiza.insert("", "end", values=(idd, nome, os, peca, operacao, tipo))
 
         
-        threading.Thread(target=self.crud_os_finalizada).start()
-        
         #Criando Treeview para visualização dos dados de OS Pausados
         
-        self.visualiza2 = ttk.Treeview(self.aba1, column=('1','2','3','4','5'), show='headings')
-        self.visualiza2.heading('1', text='NOME')
-        self.visualiza2.heading('2', text='OS')
-        self.visualiza2.heading('3', text='PEÇA')
-        self.visualiza2.heading('4', text='OPERAÇÃO')
-        self.visualiza2.heading('5', text='TIPO')
+        self.visualiza2 = ttk.Treeview(self.aba1, column=('1','2','3','4','5','6'), show='headings')
+        self.visualiza2.heading('1', text='ID')
+        self.visualiza2.heading('2', text='NOME')
+        self.visualiza2.heading('3', text='OS')
+        self.visualiza2.heading('4', text='PEÇA')
+        self.visualiza2.heading('5', text='OPERAÇÃO')
+        self.visualiza2.heading('6', text='TIPO')
         
-        self.visualiza2.column("1", width=30, anchor='n')
-        self.visualiza2.column("2", width=30, anchor='n')
-        self.visualiza2.column("3", width=30, anchor='n')
-        self.visualiza2.column("4", width=30, anchor='n')
-        self.visualiza2.column("5", width=30, anchor='n')
+        self.visualiza2.column("1", width=-50, anchor='n')
+        self.visualiza2.column("2", width=170, anchor='n')
+        self.visualiza2.column("3", width=1, anchor='n')
+        self.visualiza2.column("4", width=1, anchor='n')
+        self.visualiza2.column("5", width=1, anchor='n')
+        self.visualiza2.column("6", width=30, anchor='n')
         
         self.visualiza2.place(relx=0.500, rely=0.600, relwidth=0.480, relheight=1)
         
         scrollbar2 = Scrollbar(self.aba1, orient="vertical", command=self.visualiza2.yview)
         self.visualiza2.configure(yscrollcommand=scrollbar2.set)
-        scrollbar2.place(relx=0.980, rely=0.600, relheight=0.400)        
+        scrollbar2.place(relx=0.980, rely=0.600, relheight=0.400)
+        
+        valido = ''
+        
+        if not self.bancoConnect:
+            
+            self.cursor.execute("select Id, Operador, OS, codigoPeca, CodigoOperacao, Tipo from pausa_funcionarios WHERE DataFinal ="+dataHoje)
+            valido = self.cursor.fetchall()
+
+        self.pausado = []
+
+        if len(valido) >= 1:
+            
+            for c in valido:
+                
+                self.pausado.append(c)
+                
+            #utilizando estrutura de repetição para inserir os dados obtidos já armazenado na lista "pausado"
+            for i in range (len(self.pausado)):
+
+                #extraindo do banco de dados as informações e armazenando nas variáveis
+                idd = self.pausado[i][0]
+                nome = self.pausado[i][1]
+                os = self.pausado[i][2]
+                peca = self.pausado[i][3]
+                operacao = self.pausado[i][4]
+                tipo = self.pausado[i][5]
+                
+                self.visualiza2.insert("", "end", values=(idd, nome, os, peca, operacao, tipo))
+        
+        threading.Thread(target=self.crud_os_finalizada).start()
         
     def aba_cadastro(self):
         
