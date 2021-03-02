@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from platform import *
 from tkinter import messagebox
+from datetime import *
 import mysql.connector
 import threading
 
@@ -265,16 +266,16 @@ class Back_End(Database):
         i_d = x[0]
         
         if self.bancoServer.is_connected():
-            self.cursor.execute("select Operador, ID, OS, CodigoPeca, CodigoOperacao, Tipo, HoraLogin, HoraInicial, HoraFinal, DataInicial, DataFinal, TempProgramado, tempGasto, tempOperando, TempGastoExt, VezTempExt from monitoria_funcionarios where id = "+i_d)
+            self.cursor.execute("select Operador, CPF, ID, OS, CodigoPeca, CodigoOperacao, Tipo, HoraLogin, HoraInicial, HoraFinal, DataInicial, DataFinal, TempProgramado, tempGasto, tempOperando, TempGastoExt, VezTempExt from monitoria_funcionarios where id = "+i_d)
             
             valido = self.cursor.fetchall()
             
             for dado in valido:
-                nome, idd, os, peca, operacao, tipo, horaLogin, horaInicial, horaFinal, dataInicial, dataFinal, tempProgramado, tempGasto, tempOperando, tempExtra, vezTempoExtra = dado
+                nome, cpf, idd, os, peca, operacao, tipo, horaLogin, horaInicial, horaFinal, dataInicial, dataFinal, tempProgramado, tempGasto, tempOperando, tempExtra, vezTempoExtra = dado
                 
                 self.lbInfo1['fg'] ='black'
-                #self.lbInfo2['fg'] ='black'
-                #self.lbInfo3['fg'] ='black'
+                self.lbInfo2['fg'] ='black'
+                self.lbInfo3['fg'] ='black'
                 self.lbInfo4['fg'] ='black'
                 self.lbInfo5['fg'] ='black'
                 self.lbInfo6['fg'] ='black'
@@ -291,7 +292,8 @@ class Back_End(Database):
                 self.lbInfo17['fg'] ='black'
                 
                 self.nomeF1['text'] = nome
-                #self.cpfF1['text'] = idd
+                self.cpfF1['text'] = cpf
+                self.idF1['text'] = idd
                 self.osF1['text'] = os
                 self.pecaF1['text'] = peca
                 self.operacaoF1['text'] = operacao
@@ -432,6 +434,9 @@ class Front_End(Back_End):
         self.cpfF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
         self.cpfF1.place(relx=0.560, rely=0.025, relwidth=0.270)
         
+        self.idF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
+        self.idF1.place(relx=0.900, rely=0.025, relwidth=0.050)
+        
         self.osF1 = Label(frameDetalhe1, font=('arial', 10), fg='red')
         self.osF1.place(relx=0.100, rely=0.170, relwidth=0.060)
         
@@ -478,6 +483,7 @@ class Front_End(Back_End):
             
             self.nomeF1['text'] = ''
             self.cpfF1['text'] = ''
+            self.idF1['text'] = ''
             self.osF1['text'] = ''
             self.pecaF1['text'] = ''
             self.operacaoF1['text'] = ''
@@ -535,43 +541,43 @@ class Front_End(Back_End):
         self.lbInfo04.place(relx=0.020, rely=0.170)
         
         self.lbInfo05 = Label(frameDetalhe2, text='Peça', font=('arial', 10, 'bold'))
-        self.lbInfo05.place(relx=0.250, rely=0.170)
+        self.lbInfo05.place(relx=0.210, rely=0.170)
         
         self.lbInfo06 = Label(frameDetalhe2, text='Operação', font=('arial', 10, 'bold'))
-        self.lbInfo06.place(relx=0.470, rely=0.170)
+        self.lbInfo06.place(relx=0.450, rely=0.170)
         
-        self.lbInfo07 = Label(frameDetalhe2, text='Hora de Login', font=('arial', 10, 'bold'))
-        self.lbInfo07.place(relx=0.020, rely=0.320)
+        self.lbInfo07 = Label(frameDetalhe2, text='Tipo', font=('arial', 10, 'bold'))
+        self.lbInfo07.place(relx=0.730, rely=0.170)
         
-        self.lbInfo08 = Label(frameDetalhe2, text='Hora Pausada', font=('arial', 10, 'bold'))
-        self.lbInfo08.place(relx=0.350, rely=0.320)
+        self.lbInfo08 = Label(frameDetalhe2, text='Hora de Login', font=('arial', 10, 'bold'))
+        self.lbInfo08.place(relx=0.020, rely=0.320)
         
-        self.lbInfo09 = Label(frameDetalhe2, text='Hora Retomada', font=('arial', 10, 'bold'))
-        self.lbInfo09.place(relx=0.650, rely=0.320)
+        self.lbInfo09 = Label(frameDetalhe2, text='Hora Pausada', font=('arial', 10, 'bold'))
+        self.lbInfo09.place(relx=0.350, rely=0.320)
         
-        self.lbInfo010 = Label(frameDetalhe2, text='Data Pausada', font=('arial', 10, 'bold'))
-        self.lbInfo010.place(relx=0.020, rely=0.470)
+        self.lbInfo010 = Label(frameDetalhe2, text='Hora Retomada', font=('arial', 10, 'bold'))
+        self.lbInfo010.place(relx=0.650, rely=0.320)
         
-        self.lbInfo011 = Label(frameDetalhe2, text='Data Retomada', font=('arial', 10, 'bold'))
-        self.lbInfo011.place(relx=0.40, rely=0.470)
+        self.lbInfo011 = Label(frameDetalhe2, text='Data Pausada', font=('arial', 10, 'bold'))
+        self.lbInfo011.place(relx=0.020, rely=0.470)
         
-        self.lbInfo012 = Label(frameDetalhe2, text='Tempo Programado', font=('arial', 10, 'bold'))
-        self.lbInfo012.place(relx=0.020, rely=0.620)
+        self.lbInfo012 = Label(frameDetalhe2, text='Data Retomada', font=('arial', 10, 'bold'))
+        self.lbInfo012.place(relx=0.40, rely=0.470)
         
-        self.lbInfo013 = Label(frameDetalhe2, text='Tempo Gasto', font=('arial', 10, 'bold'))
-        self.lbInfo013.place(relx=0.40, rely=0.620)
+        self.lbInfo013 = Label(frameDetalhe2, text='T. Programado', font=('arial', 10, 'bold'))
+        self.lbInfo013.place(relx=0.020, rely=0.620)
         
-        self.lbInfo014 = Label(frameDetalhe2, text='Tempo Operando', font=('arial', 10, 'bold'))
-        self.lbInfo014.place(relx=0.70, rely=0.620)
+        self.lbInfo014 = Label(frameDetalhe2, text='T. Gasto', font=('arial', 10, 'bold'))
+        self.lbInfo014.place(relx=0.380, rely=0.620)
         
-        self.lbInfo015 = Label(frameDetalhe2, text='Ult Tempo Extra Add', font=('arial', 10, 'bold'))
-        self.lbInfo015.place(relx=0.020, rely=0.760)
+        self.lbInfo015 = Label(frameDetalhe2, text='T. Operando', font=('arial', 10, 'bold'))
+        self.lbInfo015.place(relx=0.670, rely=0.620)
         
-        self.lbInfo016 = Label(frameDetalhe2, text='Número de Vezes', font=('arial', 10, 'bold'))
-        self.lbInfo016.place(relx=0.350, rely=0.760)
+        self.lbInfo016 = Label(frameDetalhe2, text='T. Extra', font=('arial', 10, 'bold'))
+        self.lbInfo016.place(relx=0.020, rely=0.760)
         
-        self.lbInfo017 = Label(frameDetalhe2, text='Total Tempo Extra', font=('arial', 10, 'bold'))
-        self.lbInfo017.place(relx=0.650, rely=0.760)
+        self.lbInfo017 = Label(frameDetalhe2, text='Número de Vezes', font=('arial', 10, 'bold'))
+        self.lbInfo017.place(relx=0.350, rely=0.760)
         
         self.lbInfo018 = Label(frameDetalhe2, text='Motivo da Pausa', font=('arial', 10, 'bold'))
         self.lbInfo018.place(relx=0.020, rely=0.900)
@@ -631,9 +637,11 @@ class Front_End(Back_End):
         
         valido = ''
         
+        dataHoje = datetime.now().date().strftime('%d/%m/%Y')
+        
         if self.bancoConnect:
             
-            self.cursor.execute("select Id, Operador, OS, codigoPeca, CodigoOperacao, Tipo from monitoria_funcionarios")
+            self.cursor.execute("select Id, Operador, OS, codigoPeca, CodigoOperacao, Tipo from monitoria_funcionarios WHERE DataFinal ="+dataHoje)
             valido = self.cursor.fetchall()
 
         self.finalizado = []
