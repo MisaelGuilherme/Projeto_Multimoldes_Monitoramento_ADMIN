@@ -39,7 +39,7 @@ class Back_End(Database):
         if self.bancoConnect:
         
             #Buscando os dados de os Finalizado do Banco de Dados para inserir na Treeview
-            self.cursor.execute("select ID, Operador, OS, codigoPeca, CodigoOperacao, Tipo from monitoria_funcionarios order by id desc limit 1")
+            self.cursor.execute("select ID, Operador, OS, codigoPeca, CodigoOperacao, Tipo from monitoria_funcionarios where DataFinal = '"+self.dataHoje+"' order by id desc limit 1 ")
             valido = self.cursor.fetchall()
         
         if len(valido) >= 1:
@@ -713,11 +713,11 @@ class Front_End(Back_End):
         
         valido = ''
         
-        dataHoje = datetime.now().date().strftime('%d/%m/%Y')
+        self.dataHoje = datetime.now().date().strftime('%d/%m/%Y')
         
         if self.bancoConnect:
             
-            self.cursor.execute("select Id, Operador, OS, codigoPeca, CodigoOperacao, Tipo from monitoria_funcionarios WHERE DataFinal ="+dataHoje)
+            self.cursor.execute("select Id, Operador, OS, codigoPeca, CodigoOperacao, Tipo from monitoria_funcionarios WHERE DataFinal = '"+self.dataHoje+"'")
             valido = self.cursor.fetchall()
 
         self.finalizado = []
@@ -766,10 +766,10 @@ class Front_End(Back_End):
         scrollbar2.place(relx=0.980, rely=0.600, relheight=0.400)
         
         valido = ''
-        
-        if not self.bancoConnect:
+
+        if self.bancoConnect:
             
-            self.cursor.execute("select Id, Operador, OS, codigoPeca, CodigoOperacao, Tipo from pausa_funcionarios WHERE DataFinal ="+dataHoje)
+            self.cursor.execute("select ID, Operador, OS, CodigoPeca, CodigoOperacao, Tipo from pausa_funcionarios where DataPause = '"+self.dataHoje+"'")
             valido = self.cursor.fetchall()
 
         self.pausado = []
@@ -790,7 +790,7 @@ class Front_End(Back_End):
                 peca = self.pausado[i][3]
                 operacao = self.pausado[i][4]
                 tipo = self.pausado[i][5]
-                
+
                 self.visualiza2.insert("", "end", values=(idd, nome, os, peca, operacao, tipo))
         
         threading.Thread(target=self.crud_os_finalizada).start()
