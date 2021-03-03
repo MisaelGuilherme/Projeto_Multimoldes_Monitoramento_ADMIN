@@ -747,10 +747,12 @@ class Front_End(Back_End):
         botaoLimpar2 = Button(self.aba1, text='Limpar', font=('arial', 8), command=limpar_dados_visualizados2)
         botaoLimpar2.place(relx=0.930, rely=0.070)
         
-        #Criando Treeview para visualização dos dados de OS Finalizados
+        #Formatando estilo de Tree view
         
         style = ttk.Style()
         style.configure('Treeview.Heading', font=('arial', 9, 'bold'))
+        
+        #Criando Treeview para visualização dos dados de OS Finalizados
         
         self.visualiza = ttk.Treeview(self.aba1, column=('1','2','3','4','5','6'), show='headings')
         self.visualiza.heading('1', text='ID')
