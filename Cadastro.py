@@ -357,10 +357,10 @@ class Back_End(Database):
             self.operacaoF2['text'] = operacao
             self.tipoF2['text'] = tipo
             self.horaLoginF2['text'] = horaLogin
-            self.horaInicialF2['text'] = horaInicial
-            self.horaFinalF2['text'] = horaFinal
-            self.dataInicialF2['text'] = dataInicial
-            self.dataFinalF2['text'] = dataFinal
+            self.horaPausadaF2['text'] = horaInicial
+            self.horaRetomadaF2['text'] = horaFinal
+            self.dataPausadaF2['text'] = dataInicial
+            self.dataRetomadaF2['text'] = dataFinal
             self.tempProgramadoF2['text'] = tempProgramado
             self.tempGastoF2['text'] = tempGasto
             self.tempOperandoF2['text'] = tempOperando
@@ -673,17 +673,17 @@ class Front_End(Back_End):
         self.horaLoginF2 = Label(frameDetalhe2, font=('arial', 10, 'bold'), fg='#006dfa')
         self.horaLoginF2.place(relx=0.200, rely=0.320, relwidth=0.130)
         
-        self.horaInicialF2 = Label(frameDetalhe2, font=('arial', 10, 'bold'), fg='#006dfa')
-        self.horaInicialF2.place(relx=0.500, rely=0.320, relwidth=0.130)
+        self.horaPausadaF2 = Label(frameDetalhe2, font=('arial', 10, 'bold'), fg='#006dfa')
+        self.horaPausadaF2.place(relx=0.500, rely=0.320, relwidth=0.130)
         
-        self.horaFinalF2 = Label(frameDetalhe2, font=('arial', 10, 'bold'), fg='#006dfa')
-        self.horaFinalF2.place(relx=0.800, rely=0.320, relwidth=0.130)
+        self.horaRetomadaF2 = Label(frameDetalhe2, font=('arial', 10, 'bold'), fg='#006dfa')
+        self.horaRetomadaF2.place(relx=0.800, rely=0.320, relwidth=0.130)
         
-        self.dataInicialF2 = Label(frameDetalhe2, font=('arial', 10, 'bold'), fg='#006dfa')
-        self.dataInicialF2.place(relx=0.210, rely=.470, relwidth=0.130)
+        self.dataPausadaF2 = Label(frameDetalhe2, font=('arial', 10, 'bold'), fg='#006dfa')
+        self.dataPausadaF2.place(relx=0.210, rely=.470, relwidth=0.130)
         
-        self.dataFinalF2 = Label(frameDetalhe2, font=('arial', 10, 'bold'), fg='#006dfa')
-        self.dataFinalF2.place(relx=0.580, rely=0.470, relwidth=0.130)
+        self.dataRetomadaF2 = Label(frameDetalhe2, font=('arial', 10, 'bold'), fg='#006dfa')
+        self.dataRetomadaF2.place(relx=0.580, rely=0.470, relwidth=0.130)
         
         self.tempProgramadoF2 = Label(frameDetalhe2, font=('arial', 10, 'bold'), fg='#006dfa')
         self.tempProgramadoF2.place(relx=0.220, rely=0.620, relwidth=0.130)
@@ -733,10 +733,10 @@ class Front_End(Back_End):
             self.operacaoF2['text'] = ''
             self.tipoF2['text'] = ''
             self.horaLoginF2['text'] = ''
-            self.horaInicialF2['text'] = ''
-            self.horaFinalF2['text'] = ''
-            self.dataInicialF2['text'] = ''
-            self.dataFinalF2['text'] = ''
+            self.horaPausadaF2['text'] = ''
+            self.horaRetomadaF2['text'] = ''
+            self.dataPausadaF2['text'] = ''
+            self.dataRetomadaF2['text'] = ''
             self.tempProgramadoF2['text'] = ''
             self.tempGastoF2['text'] = ''
             self.tempOperandoF2['text'] = ''
@@ -796,7 +796,7 @@ class Front_End(Back_End):
 
                 #extraindo do banco de dados as informações e armazenando nas variáveis
                 idd = self.finalizado[i][0]
-                nome = self.finalizado[i][1]
+                nome = self.finalizado[i][1].title()
                 os = self.finalizado[i][2]
                 peca = self.finalizado[i][3]
                 operacao = self.finalizado[i][4]
