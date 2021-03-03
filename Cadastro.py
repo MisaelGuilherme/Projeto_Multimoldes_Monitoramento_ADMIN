@@ -744,20 +744,22 @@ class Front_End(Back_End):
         
         #Criando Treeview para visualização dos dados de OS Pausados
         
-        self.visualiza2 = ttk.Treeview(self.aba1, column=('1','2','3','4','5','6'), show='headings')
+        self.visualiza2 = ttk.Treeview(self.aba1, column=('1','2','3','4','5','6','7'), show='headings')
         self.visualiza2.heading('1', text='ID')
         self.visualiza2.heading('2', text='NOME')
         self.visualiza2.heading('3', text='OS')
         self.visualiza2.heading('4', text='PEÇA')
         self.visualiza2.heading('5', text='OPERAÇÃO')
         self.visualiza2.heading('6', text='TIPO')
+        self.visualiza2.heading('7', text='PAUSA')
         
         self.visualiza2.column("1", width=-50, anchor='n')
-        self.visualiza2.column("2", width=170, anchor='n')
-        self.visualiza2.column("3", width=1, anchor='n')
-        self.visualiza2.column("4", width=1, anchor='n')
-        self.visualiza2.column("5", width=1, anchor='n')
-        self.visualiza2.column("6", width=30, anchor='n')
+        self.visualiza2.column("2", width=120, anchor='n')
+        self.visualiza2.column("3", width=-45, anchor='n')
+        self.visualiza2.column("4", width=-40, anchor='n')
+        self.visualiza2.column("5", width=-10, anchor='n')
+        self.visualiza2.column("6", width=10, anchor='n')
+        self.visualiza2.column("7", width=40, anchor='n')
         
         self.visualiza2.place(relx=0.500, rely=0.600, relwidth=0.480, relheight=1)
         
@@ -769,7 +771,7 @@ class Front_End(Back_End):
 
         if self.bancoConnect:
             
-            self.cursor.execute("select ID, Operador, OS, CodigoPeca, CodigoOperacao, Tipo from pausa_funcionarios where DataPause = '"+self.dataHoje+"'")
+            self.cursor.execute("select ID, Operador, OS, CodigoPeca, CodigoOperacao, Tipo, MotivoPause from pausa_funcionarios where DataPause = '"+self.dataHoje+"'")
             valido = self.cursor.fetchall()
 
         self.pausado = []
@@ -785,13 +787,14 @@ class Front_End(Back_End):
 
                 #extraindo do banco de dados as informações e armazenando nas variáveis
                 idd = self.pausado[i][0]
-                nome = self.pausado[i][1]
+                nome = self.pausado[i][1].title()
                 os = self.pausado[i][2]
                 peca = self.pausado[i][3]
                 operacao = self.pausado[i][4]
                 tipo = self.pausado[i][5]
+                mPause = self.pausado[i][6]
 
-                self.visualiza2.insert("", "end", values=(idd, nome, os, peca, operacao, tipo))
+                self.visualiza2.insert("", "end", values=(idd, nome, os, peca, operacao, tipo, mPause))
         
         threading.Thread(target=self.crud_os_finalizada).start()
         
