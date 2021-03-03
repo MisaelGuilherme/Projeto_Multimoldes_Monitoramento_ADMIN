@@ -273,47 +273,106 @@ class Back_End(Database):
             for dado in valido:
                 nome, cpf, idd, os, peca, operacao, tipo, horaLogin, horaInicial, horaFinal, dataInicial, dataFinal, tempProgramado, tempGasto, tempOperando, tempExtra, vezTempoExtra = dado
                 
-                self.lbInfo1['fg'] ='black'
-                self.lbInfo2['fg'] ='black'
-                self.lbInfo3['fg'] ='black'
-                self.lbInfo4['fg'] ='black'
-                self.lbInfo5['fg'] ='black'
-                self.lbInfo6['fg'] ='black'
-                self.lbInfo7['fg'] ='black'
-                self.lbInfo8['fg'] ='black'
-                self.lbInfo9['fg'] ='black'
-                self.lbInfo10['fg'] ='black'
-                self.lbInfo11['fg'] ='black'
-                self.lbInfo12['fg'] ='black'
-                self.lbInfo13['fg'] ='black'
-                self.lbInfo14['fg'] ='black'
-                self.lbInfo15['fg'] ='black'
-                self.lbInfo16['fg'] ='black'
-                self.lbInfo17['fg'] ='black'
+            self.lbInfo1['fg'] ='black'
+            self.lbInfo2['fg'] ='black'
+            self.lbInfo3['fg'] ='black'
+            self.lbInfo4['fg'] ='black'
+            self.lbInfo5['fg'] ='black'
+            self.lbInfo6['fg'] ='black'
+            self.lbInfo7['fg'] ='black'
+            self.lbInfo8['fg'] ='black'
+            self.lbInfo9['fg'] ='black'
+            self.lbInfo10['fg'] ='black'
+            self.lbInfo11['fg'] ='black'
+            self.lbInfo12['fg'] ='black'
+            self.lbInfo13['fg'] ='black'
+            self.lbInfo14['fg'] ='black'
+            self.lbInfo15['fg'] ='black'
+            self.lbInfo16['fg'] ='black'
+            self.lbInfo17['fg'] ='black'
+            
+            self.nomeF1['text'] = nome
+            self.cpfF1['text'] = cpf
+            self.idF1['text'] = idd
+            self.osF1['text'] = os
+            self.pecaF1['text'] = peca
+            self.operacaoF1['text'] = operacao
+            self.tipoF1['text'] = tipo
+            self.horaLoginF1['text'] = horaLogin
+            self.horaInicialF1['text'] = horaInicial
+            self.horaFinalF1['text'] = horaFinal
+            self.dataInicialF1['text'] = dataInicial
+            self.dataFinalF1['text'] = dataFinal
+            self.tempProgramadoF1['text'] = tempProgramado
+            self.tempGastoF1['text'] = tempGasto
+            self.tempOperandoF1['text'] = tempOperando
+            self.tempExtraF1['text'] = tempExtra
+            self.vezTempoExtraF1['text'] = vezTempoExtra
+            
+            if tempExtra != '00:00:00': self.tempExtraF1['fg'] = 'red'                    
+            else: self.tempExtraF1['fg'] = '#006dfa'
                 
-                self.nomeF1['text'] = nome
-                self.cpfF1['text'] = cpf
-                self.idF1['text'] = idd
-                self.osF1['text'] = os
-                self.pecaF1['text'] = peca
-                self.operacaoF1['text'] = operacao
-                self.tipoF1['text'] = tipo
-                self.horaLoginF1['text'] = horaLogin
-                self.horaInicialF1['text'] = horaInicial
-                self.horaFinalF1['text'] = horaFinal
-                self.dataInicialF1['text'] = dataInicial
-                self.dataFinalF1['text'] = dataFinal
-                self.tempProgramadoF1['text'] = tempProgramado
-                self.tempGastoF1['text'] = tempGasto
-                self.tempOperandoF1['text'] = tempOperando
-                self.tempExtraF1['text'] = tempExtra
-                self.vezTempoExtraF1['text'] = vezTempoExtra
+            if vezTempoExtra != '0': self.vezTempoExtraF1['fg'] = 'red'
+            else: self.vezTempoExtraF1['fg'] = '#006dfa'
+    
+    def exibir_detalhes_frame2(self, event):
+        
+        selecionada = self.visualiza2.selection()[0]
+        x = self.visualiza2.item(selecionada, "values")
+        
+        i_d = x[0]
+        
+        if self.bancoServer.is_connected():
+            self.cursor.execute("select Operador, CPF, ID, OS, CodigoPeca, CodigoOperacao, Tipo, Hora_Login, Hora_Inicial, HoraRetomada, Data_Inicial, DataRetomada, TempProg, tempGastoProg, CorTela, TempGastoExt, VezTempExt, MotivoPause from pausa_funcionarios where id = "+i_d)
+            
+            valido = self.cursor.fetchall()
+            
+            for dado in valido:
+                nome, cpf, idd, os, peca, operacao, tipo, horaLogin, horaInicial, horaFinal, dataInicial, dataFinal, tempProgramado, tempGasto, tempOperando, tempExtra, vezTempoExtra, motivoPause = dado
                 
-                if tempExtra != '00:00:00': self.tempExtraF1['fg'] = 'red'                    
-                else: self.tempExtraF1['fg'] = '#006dfa'
-                    
-                if vezTempoExtra != '0': self.vezTempoExtraF1['fg'] = 'red'
-                else: self.vezTempoExtraF1['fg'] = '#006dfa'
+            self.lbInfo01['fg'] ='black'
+            self.lbInfo02['fg'] ='black'
+            self.lbInfo03['fg'] ='black'
+            self.lbInfo04['fg'] ='black'
+            self.lbInfo05['fg'] ='black'
+            self.lbInfo06['fg'] ='black'
+            self.lbInfo07['fg'] ='black'
+            self.lbInfo08['fg'] ='black'
+            self.lbInfo09['fg'] ='black'
+            self.lbInfo010['fg'] ='black'
+            self.lbInfo011['fg'] ='black'
+            self.lbInfo012['fg'] ='black'
+            self.lbInfo013['fg'] ='black'
+            self.lbInfo014['fg'] ='black'
+            self.lbInfo015['fg'] ='black'
+            self.lbInfo016['fg'] ='black'
+            self.lbInfo017['fg'] ='black'
+            self.lbInfo018['fg'] ='black'
+            
+            self.nomeF2['text'] = nome
+            self.cpfF2['text'] = cpf
+            self.idF2['text'] = idd
+            self.osF2['text'] = os
+            self.pecaF2['text'] = peca
+            self.operacaoF2['text'] = operacao
+            self.tipoF2['text'] = tipo
+            self.horaLoginF2['text'] = horaLogin
+            self.horaInicialF2['text'] = horaInicial
+            self.horaFinalF2['text'] = horaFinal
+            self.dataInicialF2['text'] = dataInicial
+            self.dataFinalF2['text'] = dataFinal
+            self.tempProgramadoF2['text'] = tempProgramado
+            self.tempGastoF2['text'] = tempGasto
+            self.tempOperandoF2['text'] = tempOperando
+            self.tempExtraF2['text'] = tempExtra
+            self.vezTempoExtraF2['text'] = vezTempoExtra
+            self.motivoPause['text'] = motivoPause
+            
+            if tempExtra != '00:00:00': self.tempExtraF2['fg'] = 'red'                    
+            else: self.tempExtraF2['fg'] = '#006dfa'
+                
+            if vezTempoExtra != '0': self.vezTempoExtraF2['fg'] = 'red'
+            else: self.vezTempoExtraF2['fg'] = '#006dfa'
     
 class Front_End(Back_End):
     
@@ -534,58 +593,58 @@ class Front_End(Back_End):
         
         #Labels Informativos de dados do Frame de Visualização de Pausada
 
-        self.lbInfo01 = Label(frameDetalhe2, text='Nome', font=('arial', 10, 'bold'))
+        self.lbInfo01 = Label(frameDetalhe2, text='Nome', font=('arial', 10, 'bold'), fg=corPadrao)
         self.lbInfo01.place(relx=0.020, rely=0.025)
         
-        self.lbInfo02 = Label(frameDetalhe2, text='CPF', font=('arial', 10, 'bold'))
+        self.lbInfo02 = Label(frameDetalhe2, text='CPF', font=('arial', 10, 'bold'), fg=corPadrao)
         self.lbInfo02.place(relx=0.50, rely=0.025)
         
-        self.lbInfo03 = Label(frameDetalhe2, text='ID', font=('arial', 10, 'bold'))
+        self.lbInfo03 = Label(frameDetalhe2, text='ID', font=('arial', 10, 'bold'), fg=corPadrao)
         self.lbInfo03.place(relx=0.850, rely=0.025)
         
-        self.lbInfo04 = Label(frameDetalhe2, text='OS', font=('arial', 10, 'bold'))
+        self.lbInfo04 = Label(frameDetalhe2, text='OS', font=('arial', 10, 'bold'), fg=corPadrao)
         self.lbInfo04.place(relx=0.020, rely=0.170)
         
-        self.lbInfo05 = Label(frameDetalhe2, text='Peça', font=('arial', 10, 'bold'))
+        self.lbInfo05 = Label(frameDetalhe2, text='Peça', font=('arial', 10, 'bold'), fg=corPadrao)
         self.lbInfo05.place(relx=0.210, rely=0.170)
         
-        self.lbInfo06 = Label(frameDetalhe2, text='Operação', font=('arial', 10, 'bold'))
+        self.lbInfo06 = Label(frameDetalhe2, text='Operação', font=('arial', 10, 'bold'), fg=corPadrao)
         self.lbInfo06.place(relx=0.450, rely=0.170)
         
-        self.lbInfo07 = Label(frameDetalhe2, text='Tipo', font=('arial', 10, 'bold'))
+        self.lbInfo07 = Label(frameDetalhe2, text='Tipo', font=('arial', 10, 'bold'), fg=corPadrao)
         self.lbInfo07.place(relx=0.730, rely=0.170)
         
-        self.lbInfo08 = Label(frameDetalhe2, text='Hora de Login', font=('arial', 10, 'bold'))
+        self.lbInfo08 = Label(frameDetalhe2, text='Hora de Login', font=('arial', 10, 'bold'), fg=corPadrao)
         self.lbInfo08.place(relx=0.020, rely=0.320)
         
-        self.lbInfo09 = Label(frameDetalhe2, text='Hora Pausada', font=('arial', 10, 'bold'))
+        self.lbInfo09 = Label(frameDetalhe2, text='Hora Pausada', font=('arial', 10, 'bold'), fg=corPadrao)
         self.lbInfo09.place(relx=0.350, rely=0.320)
         
-        self.lbInfo010 = Label(frameDetalhe2, text='Hora Retomada', font=('arial', 10, 'bold'))
+        self.lbInfo010 = Label(frameDetalhe2, text='Hora Retomada', font=('arial', 10, 'bold'), fg=corPadrao)
         self.lbInfo010.place(relx=0.650, rely=0.320)
         
-        self.lbInfo011 = Label(frameDetalhe2, text='Data Pausada', font=('arial', 10, 'bold'))
+        self.lbInfo011 = Label(frameDetalhe2, text='Data Pausada', font=('arial', 10, 'bold'), fg=corPadrao)
         self.lbInfo011.place(relx=0.020, rely=0.470)
         
-        self.lbInfo012 = Label(frameDetalhe2, text='Data Retomada', font=('arial', 10, 'bold'))
+        self.lbInfo012 = Label(frameDetalhe2, text='Data Retomada', font=('arial', 10, 'bold'), fg=corPadrao)
         self.lbInfo012.place(relx=0.40, rely=0.470)
         
-        self.lbInfo013 = Label(frameDetalhe2, text='T. Programado', font=('arial', 10, 'bold'))
+        self.lbInfo013 = Label(frameDetalhe2, text='T. Programado', font=('arial', 10, 'bold'), fg=corPadrao)
         self.lbInfo013.place(relx=0.020, rely=0.620)
         
-        self.lbInfo014 = Label(frameDetalhe2, text='T. Gasto', font=('arial', 10, 'bold'))
+        self.lbInfo014 = Label(frameDetalhe2, text='T. Gasto', font=('arial', 10, 'bold'), fg=corPadrao)
         self.lbInfo014.place(relx=0.380, rely=0.620)
         
-        self.lbInfo015 = Label(frameDetalhe2, text='T. Operando', font=('arial', 10, 'bold'))
+        self.lbInfo015 = Label(frameDetalhe2, text='T. Operando', font=('arial', 10, 'bold'), fg=corPadrao)
         self.lbInfo015.place(relx=0.670, rely=0.620)
         
-        self.lbInfo016 = Label(frameDetalhe2, text='T. Extra', font=('arial', 10, 'bold'))
+        self.lbInfo016 = Label(frameDetalhe2, text='T. Extra', font=('arial', 10, 'bold'), fg=corPadrao)
         self.lbInfo016.place(relx=0.020, rely=0.760)
         
-        self.lbInfo017 = Label(frameDetalhe2, text='Número de Vezes', font=('arial', 10, 'bold'))
+        self.lbInfo017 = Label(frameDetalhe2, text='Número de Vezes', font=('arial', 10, 'bold'), fg=corPadrao)
         self.lbInfo017.place(relx=0.350, rely=0.760)
         
-        self.lbInfo018 = Label(frameDetalhe2, text='Motivo da Pausa', font=('arial', 10, 'bold'))
+        self.lbInfo018 = Label(frameDetalhe2, text='Motivo da Pausa', font=('arial', 10, 'bold'), fg=corPadrao)
         self.lbInfo018.place(relx=0.020, rely=0.900)
 
         #Labels de captura de dados do frame visualização 2
@@ -641,6 +700,9 @@ class Front_End(Back_End):
         self.vezTempoExtraF2 = Label(frameDetalhe2, font=('arial', 10, 'bold'), fg='#006dfa')
         self.vezTempoExtraF2.place(relx=0.580, rely=0.760, relwidth=0.030)
         
+        self.motivoPause = Label(frameDetalhe2, font=('arial', 10, 'bold'), fg='#006dfa')
+        self.motivoPause.place(relx=0.240, rely=0.900, relwidth=0.300)
+        
         def limpar_dados_visualizados2():
             
             self.lbInfo01['fg'] = corPadrao
@@ -680,6 +742,7 @@ class Front_End(Back_End):
             self.tempOperandoF2['text'] = ''
             self.tempExtraF2['text'] = ''
             self.vezTempoExtraF2['text'] = ''
+            self.motivoPause['text'] = ''
         
         botaoLimpar2 = Button(self.aba1, text='Limpar', font=('arial', 8), command=limpar_dados_visualizados2)
         botaoLimpar2.place(relx=0.930, rely=0.070)
@@ -762,6 +825,7 @@ class Front_End(Back_End):
         self.visualiza2.column("7", width=40, anchor='n')
         
         self.visualiza2.place(relx=0.500, rely=0.600, relwidth=0.480, relheight=1)
+        self.visualiza2.bind("<Double-1>", self.exibir_detalhes_frame2)
         
         scrollbar2 = Scrollbar(self.aba1, orient="vertical", command=self.visualiza2.yview)
         self.visualiza2.configure(yscrollcommand=scrollbar2.set)
