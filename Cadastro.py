@@ -58,9 +58,32 @@ class Back_End(Database):
                 
                 #Adcionando novo dado na lista para não se repetir na Treeview
                 self.finalizado.append(valido[0])
+
                 
-                self.bancoServer.close()
-                self.cursor.close()
+        if self.bancoConnect:
+            
+            #Buscando os dados de os Pausado do Banco de Dados para inserir na Treeview
+            self.cursor.execute("select ID, Operador, OS, codigoPeca, CodigoOperacao, Tipo, MotivoPause from pausa_funcionarios where DataPause = '"+self.dataHoje+"' order by id desc limit 1 ")
+            valido = self.cursor.fetchall()
+        
+        if len(valido) >= 1:
+            
+            #Buscando o último dado do banco e último dado da lista, se for diferente: é um novo dado, e será inserido na Treeview
+            if self.pausado == [] or valido[0] != self.pausado[-1]:
+                
+                idd = valido[0][0]
+                nome = valido[0][1]
+                os = valido[0][2]
+                peca = valido[0][3]
+                operacao = valido[0][4]
+                tipo = valido[0][5]
+                motivo = valido[0][6]
+                
+                self.visualiza2.insert("", "end", values=(idd, nome, os, peca, operacao, tipo, motivo))
+                
+                #Adcionando novo dado na lista para não se repetir na Treeview
+                self.pausado.append(valido[0])
+                
         
         self.janelaInicial.after(1000, self.crud_os_finalizada)
         
@@ -323,7 +346,7 @@ class Back_End(Database):
         i_d = x[0]
         
         if self.bancoServer.is_connected():
-            self.cursor.execute("select Operador, CPF, ID, OS, CodigoPeca, CodigoOperacao, Tipo, Hora_Login, Hora_Inicial, HoraRetomada, Data_Inicial, DataRetomada, TempProg, tempGastoProg, CorTela, TempGastoExt, VezTempExt, MotivoPause from pausa_funcionarios where id = "+i_d)
+            self.cursor.execute("select Operador, CPF, ID, OS, CodigoPeca, CodigoOperacao, Tipo, Hora_Login, Hora_Inicial, HoraRetomada, Data_Inicial, DataRetomada, TempProg, tempGastoProg, TempOperando, TempGastoExt, VezTempExt, MotivoPause from pausa_funcionarios where id = "+i_d)
             
             valido = self.cursor.fetchall()
             
