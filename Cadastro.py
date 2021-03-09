@@ -237,7 +237,7 @@ class Back_End(Database):
 
         #Atribuição dos campos cadastrais nas variáveis
         
-        a = self.campoNome.get().upper()
+        a = self.campoNome.get().title()
         b = self.campoCPF.get()
         c = self.campoConfirmaSenha.get()
         
@@ -425,9 +425,11 @@ class Front_End(Back_End):
         self.abas = ttk.Notebook(self.janelaInicial)
         self.aba1 = Frame(self.abas)
         self.aba2 = Frame(self.abas)
+        self.aba3 = Frame(self.abas)
         
         self.abas.add(self.aba1, text='Principal')
-        self.abas.add(self.aba2, text='Cadastrar')
+        self.abas.add(self.aba2, text='Funcionários')
+        self.abas.add(self.aba3, text='Cadastrar')
         self.abas.place(relx=0, rely=0, relwidth=1, relheight=1)
         
         
@@ -435,10 +437,12 @@ class Front_End(Back_End):
         
         image = PhotoImage(file='image/logo-multimoldes.png')
         
-        self.logo = Label(self.aba2, image=image, bg=corPadrao)
+        self.logo = Label(self.aba3, image=image, bg=corPadrao)
         self.logo.pack()
         
         self.aba_principal()
+        
+        self.aba_funcionarios()
         
         self.aba_cadastro()
 
@@ -886,12 +890,16 @@ class Front_End(Back_End):
                 self.visualiza2.insert("", "end", values=(idd, nome, os, peca, operacao, tipo, mPause))
         
         threading.Thread(target=self.crud_os_finalizada).start()
+     
+    def aba_funcionarios(self):
+        
+        pass
         
     def aba_cadastro(self):
         
         #Frame de Login dos registros de conta do usuário
         
-        self.frameDadosLogin = Frame(self.aba2, highlightbackground='grey', highlightthickness=2)
+        self.frameDadosLogin = Frame(self.aba3, highlightbackground='grey', highlightthickness=2)
         self.frameDadosLogin.place(relx=0.100, rely=0.200, relwidth=0.800, relheight=0.250)
         
         #labels referente aos campos de login
@@ -1012,7 +1020,7 @@ class Front_End(Back_End):
         
         #Frame de atribuição das habilidades dos funcionários
         
-        self.frameAtribuicao = Frame(self.aba2, highlightbackground='grey', highlightthickness=2)
+        self.frameAtribuicao = Frame(self.aba3, highlightbackground='grey', highlightthickness=2)
         self.frameAtribuicao.place(relx=0.100, rely=0.460, relwidth=0.800, relheight=0.250)
         
         #labels referente aos campos de Atribuição
@@ -1076,7 +1084,7 @@ class Front_End(Back_End):
         
         #Botão que confirmará os dados quando solicitado
         
-        self.botaoConfirmar = Button(self.aba2, text='Confirmar', font=('arial black', 13), command=self.verificar_campos_cadastro)
+        self.botaoConfirmar = Button(self.aba3, text='Confirmar', font=('arial black', 13), command=self.verificar_campos_cadastro)
         self.botaoConfirmar.place(relx=0.82, rely=0.90)        
 
 instancia = Front_End()
