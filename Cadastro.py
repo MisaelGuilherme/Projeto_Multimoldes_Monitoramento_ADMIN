@@ -966,7 +966,7 @@ class Front_End(Back_End):
         l_OS_Dados2 = Label(self.framePerfil, text='3', font=('arial', 9, 'bold'), fg='red')
         l_OS_Dados2.place(relx=0.380, rely=0.590)
         
-        #Label dados de atribuição
+        #Labels de iunformação de atribuição
         
         l1 = Label(self.framePerfil, text='Serramento', font=('arial', 9, 'bold'))
         l1.place(relx=0.010, rely=0.700)
@@ -989,6 +989,7 @@ class Front_End(Back_End):
         l7 = Label(self.framePerfil, text='Eletroerosão', font=('arial', 9, 'bold'))
         l7.place(relx=0.010, rely=0.850)
         
+        #Labels a serem preenchidos pelos dados de atribuição
         
         ldados1 = Label(self.framePerfil, text='0', font=('arial', 9, 'bold'), fg='blue')
         ldados1.place(relx=0.370, rely=0.700)
@@ -1010,14 +1011,18 @@ class Front_End(Back_End):
         
         ldados7 = Label(self.framePerfil, text='3', font=('arial', 9, 'bold'), fg='blue')
         ldados7.place(relx=0.370, rely=0.850)
-        
-        
+            
     def aba_cadastro(self):
         
         #Frame de Login dos registros de conta do usuário
         
         self.frameDadosLogin = Frame(self.aba3, highlightbackground='grey', highlightthickness=2)
-        self.frameDadosLogin.place(relx=0.100, rely=0.200, relwidth=0.800, relheight=0.250)
+        self.frameDadosLogin.place(relx=0.100, rely=0.200, relwidth=0.800, relheight=0.380)
+        
+        #Label de inserção de foto do Funcionário
+        
+        foto = Label(self.frameDadosLogin, text='3x4', bg='grey', width=20, height=10)
+        foto.place(relx=0.840, rely=0.060)
         
         #labels referente aos campos de login
         
@@ -1026,13 +1031,19 @@ class Front_End(Back_End):
         
         self.lbNome = Label(self.frameDadosLogin, text='Nome', font=('impact',12))
         self.lbCPF = Label(self.frameDadosLogin, text='CPF', font=('impact',12))
+        self.lbfuncao = Label(self.frameDadosLogin, text='Função', font=('impact',12))
+        self.lbfone = Label(self.frameDadosLogin, text='Fone', font=('impact',12))
+        self.lbNasc = Label(self.frameDadosLogin, text='Data de Nasc.', font=('impact',12))
         self.lbSenha = Label(self.frameDadosLogin, text='Senha', font=('impact',12))
         self.lbSenhaErro = Label(self.frameDadosLogin, text='', font=('arial', 10), fg='red')
         self.lbConfirmaSenha = Label(self.frameDadosLogin, text='Confirme Senha', font=('impact',12))
         self.lbConfirmaSenhaErro = Label(self.frameDadosLogin, text='', font=('arial', 10), fg='red')
         
-        self.lbNome.place(relx=0.020, rely=0.300)
-        self.lbCPF.place(relx=0.470, rely=0.300)
+        self.lbNome.place(relx=0.020, rely=0.220)
+        self.lbCPF.place(relx=0.470, rely=0.220)
+        self.lbfuncao.place(relx=0.020, rely=0.400)
+        self.lbfone.place(relx=0.300, rely=0.400)
+        self.lbNasc.place(relx=0.570, rely=0.400)
         self.lbSenha.place(relx=0.020, rely=0.600)
         self.lbSenhaErro.place(relx=0.110, rely=0.750)
         self.lbConfirmaSenha.place(relx=0.300, rely=0.600)
@@ -1110,11 +1121,17 @@ class Front_End(Back_End):
         self.campoNome = Entry(self.frameDadosLogin, font=('arial',12), textvariable=strNome)
         self.campoNome.focus_force()
         self.campoCPF = Entry(self.frameDadosLogin, font=('arial',12), textvariable=nCPF)
+        self.campoFuncao = Entry(self.frameDadosLogin, font=('impact',12))
+        self.campoFone = Entry(self.frameDadosLogin, font=('impact',12))
+        self.campoNasc = Entry(self.frameDadosLogin, font=('impact',12))
         self.campoSenha = Entry(self.frameDadosLogin, font=('arial',12), show='*', textvariable=nSenha)
         self.campoConfirmaSenha = Entry(self.frameDadosLogin, font=('arial',12), show='*', textvariable=nConfirmaSenha,state=DISABLED)
         
-        self.campoNome.place(relx=0.080, rely=0.300, relwidth=0.350)
-        self.campoCPF.place(relx=0.518, rely=0.300, relwidth=0.175)
+        self.campoNome.place(relx=0.080, rely=0.220, relwidth=0.350)
+        self.campoCPF.place(relx=0.518, rely=0.220, relwidth=0.175)
+        self.campoFuncao.place(relx=0.080, rely=0.400)
+        self.campoFone.place(relx=0.350, rely=0.400)
+        self.campoNasc.place(relx=0.680, rely=0.400, relwidth=0.130)
         self.campoSenha.place(relx=0.085, rely=0.600, relwidth=0.175)
         self.campoConfirmaSenha.place(relx=0.430, rely=0.600, relwidth=0.175)
         
@@ -1138,7 +1155,7 @@ class Front_End(Back_End):
         #Frame de atribuição das habilidades dos funcionários
         
         self.frameAtribuicao = Frame(self.aba3, highlightbackground='grey', highlightthickness=2)
-        self.frameAtribuicao.place(relx=0.100, rely=0.460, relwidth=0.800, relheight=0.250)
+        self.frameAtribuicao.place(relx=0.100, rely=0.600, relwidth=0.800, relheight=0.250)
         
         #labels referente aos campos de Atribuição
         
