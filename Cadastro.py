@@ -895,12 +895,12 @@ class Front_End(Back_End):
         
         global image
         
+        #Frame 1 que exibirá os funcionários
         
         self.frameFuncionarios = Frame(self.aba2, highlightbackground='grey', highlightthickness=2)
         self.frameFuncionarios.place(relx=0.040, rely=0.040, relwidth=0.650, relheight=0.930)
         
-        self.framePerfil = Frame(self.aba2, highlightbackground='grey', highlightthickness=2)
-        self.framePerfil.place(relx=0.750, rely=0.040, relwidth=0.200, relheight=0.930)
+        #Imagem Logo da Empresa
         
         image = PhotoImage(file='image/logo-multimoldes.png')
         
@@ -909,7 +909,30 @@ class Front_End(Back_End):
         logo = Label(self.frameFuncionarios, image=image, bg=corPadrao)
         logo.pack()
         
-
+        lb1 = Label(self.frameFuncionarios, text='N. Total de Funcionários', font=('arial', 10, 'bold'))
+        lb1.place(relx=0.010, rely=0.010)
+        
+        #Tree view onde exibirá os funcionários
+        
+        self.viewFuncionarios = ttk.Treeview(self.frameFuncionarios, column=('1','2','3','4'), show='headings')
+        self.viewFuncionarios.heading('1', text='ID')
+        self.viewFuncionarios.heading('2', text='Nome')
+        self.viewFuncionarios.heading('3', text='Cargo')
+        self.viewFuncionarios.heading('4', text='CPF')
+        
+        self.viewFuncionarios.column("1", width=-90, anchor='n')
+        self.viewFuncionarios.column("2", width=120, anchor='n')
+        self.viewFuncionarios.column("3", width=30, anchor='n')
+        self.viewFuncionarios.column("4", width=30, anchor='n')
+        
+        self.viewFuncionarios.place(relx=0.0, rely=0.300, relwidth=0.950, relheight=0.700)
+        
+        #Frame 2 que mostrará os dados dos funcionários
+        
+        self.framePerfil = Frame(self.aba2, highlightbackground='grey', highlightthickness=2)
+        self.framePerfil.place(relx=0.750, rely=0.040, relwidth=0.200, relheight=0.930)
+        
+        
         
     def aba_cadastro(self):
         
