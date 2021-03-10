@@ -893,7 +893,23 @@ class Front_End(Back_End):
      
     def aba_funcionarios(self):
         
-        pass
+        global image
+        
+        
+        self.frameFuncionarios = Frame(self.aba2, highlightbackground='grey', highlightthickness=2)
+        self.frameFuncionarios.place(relx=0.040, rely=0.040, relwidth=0.650, relheight=0.930)
+        
+        self.framePerfil = Frame(self.aba2, highlightbackground='grey', highlightthickness=2)
+        self.framePerfil.place(relx=0.750, rely=0.040, relwidth=0.200, relheight=0.930)
+        
+        image = PhotoImage(file='image/logo-multimoldes.png')
+        
+        corPadrao = self.janelaInicial['bg']
+        
+        logo = Label(self.frameFuncionarios, image=image, bg=corPadrao)
+        logo.pack()
+        
+
         
     def aba_cadastro(self):
         
