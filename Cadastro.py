@@ -932,6 +932,84 @@ class Front_End(Back_End):
         self.framePerfil = Frame(self.aba2, highlightbackground='grey', highlightthickness=2)
         self.framePerfil.place(relx=0.750, rely=0.040, relwidth=0.200, relheight=0.930)
         
+        foto = Label(self.framePerfil, text='3x4', bg='grey', width=20, height=10)
+        foto.place(relx=0.320, rely=0.040)
+        
+        buttonLimpar = Button(self.framePerfil, text='Limpar', font=('arial', 7))
+        buttonLimpar.place(relx=0.040, rely=0.110)
+        
+        buttonEditar = Button(self.framePerfil, text='Editar', font=('arial', 7))
+        buttonEditar.place(relx=0.040, rely=0.170)
+        
+        #Label dados pessoais
+        
+        lNome = Label(self.framePerfil, text='João Alberto Gomes Da Silva', font=('arial', 10), justify=CENTER)
+        lNome.place(relx=0, rely=0.350, relwidth=1)
+        
+        lIdade = Label(self.framePerfil, text='26 anos', font=('arial', 10), justify=CENTER)
+        lIdade.place(relx=0, rely=0.400, relwidth=1)
+        
+        lFone = Label(self.framePerfil, text='(81) 98476-6523', font=('arial', 10), justify=CENTER)
+        lFone.place(relx=0, rely=0.450, relwidth=1)
+        
+        #Label totalizando OS's Concluídas e Pendentes
+        
+        l_OS_Con = Label(self.framePerfil, text='OS Concluídas', font=('arial', 9, 'bold'))
+        l_OS_Con.place(relx=0.010, rely=0.540)
+        
+        l_OS_Pen = Label(self.framePerfil, text='OS Pendentes', font=('arial', 9, 'bold'))
+        l_OS_Pen.place(relx=0.010, rely=0.590)
+        
+        l_OS_Dados1 = Label(self.framePerfil, text='74', font=('arial', 9, 'bold'), fg='green')
+        l_OS_Dados1.place(relx=0.380, rely=0.540)
+        
+        l_OS_Dados2 = Label(self.framePerfil, text='3', font=('arial', 9, 'bold'), fg='red')
+        l_OS_Dados2.place(relx=0.380, rely=0.590)
+        
+        #Label dados de atribuição
+        
+        l1 = Label(self.framePerfil, text='Serramento', font=('arial', 9, 'bold'))
+        l1.place(relx=0.010, rely=0.700)
+        
+        l2 = Label(self.framePerfil, text='Aplainamento', font=('arial', 9, 'bold'))
+        l2.place(relx=0.500, rely=0.700)
+        
+        l3 = Label(self.framePerfil, text='Torneamento', font=('arial', 9, 'bold'))
+        l3.place(relx=0.010, rely=0.750)
+        
+        l4 = Label(self.framePerfil, text='Fresagem', font=('arial', 9, 'bold'))
+        l4.place(relx=0.500, rely=0.750)
+
+        l5 = Label(self.framePerfil, text='Furar', font=('arial', 9, 'bold'))
+        l5.place(relx=0.010, rely=0.800)
+        
+        l6 = Label(self.framePerfil, text='Brochamento', font=('arial', 9, 'bold'))
+        l6.place(relx=0.500, rely=0.800)
+
+        l7 = Label(self.framePerfil, text='Eletroerosão', font=('arial', 9, 'bold'))
+        l7.place(relx=0.010, rely=0.850)
+        
+        
+        ldados1 = Label(self.framePerfil, text='0', font=('arial', 9, 'bold'), fg='blue')
+        ldados1.place(relx=0.370, rely=0.700)
+        
+        ldados2 = Label(self.framePerfil, text='2', font=('arial', 9, 'bold'), fg='blue')
+        ldados2.place(relx=0.870, rely=0.700)
+        
+        ldados3 = Label(self.framePerfil, text='3', font=('arial', 9, 'bold'), fg='blue')
+        ldados3.place(relx=0.370, rely=0.750)
+        
+        ldados4 = Label(self.framePerfil, text='2', font=('arial', 9, 'bold'), fg='blue')
+        ldados4.place(relx=0.870, rely=0.750)
+        
+        ldados5 = Label(self.framePerfil, text='1', font=('arial', 9, 'bold'), fg='blue')
+        ldados5.place(relx=0.370, rely=0.800)
+        
+        ldados6 = Label(self.framePerfil, text='0', font=('arial', 9, 'bold'), fg='blue')
+        ldados6.place(relx=0.870, rely=0.800)
+        
+        ldados7 = Label(self.framePerfil, text='3', font=('arial', 9, 'bold'), fg='blue')
+        ldados7.place(relx=0.370, rely=0.850)
         
         
     def aba_cadastro(self):
