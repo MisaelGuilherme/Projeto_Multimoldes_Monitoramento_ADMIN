@@ -1126,7 +1126,37 @@ class Front_End(Back_End):
             else:
                 self.lbConfirmaSenhaErro['text'] = ''
         
+        def format_campo_fone(*args):
+            
+            mask = nFone.get()
+            nFone.set(mask[:15])
+            
+            #Se houver 2 dígitos no campo, e eles forem númericos...
+            if len(mask) == 2 and mask.isnumeric():
 
+                #Delete todo o campo
+                self.campoFone.delete(0, END)
+            
+                #E acrescente parênteses com o valor obtido dentro
+                self.campoFone.insert(END,'('+mask+')')
+            
+            #Se houver 9 dígitos no campo, e os últimos 4 forem númericos...
+            if len(mask) == 9 and mask[4:].isnumeric():
+                
+                #Delete todo o campo
+                self.campoFone.delete(0, END)
+                
+                #pegue os primeiros quatro dígitos e acrescente um espaço no final
+                a = mask[0:4]+' '
+                
+                #com os primeiros dígitos acrescentado com o espaço, concatene com o resto
+                a = a+mask[4:]
+                
+                #Devolvendo o valor ajustado para a variável principal
+                mask = a
+                
+                #Insira no campo os números com a máscara pronta
+                self.campoFone.insert(END, mask+'-')
         
         #def format_campo_nasc(*args):
         #    pass
@@ -1138,10 +1168,10 @@ class Front_End(Back_End):
 
         nCPF = StringVar()
         nCPF.trace('w', verifica_campo)
-        '''
+        
         nFone = StringVar()
         nFone.trace('w', format_campo_fone)
-        
+        '''
         nNasc = StringVar()
         nNasc.trace('w', format_campo_nasc)
         '''
@@ -1158,7 +1188,7 @@ class Front_End(Back_End):
         self.campoCPF = Entry(self.frameDadosLogin, font=('arial',12), textvariable=nCPF)
         self.campoFuncao = Entry(self.frameDadosLogin, font=('arial',12))
         self.campoFone = Entry(self.frameDadosLogin, font=('arial',12), textvariable=nFone)
-        self.campoNasc = Entry(self.frameDadosLogin, font=('arial',12), textvariable=nNasc)
+        self.campoNasc = Entry(self.frameDadosLogin, font=('arial',12))
         self.campoSenha = Entry(self.frameDadosLogin, font=('arial',12), show='*', textvariable=nSenha)
         self.campoConfirmaSenha = Entry(self.frameDadosLogin, font=('arial',12), show='*', textvariable=nConfirmaSenha,state=DISABLED)
         
