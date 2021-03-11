@@ -1158,8 +1158,28 @@ class Front_End(Back_End):
                 #Insira no campo os números com a máscara pronta
                 self.campoFone.insert(END, mask+'-')
         
-        #def format_campo_nasc(*args):
-        #    pass
+        def format_campo_nasc(*args):
+            
+            mask = nNasc.get()
+            nNasc.set(mask[:10])
+            
+            #Se houver 2 dígitos no campo, e eles forem númericos...
+            if len(mask) == 2 and mask.isnumeric():
+
+                #Delete todo o campo
+                self.campoNasc.delete(0, END)
+            
+                #E acrescente parênteses com o valor obtido dentro
+                self.campoNasc.insert(END, mask+'/')
+            
+            elif len(mask) == 5 and mask[3:].isnumeric():
+                
+                #Delete todo o campo
+                self.campoNasc.delete(0, END)
+            
+                #E acrescente parênteses com o valor obtido dentro
+                self.campoNasc.insert(END, mask+'/')
+                
         
         #Variáveis que será utilizadas para verificação dos campos
         
@@ -1171,10 +1191,10 @@ class Front_End(Back_End):
         
         nFone = StringVar()
         nFone.trace('w', format_campo_fone)
-        '''
+        
         nNasc = StringVar()
         nNasc.trace('w', format_campo_nasc)
-        '''
+        
         nSenha = StringVar()
         nSenha.trace('w', verifica_campo)
         
@@ -1188,7 +1208,7 @@ class Front_End(Back_End):
         self.campoCPF = Entry(self.frameDadosLogin, font=('arial',12), textvariable=nCPF)
         self.campoFuncao = Entry(self.frameDadosLogin, font=('arial',12))
         self.campoFone = Entry(self.frameDadosLogin, font=('arial',12), textvariable=nFone)
-        self.campoNasc = Entry(self.frameDadosLogin, font=('arial',12))
+        self.campoNasc = Entry(self.frameDadosLogin, font=('arial',12), textvariable=nNasc)
         self.campoSenha = Entry(self.frameDadosLogin, font=('arial',12), show='*', textvariable=nSenha)
         self.campoConfirmaSenha = Entry(self.frameDadosLogin, font=('arial',12), show='*', textvariable=nConfirmaSenha,state=DISABLED)
         
