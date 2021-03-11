@@ -1220,22 +1220,30 @@ class Front_End(Back_End):
         self.campoSenha.place(relx=0.085, rely=0.600, relwidth=0.175)
         self.campoConfirmaSenha.place(relx=0.430, rely=0.600, relwidth=0.175)
         
-        def mostrar_senha(*args):
+        def mostrar_senha():
 
-            if senhaVisible.get() == 1:
+            if self.senhaVisible == False:
                 
                 self.campoSenha['show'] = ''
                 self.campoConfirmaSenha['show'] = ''
+                self.senhaVisible = True
+                self.cadeado = PhotoImage(file='image/cadeado_aberto.png')
+                self.check['image'] = self.cadeado
             
             else:
                 
                 self.campoSenha['show'] = '*'
                 self.campoConfirmaSenha['show'] = '*'
+                self.senhaVisible = False
+                self.cadeado = PhotoImage(file='image/cadeado.png')
+                self.check['image'] = self.cadeado
         
-        senhaVisible = IntVar()
+        self.senhaVisible = False
         
-        self.check = Checkbutton(self.frameDadosLogin, text='Mostrar Senha', variable=senhaVisible, command=mostrar_senha)
-        self.check.place(relx=0.620, rely=0.600)
+        self.cadeado = PhotoImage(file='image/cadeado.png')
+        
+        self.check = Button(self.frameDadosLogin, image=self.cadeado, border=0, command=mostrar_senha)
+        self.check.place(relx=0.620, rely=0.580)
         
         #Frame de atribuição das habilidades dos funcionários
         
