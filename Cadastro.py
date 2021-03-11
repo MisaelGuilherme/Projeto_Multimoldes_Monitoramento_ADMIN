@@ -932,28 +932,28 @@ class Front_End(Back_End):
         self.framePerfil = Frame(self.aba2, highlightbackground='grey', highlightthickness=2)
         self.framePerfil.place(relx=0.750, rely=0.040, relwidth=0.200, relheight=0.930)
         
-        global imgSemPerfil
-        imgSemPerfil = PhotoImage(file='image/sem_perfil.png')
+        global imgPerfil
+        imgPerfil = PhotoImage(file='image/sem_perfil.png')
         
-        buttonSPerfil = Button(self.framePerfil, image=imgSemPerfil, bg=corPadrao, relief=FLAT)
-        buttonSPerfil.place(relx=0.320, rely=0.040)
+        lbPerfil = Label(self.framePerfil, image=imgPerfil, bg=corPadrao, relief=FLAT)
+        lbPerfil.place(relx=0.320, rely=0.040)
         
         global imgEditar
         imgEditar = PhotoImage(file='image/editar.png')
         
-        buttonEditar = Button(self.framePerfil, image=imgEditar, bg=corPadrao, relief=FLAT)
+        buttonEditar = Button(self.framePerfil, image=imgEditar, bg=corPadrao, relief=FLAT, border=0)
         buttonEditar.place(relx=0.040, rely=0.070)
 
         global imgExcluir
         imgExcluir = PhotoImage(file='image/excluir.png')
         
-        buttonExcluir = Button(self.framePerfil, image=imgExcluir, bg=corPadrao, relief=FLAT)
+        buttonExcluir = Button(self.framePerfil, image=imgExcluir, bg=corPadrao, relief=FLAT, border=0)
         buttonExcluir.place(relx=0.040, rely=0.135)
         
         global imgLimpar
         imgLimpar = PhotoImage(file='image/limpar.png')
         
-        buttonLimpar = Button(self.framePerfil, image=imgLimpar, bg=corPadrao, relief=FLAT)
+        buttonLimpar = Button(self.framePerfil, image=imgLimpar, bg=corPadrao, relief=FLAT, border=0)
         buttonLimpar.place(relx=0.040, rely=0.200)
         
         #Label dados pessoais
@@ -1036,8 +1036,17 @@ class Front_End(Back_End):
         
         #Label de inserção de foto do Funcionário
         
-        foto = Label(self.frameDadosLogin, text='3x4', bg='grey', width=20, height=10)
-        foto.place(relx=0.840, rely=0.060)
+        global imgSemPerfil
+        imgSemPerfil = PhotoImage(file='image/sem_perfil.png')
+        
+        foto = Label(self.frameDadosLogin, image=imgSemPerfil)
+        foto.place(relx=0.830, rely=0.060)
+        
+        global imgAdd
+        imgAdd = PhotoImage(file='image/abrir.png')
+        
+        add = Button(self.frameDadosLogin, image=imgAdd, bg='white', relief=FLAT, activebackground='white', border=0)
+        add.place(relx=0.890, rely=0.580)
         
         #labels referente aos campos de login
         
@@ -1117,6 +1126,11 @@ class Front_End(Back_End):
             else:
                 self.lbConfirmaSenhaErro['text'] = ''
         
+
+        
+        #def format_campo_nasc(*args):
+        #    pass
+        
         #Variáveis que será utilizadas para verificação dos campos
         
         strNome = StringVar()
@@ -1124,7 +1138,13 @@ class Front_End(Back_End):
 
         nCPF = StringVar()
         nCPF.trace('w', verifica_campo)
+        '''
+        nFone = StringVar()
+        nFone.trace('w', format_campo_fone)
         
+        nNasc = StringVar()
+        nNasc.trace('w', format_campo_nasc)
+        '''
         nSenha = StringVar()
         nSenha.trace('w', verifica_campo)
         
@@ -1136,9 +1156,9 @@ class Front_End(Back_End):
         self.campoNome = Entry(self.frameDadosLogin, font=('arial',12), textvariable=strNome)
         self.campoNome.focus_force()
         self.campoCPF = Entry(self.frameDadosLogin, font=('arial',12), textvariable=nCPF)
-        self.campoFuncao = Entry(self.frameDadosLogin, font=('impact',12))
-        self.campoFone = Entry(self.frameDadosLogin, font=('impact',12))
-        self.campoNasc = Entry(self.frameDadosLogin, font=('impact',12))
+        #self.campoFuncao = Entry(self.frameDadosLogin, font=('arial',12))
+        #self.campoFone = Entry(self.frameDadosLogin, font=('arial',12), textvariable=nFone)
+        #self.campoNasc = Entry(self.frameDadosLogin, font=('arial',12), textvariable=nNasc)
         self.campoSenha = Entry(self.frameDadosLogin, font=('arial',12), show='*', textvariable=nSenha)
         self.campoConfirmaSenha = Entry(self.frameDadosLogin, font=('arial',12), show='*', textvariable=nConfirmaSenha,state=DISABLED)
         
