@@ -1156,9 +1156,9 @@ class Front_End(Back_End):
         self.campoNome = Entry(self.frameDadosLogin, font=('arial',12), textvariable=strNome)
         self.campoNome.focus_force()
         self.campoCPF = Entry(self.frameDadosLogin, font=('arial',12), textvariable=nCPF)
-        #self.campoFuncao = Entry(self.frameDadosLogin, font=('arial',12))
-        #self.campoFone = Entry(self.frameDadosLogin, font=('arial',12), textvariable=nFone)
-        #self.campoNasc = Entry(self.frameDadosLogin, font=('arial',12), textvariable=nNasc)
+        self.campoFuncao = Entry(self.frameDadosLogin, font=('arial',12))
+        self.campoFone = Entry(self.frameDadosLogin, font=('arial',12), textvariable=nFone)
+        self.campoNasc = Entry(self.frameDadosLogin, font=('arial',12), textvariable=nNasc)
         self.campoSenha = Entry(self.frameDadosLogin, font=('arial',12), show='*', textvariable=nSenha)
         self.campoConfirmaSenha = Entry(self.frameDadosLogin, font=('arial',12), show='*', textvariable=nConfirmaSenha,state=DISABLED)
         
