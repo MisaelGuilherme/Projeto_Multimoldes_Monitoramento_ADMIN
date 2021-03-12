@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+from tkinter import filedialog
 from platform import *
 from tkinter import messagebox
 from datetime import *
@@ -1036,17 +1037,31 @@ class Front_End(Back_End):
         
         #Label de inserção de foto do Funcionário
         
-        global imgSemPerfil
-        imgSemPerfil = PhotoImage(file='image/sem_perfil.png')
+        self.imgSemPerfil = PhotoImage(file='image/sem_perfil.png')
         
-        foto = Label(self.frameDadosLogin, image=imgSemPerfil)
-        foto.place(relx=0.830, rely=0.060)
+        self.foto = Label(self.frameDadosLogin, image=self.imgSemPerfil, width=150)
+        self.foto.place(relx=0.830, rely=0.060)
         
-        global imgAdd
-        imgAdd = PhotoImage(file='image/abrir.png')
+        def selecionar_imagem():
         
-        add = Button(self.frameDadosLogin, image=imgAdd, bg='white', relief=FLAT, activebackground='white', border=0)
-        add.place(relx=0.890, rely=0.580)
+            try:
+                caminhoIMG = filedialog.askopenfilename(title='Selecione imagem de perfil', filetypes=(('Imagem PNG', '*.png'), ('All files', '*.*')))
+            except: return ''
+            
+            self.imgSelecionada = PhotoImage(file=caminhoIMG)
+            
+            if self.imgSelecionada.width() > 150 or self.imgSelecionada.height() > 150:
+                
+                return messagebox.showinfo('Tamanho não permitido', 'A imagem selecionada possui comprimento grande demais')
+            
+            self.add.destroy()
+            
+            self.foto['image'] = self.imgSelecionada
+        
+        self.imgAdd = PhotoImage(file='image/abrir.png')
+        
+        self.add = Button(self.frameDadosLogin, image=self.imgAdd, bg='white', relief=FLAT, activebackground='white', border=0, command=selecionar_imagem)
+        self.add.place(relx=0.890, rely=0.580)
         
         #labels referente aos campos de login
         
