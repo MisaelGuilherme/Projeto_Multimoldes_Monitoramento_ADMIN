@@ -35,7 +35,10 @@ class Back_End(Database):
         
         valido = ''
         
-        self.connection_database()
+        try:
+            self.connection_database()
+        except Exception as erro:
+            print(erro)
         
         if self.bancoConnect:
         
@@ -1039,24 +1042,40 @@ class Front_End(Back_End):
         
         self.imgSemPerfil = PhotoImage(file='image/sem_perfil.png')
         
-        self.foto = Label(self.frameDadosLogin, image=self.imgSemPerfil, width=150)
+        self.foto = Label(self.frameDadosLogin, image=self.imgSemPerfil, width=150, height=150)
         self.foto.place(relx=0.830, rely=0.060)
         
         def selecionar_imagem():
-        
-            try:
-                caminhoIMG = filedialog.askopenfilename(title='Selecione imagem de perfil', filetypes=(('Imagem PNG', '*.png'), ('All files', '*.*')))
-            except: return ''
+            
+            #Abrindo arquivo de imagem para foto de perfil
+            
+            caminhoIMG = filedialog.askopenfilename(title='Selecione imagem de perfil', filetypes=(('Imagem PNG', '*.png'), ('All files', '*.*')))
+            
+            #Se for zero nenhuma foto foi selecionada
+            
+            if len(caminhoIMG) == 0:
+                
+                return ''
+            
+            #Armazenando a foto selecionada
             
             self.imgSelecionada = PhotoImage(file=caminhoIMG)
+            
+            #Verificando se imagem não excede o comprimento máximo permitido
             
             if self.imgSelecionada.width() > 150 or self.imgSelecionada.height() > 150:
                 
                 return messagebox.showinfo('Tamanho não permitido', 'A imagem selecionada possui comprimento grande demais')
             
-            self.add.destroy()
+            #Configurando Labels parar exibir imagem de selecionar e botão de editar
             
             self.foto['image'] = self.imgSelecionada
+            
+            self.imgAdd = PhotoImage(file='image/lapis.png')
+            
+            self.add['image'] = self.imgAdd
+            self.add['bg'] = self.janelaInicial['bg']
+            self.add.place(relx=0.955, rely=0.700)
         
         self.imgAdd = PhotoImage(file='image/abrir.png')
         
@@ -1330,7 +1349,9 @@ class Front_End(Back_End):
         
         #Botão que confirmará os dados quando solicitado
         
-        self.botaoConfirmar = Button(self.aba3, text='Confirmar', font=('arial black', 13), command=self.verificar_campos_cadastro)
+        self.imgConfirmar = PhotoImage(file='image/confirmar.png')
+        
+        self.botaoConfirmar = Button(self.aba3, image=self.imgConfirmar, border=0, command=self.verificar_campos_cadastro)
         self.botaoConfirmar.place(relx=0.82, rely=0.90)        
 
 instancia = Front_End()
