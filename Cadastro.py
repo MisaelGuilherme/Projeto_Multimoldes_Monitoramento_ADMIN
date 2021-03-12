@@ -100,6 +100,10 @@ class Back_End(Database):
         c = self.campoSenha.get()
         d = self.campoConfirmaSenha.get()
         
+        e = self.campoFuncao.get()
+        f = self.campoFone.get()
+        g = self.campoNasc.get()
+        
         #Atribuição dos valores dos boxes de seleção nas variáves
         
         A = self.box1.get()
@@ -112,17 +116,22 @@ class Back_End(Database):
         
         #Verificando se algum campo não foi preenchido
 
-        if a == '' or b == '' or c == '' or d == '' or A == 'Select' or B == 'Select' or C == 'Select' or D == 'Select' or E == 'Select' or F == 'Select' or G == 'Select':
+        if a == '' or b == '' or c == '' or d == '' or e == '' or f == '' or g == '' or A == 'Select' or B == 'Select' or C == 'Select' or D == 'Select' or E == 'Select' or F == 'Select' or G == 'Select':
             
             #Mudando cor para preto caso o usuário tenha errado em algum campo e tenha corrigdo
             
             self.lbNome['fg'] = 'black'
             self.lbCPF['fg'] = 'black'
+            self.lbFuncao['fg'] = 'black'
+            self.lbFone['fg'] = 'black'
+            self.lbNasc['fg'] = 'black'
             self.lbSenha['fg'] = 'black'
             self.lbConfirmaSenha['fg'] = 'black'
             
             self.campoNome['bg'] = 'white'
             self.campoCPF['bg'] = 'white'
+            self.campoFone['bg'] = 'white'
+            self.campoNasc['bg'] = 'white'
             self.campoSenha['bg'] = 'white'
             self.campoConfirmaSenha['bg'] = 'white'
             
@@ -153,6 +162,20 @@ class Back_End(Database):
         
                 self.campoConfirmaSenha['bg'] = 'pink'
                 self.lbConfirmaSenha['fg'] = 'red'
+            
+            if e == '': 
+                
+                self.lbFuncao['fg'] = 'red'
+            
+            if f == '':
+                
+                self.campoFone['bg'] = 'pink'
+                self.lbFone['fg'] = 'red'
+                
+            if g == '':
+                
+                self.campoNasc['bg'] = 'pink'
+                self.lbNasc['fg'] = 'red'
             
             if A == 'Select':
                 self.lbSerramento['fg'] = 'red'
@@ -221,7 +244,56 @@ class Back_End(Database):
                 
             return messagebox.showerror('Alerta', 'Verifique os campos')
         
-        try:   
+        cont1 = 0
+        cont2 = 0
+        
+        #Verificando se o campo de telefone foi digitado corretamente
+        
+        for caracter in f:
+        
+            if caracter.isnumeric():
+                cont1 +=1
+            elif not caracter.isnumeric():
+                cont2 +=1
+        
+        if cont1 != 11 or cont2 != 4:
+            
+            self.lbFone['fg'] = 'red'
+            self.campoFone['bg'] = 'pink'
+            
+            return messagebox.showerror('Alerta', 'Verifique os campos')
+        
+        else:
+            
+            self.lbFone['fg'] = 'black'
+            self.campoFone['bg'] = 'white'
+        
+        cont1 = 0
+        cont2 = 0
+        
+        #Verificando se o campo de data de nascimento foi digitado corretamente
+        
+        for caracter in g:
+        
+            if caracter.isnumeric():
+                cont1 +=1
+            elif not caracter.isnumeric():
+                cont2 +=1
+        
+        if cont1 != 8 or cont2 != 2:
+
+            self.lbNasc['fg'] = 'red'
+            self.campoNasc['bg'] = 'pink'
+            
+            return messagebox.showerror('Alerta', 'Verifique os campos')
+        
+        else:
+            
+            self.lbNasc['fg'] = 'black'
+            self.campoNasc['bg'] = 'white'
+        
+        
+        try:
             if self.bancoServer.is_connected():
                 
                 self.inserindo_dados_cadastro()
@@ -1089,8 +1161,8 @@ class Front_End(Back_End):
         
         self.lbNome = Label(self.frameDadosLogin, text='Nome', font=('impact',12))
         self.lbCPF = Label(self.frameDadosLogin, text='CPF', font=('impact',12))
-        self.lbfuncao = Label(self.frameDadosLogin, text='Função', font=('impact',12))
-        self.lbfone = Label(self.frameDadosLogin, text='Fone', font=('impact',12))
+        self.lbFuncao = Label(self.frameDadosLogin, text='Função', font=('impact',12))
+        self.lbFone = Label(self.frameDadosLogin, text='Fone', font=('impact',12))
         self.lbNasc = Label(self.frameDadosLogin, text='Data de Nasc.', font=('impact',12))
         self.lbSenha = Label(self.frameDadosLogin, text='Senha', font=('impact',12))
         self.lbSenhaErro = Label(self.frameDadosLogin, text='', font=('arial', 10), fg='red')
@@ -1099,8 +1171,8 @@ class Front_End(Back_End):
         
         self.lbNome.place(relx=0.020, rely=0.220)
         self.lbCPF.place(relx=0.470, rely=0.220)
-        self.lbfuncao.place(relx=0.020, rely=0.400)
-        self.lbfone.place(relx=0.300, rely=0.400)
+        self.lbFuncao.place(relx=0.020, rely=0.400)
+        self.lbFone.place(relx=0.300, rely=0.400)
         self.lbNasc.place(relx=0.570, rely=0.400)
         self.lbSenha.place(relx=0.020, rely=0.600)
         self.lbSenhaErro.place(relx=0.110, rely=0.750)
